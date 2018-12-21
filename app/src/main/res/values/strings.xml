@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Word\'s World</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_challenge">Challenges</string>
+    <string name="title_statistic">Statistics</string>
+    <string name="app_title_nav">Word\'s World</string>
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:checkable="false"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_about"
+            android:checkable="false"
+            android:title="About" />
+        <item
+            android:id="@+id/nav_settings"
+            android:checkable="false"
+            android:title="Settings" />
+        <item
+            android:checkable="false"
+            android:enabled="false"
+            android:title="" />
+        <item
+            android:id="@+id/title_games"
+            android:checkable="false"
+            android:icon="@drawable/ic_games_black_24dp"
+            android:title="GAMES" />
+        <item
+            android:id="@+id/nav_taboo"
+            android:checkable="false"
+            android:title="Taboo" />
+    </group>
+</menu>
