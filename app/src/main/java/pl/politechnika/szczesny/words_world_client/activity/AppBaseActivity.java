@@ -1,4 +1,4 @@
-package pl.politechnika.szczesny.words_world_client;
+package pl.politechnika.szczesny.words_world_client.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.util.Objects;
+
+import pl.politechnika.szczesny.words_world_client.R;
 
 public class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener {
     private FrameLayout view_stub;

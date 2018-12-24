@@ -1,12 +1,12 @@
-package pl.politechnika.szczesny.words_world_client;
+package pl.politechnika.szczesny.words_world_client.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
-import android.view.Window;
 
+import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.fragment.ChallengesFragment;
 import pl.politechnika.szczesny.words_world_client.fragment.NotificationsFragment;
 import pl.politechnika.szczesny.words_world_client.fragment.StatisticsFragment;
