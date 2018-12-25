@@ -1,4 +1,4 @@
-package pl.politechnika.szczesny.words_world_client.activity;
+package pl.politechnika.szczesny.words_world_client;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
