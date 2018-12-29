@@ -15,17 +15,27 @@ import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
+import pl.politechnika.szczesny.words_world_client.model.Token;
+import pl.politechnika.szczesny.words_world_client.model.User;
+import pl.politechnika.szczesny.words_world_client.service.ApiManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static pl.politechnika.szczesny.words_world_client.helper.ConstHelper.MINIMUM_USERNAME_LENGTH;
+import static pl.politechnika.szczesny.words_world_client.helper.SessionHelper.isSessionActive;
+import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.getTokenFormSP;
+import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.storeTokenInSP;
+import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.storeUserInSP;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
-    private static final int REQUEST_SIGNUP = 0;
+    private static final int REQUEST_SIGNUP = 1;
 
     @BindView(R.id.input_username) EditText _usernameText;
     @BindView(R.id.input_password) EditText _passwordText;
     @BindView(R.id.btn_login) Button _loginButton;
-    @BindView(R.id.link_signup) TextView _signupLink;
+    @BindView(R.id.link_signup) TextView _signUpLink;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,23 +43,24 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        if (isSessionActive(getApplication())) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
+
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // TODO: Run retrofit login endpoint
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
                 login();
             }
         });
 
-        _signupLink.setOnClickListener(new View.OnClickListener() {
+        _signUpLink.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // Start the Signup activity
-                Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivityForResult(intent, REQUEST_SIGNUP);
             }
         });
@@ -73,17 +84,21 @@ public class LoginActivity extends AppCompatActivity {
         String username = _usernameText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
+        ApiManager.getInstance().authenticate(username, password, new Callback<Token>() {
+            @Override
+            public void onResponse(Call<Token> call, Response<Token> response) {
+                if (response.isSuccessful()) {
+                    Token resToken = response.body();
+                    storeTokenInSP(resToken, getApplication());
+                    fetchUser();
+                }
+            }
 
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
+            @Override
+            public void onFailure(Call<Token> call, Throwable t) {
+                onLoginFailed();
+            }
+        });
     }
 
 
@@ -107,7 +122,25 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        finish();
+
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    }
+
+    private void fetchUser() {
+        ApiManager.getInstance().fetchUser(getTokenFormSP(getApplication()), new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                User resUser = response.body();
+                storeUserInSP(resUser, getApplication());
+                onLoginSuccess();
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.d("INTERNAL ERROR", "CANNOT FETCH USER DATA");
+            }
+        });
     }
 
     public void onLoginFailed() {

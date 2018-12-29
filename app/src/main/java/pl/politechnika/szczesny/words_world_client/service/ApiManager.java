@@ -3,6 +3,7 @@ package pl.politechnika.szczesny.words_world_client.service;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import pl.politechnika.szczesny.words_world_client.model.Token;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -13,8 +14,6 @@ public class ApiManager {
     private static AuthApi authService;
     private static DataApi dataService;
     private static ApiManager apiManager;
-
-    public enum StuffType { BORROWED, LENT }
 
     private ApiManager() {
 
@@ -44,13 +43,18 @@ public class ApiManager {
         return apiManager;
     }
 
-    public void loginUser(String email, String password, Callback<User> callback) {
-        Call<User> userCall = authService.login(email,password);
-        userCall.enqueue(callback);
+    public void authenticate(String username, String password, Callback<Token> callback) {
+        Call<Token> tokenCall = authService.login(username ,password);
+        tokenCall.enqueue(callback);
     }
 
-    public void registerUser(String email, String password, String passwordConfirmation,String username,  Callback<User> callback) {
-        Call<User> userCall = authService.register(email, password, passwordConfirmation, username);
-        userCall.enqueue(callback);
+    public void fetchUser(Token token, Callback<User> callback) {
+        Call<User> userDataCall = authService.getUserData(token.getToken());
+        userDataCall.enqueue(callback);
+    }
+
+    public void registerUser(String email, String password, String username,  Callback<Token> callback) {
+        Call<Token> tokenCall = authService.register(email, password, username);
+        tokenCall.enqueue(callback);
     }
 }

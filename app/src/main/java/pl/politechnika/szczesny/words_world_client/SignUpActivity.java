@@ -17,13 +17,13 @@ import butterknife.BindView;
 import static pl.politechnika.szczesny.words_world_client.helper.ConstHelper.MINIMUM_PASSWORD_LENGTH;
 import static pl.politechnika.szczesny.words_world_client.helper.ConstHelper.MINIMUM_USERNAME_LENGTH;
 
-public class SignupActivity extends AppCompatActivity {
-    private static final String TAG = "SignupActivity";
+public class SignUpActivity extends AppCompatActivity {
+    private static final String TAG = "SignUpActivity";
 
     @BindView(R.id.input_username) EditText _usernameText;
     @BindView(R.id.input_email) EditText _emailText;
     @BindView(R.id.input_password) EditText _passwordText;
-    @BindView(R.id.btn_signup) Button _signupButton;
+    @BindView(R.id.btn_signup) Button _signUpButton;
     @BindView(R.id.link_login) TextView _loginLink;
 
     @Override
@@ -32,66 +32,54 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
 
-        _signupButton.setOnClickListener(new View.OnClickListener() {
+        _signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signup();
+                signUp();
             }
         });
 
         _loginLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Finish the registration screen and return to the Login activity
                 finish();
             }
         });
     }
 
-    public void signup() {
-        Log.d(TAG, "Signup");
+    public void signUp() {
+        Log.d(TAG, "SignUp");
 
         if (!validate()) {
-            onSignupFailed();
+            onSignUpFailed();
             return;
         }
 
-        _signupButton.setEnabled(false);
+        _signUpButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this);
+        final ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
 
-        String name = _usernameText.getText().toString();
+        String username = _usernameText.getText().toString();
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own signup logic here.
-
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onSignupSuccess or onSignupFailed
-                        // depending on success
-                        onSignupSuccess();
-                        // onSignupFailed();
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
+        // TODO: Implement your own signUp logic here.
     }
 
 
-    public void onSignupSuccess() {
-        _signupButton.setEnabled(true);
+    public void onSignUpSuccess() {
+        _signUpButton.setEnabled(true);
         setResult(RESULT_OK, null);
         finish();
     }
 
-    public void onSignupFailed() {
+    public void onSignUpFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
 
-        _signupButton.setEnabled(true);
+        _signUpButton.setEnabled(true);
     }
 
     public boolean validate() {

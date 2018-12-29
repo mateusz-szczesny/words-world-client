@@ -13,8 +13,8 @@ public class User implements Serializable {
     private String email;
     @SerializedName("username")
     private String username;
-    @SerializedName("token")
-    private String token;
+
+    private Token token;
 
     @SerializedName("following")
     private List<User> followedUsers;
@@ -26,11 +26,10 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(long id, String email, String username, String token, List followedUsers, List achievements, List selectedLanguages) {
+    public User(long id, String email, String username, List followedUsers, List achievements, List selectedLanguages) {
         this.id = id;
         this.email = email;
         this.username = username;
-        this.token = token;
         this.followedUsers = followedUsers;
         this.achievements = achievements;
         this.selectedLanguages = selectedLanguages;
@@ -60,11 +59,11 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public String getToken() {
+    public Token getToken() {
         return token;
     }
 
-    public void setToken(String token) {
+    public void setToken(Token token) {
         this.token = token;
     }
 
