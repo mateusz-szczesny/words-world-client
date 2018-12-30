@@ -1,6 +1,8 @@
 package pl.politechnika.szczesny.words_world_client.service;
 
 
+import java.util.List;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import pl.politechnika.szczesny.words_world_client.model.Token;
@@ -53,8 +55,13 @@ public class ApiManager {
         userDataCall.enqueue(callback);
     }
 
-    public void registerUser(String email, String password, String username,  Callback<Token> callback) {
-        Call<Token> tokenCall = authService.register(email, password, username);
+    public void registerUser(String username, String email, String password, Callback<Token> callback) {
+        Call<Token> tokenCall = authService.register(username, email, password);
         tokenCall.enqueue(callback);
+    }
+
+    public void getUsersByFilter(Token token, String filter, Callback<List<User>> callback) {
+        Call<List<User>> call = dataService.getUsersByFilter(token.getToken(), filter);
+        call.enqueue(callback);
     }
 }

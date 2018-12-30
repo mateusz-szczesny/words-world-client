@@ -11,23 +11,23 @@ import retrofit2.http.POST;
 
 public interface AuthApi {
 
-    @POST("auth")
+    @POST("auth/")
     @FormUrlEncoded
     Call<Token> login(
-            @Field("username") String username,
-            @Field("password") String password
+        @Field("username") String username,
+        @Field("password") String password
     );
 
-    @POST("signup")
+    @POST("signup/")
     @FormUrlEncoded
     Call<Token> register(
-            @Field("email") String email,
-            @Field("password") String password,
-            @Field("username") String username
+        @Field("username") String username,
+        @Field("email") String email,
+        @Field("password") String password
     );
 
     @GET("api/users/me")
     Call<User> getUserData(
-            @Header("Authorization") String token
+        @Header("Authorization") String token
     );
 }

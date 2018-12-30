@@ -7,6 +7,10 @@
             android:checkable="false"
             android:title="Home" />
         <item
+            android:id="@+id/nav_friends"
+            android:checkable="false"
+            android:title="Friends" />
+        <item
             android:id="@+id/nav_about"
             android:checkable="false"
             android:title="About" />

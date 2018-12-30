@@ -16,6 +16,8 @@ import java.util.Objects;
 
 import pl.politechnika.szczesny.words_world_client.R;
 
+import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.flushSP;
+
 public class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener {
     private FrameLayout view_stub;
 
@@ -63,29 +65,32 @@ public class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMen
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        Intent intent;
+        Intent intent = new Intent();
         switch (item.getItemId()) {
             case R.id.nav_home:
-//                intent = new Intent(getBaseContext(), SettingsActivity.class);
-//                getBaseContext().startActivity(intent);
+                intent = new Intent(getBaseContext(), MainActivity.class);
                 break;
             case R.id.nav_about:
-//                intent = new Intent(getBaseContext(), AddFriendActivity.class);
-//                getBaseContext().startActivity(intent);
+                intent = new Intent(getBaseContext(), AboutActivity.class);
                 break;
             case R.id.nav_settings:
-//                intent = new Intent(getBaseContext(), AddFriendActivity.class);
-//                getBaseContext().startActivity(intent);
+                intent = new Intent(getBaseContext(), SettingsActivity.class);
                 break;
+            case R.id.nav_friends:
+                intent = new Intent(getBaseContext(), FriendsSearchActivity.class);
             case R.id.nav_taboo:
 //                intent = new Intent(getBaseContext(), AddFriendActivity.class);
-//                getBaseContext().startActivity(intent);
                 break;
         }
+
+        getBaseContext().startActivity(intent);
         return false;
     }
 
     public void logout(View view) {
-        this.finish();
+        flushSP(getApplication());
+
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
     }
 }

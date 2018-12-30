@@ -32,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 1;
 
+    ProgressDialog progressDialog;
+
     @BindView(R.id.input_username) EditText _usernameText;
     @BindView(R.id.input_password) EditText _passwordText;
     @BindView(R.id.btn_login) Button _loginButton;
@@ -76,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
 
         _loginButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+        progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.show();
@@ -90,7 +92,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Token resToken = response.body();
                     storeTokenInSP(resToken, getApplication());
-                    fetchUser();
+                    fetchUserAndLogIn();
+                } else {
+                    onLoginFailed();
                 }
             }
 
@@ -106,10 +110,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
-
-                // TODO: Implement successful sign up logic here
-                // By default we just finish the Activity and log them in automatically
-                this.finish();
+                fetchUserAndLogIn();
             }
         }
     }
@@ -127,7 +128,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void fetchUser() {
+    private void fetchUserAndLogIn() {
         ApiManager.getInstance().fetchUser(getTokenFormSP(getApplication()), new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -145,8 +146,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
         _loginButton.setEnabled(true);
+        progressDialog.cancel();
     }
 
     public boolean validate() {
@@ -157,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         if (username.isEmpty() || username.length() < MINIMUM_USERNAME_LENGTH) {
-            _usernameText.setError("at least 6 characters");
+            _usernameText.setError("at least 4 characters");
             valid = false;
         } else {
             _usernameText.setError(null);

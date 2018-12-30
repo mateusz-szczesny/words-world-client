@@ -13,12 +13,19 @@ import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
+import pl.politechnika.szczesny.words_world_client.model.Token;
+import pl.politechnika.szczesny.words_world_client.service.ApiManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static pl.politechnika.szczesny.words_world_client.helper.ConstHelper.MINIMUM_PASSWORD_LENGTH;
 import static pl.politechnika.szczesny.words_world_client.helper.ConstHelper.MINIMUM_USERNAME_LENGTH;
+import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.storeTokenInSP;
 
 public class SignUpActivity extends AppCompatActivity {
     private static final String TAG = "SignUpActivity";
+    ProgressDialog progressDialog;
 
     @BindView(R.id.input_username) EditText _usernameText;
     @BindView(R.id.input_email) EditText _emailText;
@@ -57,7 +64,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         _signUpButton.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(SignUpActivity.this);
+        progressDialog = new ProgressDialog(SignUpActivity.this);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
@@ -66,7 +73,23 @@ public class SignUpActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own signUp logic here.
+        ApiManager.getInstance().registerUser(username, email, password, new Callback<Token>() {
+            @Override
+            public void onResponse(Call<Token> call, Response<Token> response) {
+                if (response.isSuccessful()) {
+                    Token resToken = response.body();
+                    storeTokenInSP(resToken, getApplication());
+                    onSignUpSuccess();
+                }else {
+                    onSignUpFailed();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Token> call, Throwable t) {
+                onSignUpFailed();
+            }
+        });
     }
 
 
@@ -77,8 +100,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void onSignUpFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
-
+        Toast.makeText(getBaseContext(), "Sign up failed", Toast.LENGTH_LONG).show();
+        progressDialog.cancel();
         _signUpButton.setEnabled(true);
     }
 
@@ -90,7 +113,7 @@ public class SignUpActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         if (username.isEmpty() || username.length() < MINIMUM_USERNAME_LENGTH) {
-            _usernameText.setError("at least 6 characters");
+            _usernameText.setError("at least 4 characters");
             valid = false;
         } else {
             _usernameText.setError(null);

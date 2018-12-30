@@ -9,7 +9,7 @@ import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelpe
 public class SessionHelper {
     public static boolean isSessionActive(Application application) {
         Token token = getTokenFormSP(application);
-        return !token.getToken().isEmpty();
+        return token != null && !token.getToken().isEmpty();
     }
 
     public static String getToken(Application application) {
