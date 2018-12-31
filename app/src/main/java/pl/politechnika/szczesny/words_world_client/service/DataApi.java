@@ -19,6 +19,22 @@ public interface DataApi {
         @Query("search") String filter
     );
 
+    @GET("api/users/me")
+    Call<User> getUserData(
+            @Header("Authorization") String token
+    );
+
+    @POST("api/users/{id}/follow/")
+    Call<Void> followUser(
+            @Header("Authorization") String token,
+            @Path("id") long id
+    );
+
+    @GET("api/users/followings")
+    Call<List<User>> getFollowings(
+            @Header("Authorization") String token
+    );
+
     @GET("api/languages")
     Call<List<Language>> getLanguages(
         @Header("Authorization") String token
@@ -40,6 +56,4 @@ public interface DataApi {
     Call<List<Language>> getSubscribedLanguages(
         @Header("Authorization") String token
     );
-
-
 }

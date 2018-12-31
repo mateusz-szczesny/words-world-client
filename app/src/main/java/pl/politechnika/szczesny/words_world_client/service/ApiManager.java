@@ -52,7 +52,7 @@ public class ApiManager {
     }
 
     public void fetchUser(Token token, Callback<User> callback) {
-        Call<User> userDataCall = authService.getUserData(token.getToken());
+        Call<User> userDataCall = dataService.getUserData(token.getToken());
         userDataCall.enqueue(callback);
     }
 
@@ -78,6 +78,11 @@ public class ApiManager {
 
     public void unsubscribeLanguage(Token token, long id, Callback<Void> callback) {
         Call<Void> call = dataService.unsubscribeLanguage(token.getToken(), id);
+        call.enqueue(callback);
+    }
+
+    public void getFriends(Token token, Callback<List<User>> callback) {
+        Call<List<User>> call = dataService.getFollowings(token.getToken());
         call.enqueue(callback);
     }
 }

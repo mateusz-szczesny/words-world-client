@@ -15,7 +15,7 @@ import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.model.User;
 
 public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.FriendViewHolder>{
-    List<User> users;
+    List<User> friends;
     Application application;
 
     public FriendsListAdapter(Application application) {
@@ -32,16 +32,16 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull FriendViewHolder friendViewHolder, int i) {
-        friendViewHolder.username.setText(users.get(i).getUsername());
+        friendViewHolder.username.setText(friends.get(i).getUsername());
     }
 
     @Override
     public int getItemCount() {
-        return users == null ? 0 : users.size();
+        return friends == null ? 0 : friends.size();
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
         notifyDataSetChanged();
     }
 

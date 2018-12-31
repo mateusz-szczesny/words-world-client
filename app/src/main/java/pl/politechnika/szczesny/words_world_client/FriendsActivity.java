@@ -7,28 +7,21 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
 
 import java.util.List;
 
 import pl.politechnika.szczesny.words_world_client.adapter.FriendsListAdapter;
 import pl.politechnika.szczesny.words_world_client.model.User;
-import pl.politechnika.szczesny.words_world_client.viewmodel.UserViewModel;
+import pl.politechnika.szczesny.words_world_client.viewmodel.FriendsViewModel;
 
-public class FriendsSearchActivity extends AppBaseActivity {
+public class FriendsActivity extends AppBaseActivity {
     RecyclerView _friendsList;
-    ImageButton _search;
-    EditText _searchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_friends_search);
+        setContentView(R.layout.activity_friends);
         _friendsList = findViewById(R.id.friends_list);
-        _search = findViewById(R.id.search_button);
-        _searchText = findViewById(R.id.search_text);
 
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         final FriendsListAdapter adapter = new FriendsListAdapter(getApplication());
@@ -37,19 +30,11 @@ public class FriendsSearchActivity extends AppBaseActivity {
         _friendsList.setAdapter(adapter);
         _friendsList.setItemAnimator(new DefaultItemAnimator());
 
-        final UserViewModel userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
-        userViewModel.getUsers().observe(this, new Observer<List<User>>() {
+        final FriendsViewModel friendsViewModel = ViewModelProviders.of(this).get(FriendsViewModel.class);
+        friendsViewModel.getFriends().observe(this, new Observer<List<User>>() {
             @Override
-            public void onChanged(@Nullable List<User> users) {
-                adapter.setFriends(users);
-            }
-        });
-
-        _search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String searchText = _searchText.getText().toString();
-                userViewModel.refreshData(getApplication(), searchText);
+            public void onChanged(@Nullable List<User> friends) {
+                adapter.setFriends(friends);
             }
         });
     }

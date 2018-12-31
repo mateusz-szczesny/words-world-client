@@ -3,10 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android" >
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:checkable="false"
-            android:title="@string/home" />
-        <item
             android:id="@+id/nav_friends"
             android:checkable="false"
             android:title="@string/friends" />
@@ -19,16 +15,12 @@
             android:checkable="false"
             android:title="@string/about" />
         <item
-            android:id="@+id/nav_settings"
-            android:checkable="false"
-            android:title="@string/settings" />
-        <item
             android:checkable="false"
             android:enabled="false"
             android:title="" />
         <item
             android:id="@+id/title_games"
-            android:checkable="false"
+            android:enabled="false"
             android:icon="@drawable/ic_games_black_24dp"
             android:title="@string/games" />
         <item

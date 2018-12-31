@@ -29,6 +29,8 @@
         <activity android:name=".SettingsActivity" android:theme="@style/AppTheme" />
         <activity android:name=".FriendsSearchActivity" android:theme="@style/AppTheme" />
         <activity android:name=".LanguagesActivity" android:theme="@style/AppTheme" />
+        <activity android:name=".FriendsActivity" android:theme="@style/AppTheme" />
+        <activity android:name=".TabooActivity" android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

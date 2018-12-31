@@ -6,10 +6,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
-import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.fragment.ChallengesFragment;
 import pl.politechnika.szczesny.words_world_client.fragment.NotificationsFragment;
-import pl.politechnika.szczesny.words_world_client.fragment.StatisticsFragment;
+import pl.politechnika.szczesny.words_world_client.fragment.ProfileFragment;
 
 public class MainActivity extends AppBaseActivity {
 
@@ -28,8 +27,8 @@ public class MainActivity extends AppBaseActivity {
                 case R.id.navigation_notifications:
                     fragment = new NotificationsFragment();
                     break;
-                case R.id.navigation_statistics:
-                    fragment = new StatisticsFragment();
+                case R.id.navigation_profile:
+                    fragment = new ProfileFragment();
                     break;
             }
 

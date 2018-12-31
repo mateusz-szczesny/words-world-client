@@ -4,14 +4,15 @@
     <string name="title_dashboard">P</string>
     <string name="title_notifications">Powiadomienia</string>
     <string name="title_challenge">Wyzwania</string>
-    <string name="title_statistic">Statystyki</string>
+    <string name="title_profile">Profil</string>
     <string name="app_title_nav">Word\'s World</string>
     <string name="search">szukaj</string>
-    <string name="friends">Znajomi</string>
+    <string name="friends">Znajdz</string>
     <string name="about">O nas</string>
-    <string name="settings">Ustawienia</string>
     <string name="games">GRY</string>
     <string name="taboo">Taboo</string>
-    <string name="home">Panel</string>
     <string name="languages">Języki</string>
+    <string name="achievements_title">Osiągnięcia</string>
+    <string name="edit_profile_btn">Edytuj Profil</string>
+    <string name="no_of_followings">Obserwowani:</string>
 </resources>

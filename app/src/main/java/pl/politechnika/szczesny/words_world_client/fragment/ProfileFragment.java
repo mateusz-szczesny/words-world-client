@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import pl.politechnika.szczesny.words_world_client.R;
 
-public class StatisticsFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
     @Nullable
     @Override
