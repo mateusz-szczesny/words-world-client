@@ -101,7 +101,9 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void onSignUpFailed() {
         Toast.makeText(getBaseContext(), "Sign up failed", Toast.LENGTH_LONG).show();
-        progressDialog.cancel();
+        if (progressDialog != null) {
+            progressDialog.cancel();
+        }
         _signUpButton.setEnabled(true);
     }
 
