@@ -1,6 +1,15 @@
 package pl.politechnika.szczesny.words_world_client.model;
 
+import android.app.Application;
+import android.support.annotation.NonNull;
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 
 public class Language {
 
@@ -12,12 +21,6 @@ public class Language {
     private Boolean isSubscribed;
 
     public Language() {
-    }
-
-    public Language(long id, String name, Boolean isSubscribed) {
-        this.id = id;
-        this.name = name;
-        this.isSubscribed = isSubscribed;
     }
 
     public long getId() {
@@ -44,8 +47,10 @@ public class Language {
         isSubscribed = subscribed;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return this.name;
     }
+
 }

@@ -13,26 +13,20 @@ public class User implements Serializable {
     private String email;
     @SerializedName("username")
     private String username;
-
-    private Token token;
-
+    @SerializedName("first_name")
+    private String firstName;
+    @SerializedName("last_name")
+    private String lastName;
     @SerializedName("following")
     private List<User> followedUsers;
     @SerializedName("achievements")
     private List<Achievement> achievements;
     @SerializedName("selected_languages")
     private List<Language> selectedLanguages;
+    @SerializedName("is_friend")
+    private Boolean isFriend;
 
     public User() {
-    }
-
-    public User(long id, String email, String username, List followedUsers, List achievements, List selectedLanguages) {
-        this.id = id;
-        this.email = email;
-        this.username = username;
-        this.followedUsers = followedUsers;
-        this.achievements = achievements;
-        this.selectedLanguages = selectedLanguages;
     }
 
     public long getId() {
@@ -59,12 +53,20 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public Token getToken() {
-        return token;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setToken(Token token) {
-        this.token = token;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public List getFollowedUsers() {
@@ -83,12 +85,20 @@ public class User implements Serializable {
         this.achievements = achievements;
     }
 
-    public List getSelectedLanguages() {
+    public List<Language> getSelectedLanguages() {
         return selectedLanguages;
     }
 
     public void setSelectedLanguages(List selectedLanguages) {
         this.selectedLanguages = selectedLanguages;
+    }
+
+    public Boolean getFriend() {
+        return isFriend;
+    }
+
+    public void setFriend(Boolean friend) {
+        isFriend = friend;
     }
 
     @Override

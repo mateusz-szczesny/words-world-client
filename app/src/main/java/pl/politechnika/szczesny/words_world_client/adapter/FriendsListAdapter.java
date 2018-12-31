@@ -2,6 +2,7 @@ package pl.politechnika.szczesny.words_world_client.adapter;
 
 import android.app.Application;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,10 +51,12 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
     }
 
     public static class FriendViewHolder extends RecyclerView.ViewHolder {
+        CardView cv;
         TextView username;
 
         FriendViewHolder(View itemView) {
             super(itemView);
+            cv = (CardView)itemView.findViewById(R.id.cv);
             username = (TextView)itemView.findViewById(R.id.username);
         }
     }

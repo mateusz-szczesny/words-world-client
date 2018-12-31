@@ -15,13 +15,6 @@ public class Achievement {
     public Achievement() {
     }
 
-    public Achievement(long id, String name, String condition, String badgeIcon) {
-        this.id = id;
-        this.name = name;
-        this.condition = condition;
-        this.badgeIcon = badgeIcon;
-    }
-
     public long getId() {
         return id;
     }

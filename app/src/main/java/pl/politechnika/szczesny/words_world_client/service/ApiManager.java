@@ -5,6 +5,7 @@ import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.model.Token;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import retrofit2.Call;
@@ -62,6 +63,21 @@ public class ApiManager {
 
     public void getUsersByFilter(Token token, String filter, Callback<List<User>> callback) {
         Call<List<User>> call = dataService.getUsersByFilter(token.getToken(), filter);
+        call.enqueue(callback);
+    }
+
+    public void getLanguages(Token token, Callback<List<Language>> callback) {
+        Call<List<Language>> call = dataService.getLanguages(token.getToken());
+        call.enqueue(callback);
+    }
+
+    public void subscribeLanguage(Token token, long id, Callback<Void> callback) {
+        Call<Void> call = dataService.subscribeLanguage(token.getToken(), id);
+        call.enqueue(callback);
+    }
+
+    public void unsubscribeLanguage(Token token, long id, Callback<Void> callback) {
+        Call<Void> call = dataService.unsubscribeLanguage(token.getToken(), id);
         call.enqueue(callback);
     }
 }

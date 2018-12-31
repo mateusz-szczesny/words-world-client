@@ -5,7 +5,6 @@ import java.util.List;
 import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import retrofit2.Call;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -21,19 +20,26 @@ public interface DataApi {
     );
 
     @GET("api/languages")
-    Call<List<Language>> getAllLanguages(
+    Call<List<Language>> getLanguages(
         @Header("Authorization") String token
     );
 
     @POST("api/languages/{id}/subscribe/")
-    @FormUrlEncoded
-    Call<Language> subscribeLanguage(
+    Call<Void> subscribeLanguage(
         @Header("Authorization") String token,
         @Path("id") long id
+    );
+
+    @POST("api/languages/{id}/unsubscribe/")
+    Call<Void> unsubscribeLanguage(
+            @Header("Authorization") String token,
+            @Path("id") long id
     );
 
     @GET("api/languages/get_subscribed")
     Call<List<Language>> getSubscribedLanguages(
         @Header("Authorization") String token
     );
+
+
 }

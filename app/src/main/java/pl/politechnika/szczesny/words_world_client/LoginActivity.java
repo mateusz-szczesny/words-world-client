@@ -46,8 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         if (isSessionActive(getApplication())) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+            fetchUserAndLogIn();
         }
 
         _loginButton.setOnClickListener(new View.OnClickListener() {

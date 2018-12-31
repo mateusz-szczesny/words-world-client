@@ -1,10 +1,17 @@
 <resources>
     <string name="app_name">Word\'s World</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="title_challenge">Challenges</string>
-    <string name="title_statistic">Statistics</string>
+    <string name="title_home">Wyzwania</string>
+    <string name="title_dashboard">P</string>
+    <string name="title_notifications">Powiadomienia</string>
+    <string name="title_challenge">Wyzwania</string>
+    <string name="title_statistic">Statystyki</string>
     <string name="app_title_nav">Word\'s World</string>
-    <string name="search">search</string>
+    <string name="search">szukaj</string>
+    <string name="friends">Znajomi</string>
+    <string name="about">O nas</string>
+    <string name="settings">Ustawienia</string>
+    <string name="games">GRY</string>
+    <string name="taboo">Taboo</string>
+    <string name="home">Panel</string>
+    <string name="languages">Języki</string>
 </resources>

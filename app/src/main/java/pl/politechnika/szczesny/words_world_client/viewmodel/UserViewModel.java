@@ -18,11 +18,11 @@ import retrofit2.Response;
 
 import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.getTokenFormSP;
 
-public class UsersViewModel extends AndroidViewModel {
+public class UserViewModel extends AndroidViewModel {
     private final MutableLiveData<List<User>> allUsers;
     private final ApiManager apiManager;
 
-    public UsersViewModel(Application application) {
+    public UserViewModel(Application application) {
         super(application);
         apiManager = ApiManager.getInstance();
         allUsers = new MutableLiveData<>();

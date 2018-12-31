@@ -78,8 +78,12 @@ public class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMen
                 break;
             case R.id.nav_friends:
                 intent = new Intent(getBaseContext(), FriendsSearchActivity.class);
+                break;
+            case R.id.nav_languages:
+                intent = new Intent(getBaseContext(), LanguagesActivity.class);
+                break;
             case R.id.nav_taboo:
-//                intent = new Intent(getBaseContext(), AddFriendActivity.class);
+//                intent = new Intent(getBaseContext(), TabooActivity.class);
                 break;
         }
 
