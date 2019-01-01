@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import java.util.List;
 
 import pl.politechnika.szczesny.words_world_client.adapter.FriendsListAdapter;
+import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.viewmodel.UserViewModel;
 
@@ -41,6 +42,9 @@ public class FriendsSearchActivity extends AppBaseActivity {
         userViewModel.getUsers().observe(this, new Observer<List<User>>() {
             @Override
             public void onChanged(@Nullable List<User> users) {
+                if (users != null) {
+                    users.remove(SharedPrefHelper.getUserFormSP(getApplication()));
+                }
                 adapter.setFriends(users);
             }
         });

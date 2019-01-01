@@ -85,4 +85,19 @@ public class ApiManager {
         Call<List<User>> call = dataService.getFollowings(token.getToken());
         call.enqueue(callback);
     }
+
+    public void followUser(Token token, long id, Callback<Void> callback) {
+        Call<Void> call = dataService.followUser(token.getToken(), id);
+        call.enqueue(callback);
+    }
+
+    public void unFollowUser(Token token, long id, Callback<Void> callback) {
+        Call<Void> call = dataService.unfollowUser(token.getToken(), id);
+        call.enqueue(callback);
+    }
+
+    public  void updateUserData(Token token, User.Credentials credentials, Callback<User> callback) {
+        Call<User> call = dataService.updateUserData(token.getToken(), credentials);
+        call.enqueue(callback);
+    }
 }

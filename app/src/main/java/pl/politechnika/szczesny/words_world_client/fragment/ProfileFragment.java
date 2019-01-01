@@ -27,6 +27,8 @@ import retrofit2.Response;
 public class ProfileFragment extends Fragment {
     public User _loggedUser;
     public TextView _username;
+    public TextView _first_name;
+    public TextView _last_name;
     public TextView _noOfFollowings;
     public RecyclerView _achievementsList;
     public Button _editProfile;
@@ -37,6 +39,8 @@ public class ProfileFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_profile, null);
 
         _username = view.findViewById(R.id.profile_name);
+        _first_name = view.findViewById(R.id.first_name);
+        _last_name = view.findViewById(R.id.last_name);
         _noOfFollowings = view.findViewById(R.id.followings_no);
         _achievementsList = view.findViewById(R.id.achievements_list);
         _editProfile = view.findViewById(R.id.edit_profile);
@@ -83,7 +87,9 @@ public class ProfileFragment extends Fragment {
     }
 
     private void fillData(User user) {
-        _username.setText(user.getUsername());
+        _username.setText(!"".equals(user.getUsername()) ? user.getUsername() : "");
+        _first_name.setText(!"".equals(user.getFirstName()) ? user.getFirstName() : "");
+        _last_name.setText(!"".equals(user.getLastName()) ? user.getLastName() : "");
         _noOfFollowings.setText(String.valueOf(user.getFollowedUsers().size()));
     }
 }

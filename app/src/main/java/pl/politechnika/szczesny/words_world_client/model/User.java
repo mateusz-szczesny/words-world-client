@@ -105,4 +105,26 @@ public class User implements Serializable {
     public String toString() {
         return this.username;
     }
+
+    @Override
+    public int hashCode() {
+        return (int) (this.id * 31);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (obj instanceof User) {
+            return this.getId() == ((User) obj).getId();
+        } else {
+            return false;
+        }
+    }
+
+    public static class Credentials {
+        @SerializedName("first_name")
+        public String firstName;
+        @SerializedName("last_name")
+        public String lastName;
+    }
 }

@@ -15,4 +15,16 @@
     <string name="achievements_title">Osiągnięcia</string>
     <string name="edit_profile_btn">Edytuj Profil</string>
     <string name="no_of_followings">Obserwowani:</string>
+    <string name="dictionary">Słownik</string>
+    <string name="password_input">Hasło</string>
+    <string name="log_in_btn">Zaloguj</string>
+    <string name="create_acc_in_case">Nie masz jeszcze konta? Stwórz je!</string>
+    <string name="username_inpt">Nazwa użytkownika</string>
+    <string name="email_inpt">Email</string>
+    <string name="create_btn">Stwórz</string>
+    <string name="login_in_Case">Masz już konto? Zaloguj się!</string>
+    <string name="settings_lbl">Ustawienia</string>
+    <string name="first_name">Imię</string>
+    <string name="last_name">Nazwisko</string>
+    <string name="submit_changes">Zapisz</string>
 </resources>

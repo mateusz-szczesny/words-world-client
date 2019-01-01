@@ -20,7 +20,7 @@
             android:layout_height="72dp"
             android:layout_marginBottom="24dp"
             android:gravity="center"
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:layout_gravity="center_horizontal"
             android:text="@string/app_name"
             android:textColor="@color/accent"/>
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textAutoComplete"
-                android:hint="Username" />
+                android:hint="@string/username_inpt" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
@@ -48,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
-                android:hint="Password"/>
+                android:hint="@string/password_input"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.v7.widget.AppCompatButton
@@ -58,15 +58,15 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
-            android:text="Login"/>
+            android:text="@string/log_in_btn"/>
 
         <TextView android:id="@+id/link_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="No account yet? Create one"
+            android:text="@string/create_acc_in_case"
             android:gravity="center"
-            android:textSize="16dip"/>
+            android:textSize="16sp"/>
 
     </LinearLayout>
 </ScrollView>

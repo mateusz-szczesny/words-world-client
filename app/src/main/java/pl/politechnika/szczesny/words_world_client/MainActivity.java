@@ -37,6 +37,12 @@ public class MainActivity extends AppBaseActivity {
     };
 
     @Override
+    public void onBackPressed() {
+        // disable going back to the MainActivity
+        moveTaskToBack(true);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

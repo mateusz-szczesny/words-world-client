@@ -32,7 +32,9 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull FriendViewHolder friendViewHolder, int i) {
-        friendViewHolder.username.setText(friends.get(i).getUsername());
+        friendViewHolder._username.setText(friends.get(i).getUsername());
+        friendViewHolder._first_name.setText(!"".equals(friends.get(i).getFirstName()) ? friends.get(i).getFirstName() : "");
+        friendViewHolder._last_name.setText(!"".equals(friends.get(i).getLastName()) ? friends.get(i).getLastName() : "");
     }
 
     @Override
@@ -51,13 +53,18 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
     }
 
     public static class FriendViewHolder extends RecyclerView.ViewHolder {
-        CardView cv;
-        TextView username;
+        CardView _cv;
+        TextView _username;
+        TextView _first_name;
+        TextView _last_name;
 
         FriendViewHolder(View itemView) {
             super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.cv);
-            username = (TextView)itemView.findViewById(R.id.username);
+            _cv = itemView.findViewById(R.id.cv);
+            _username = itemView.findViewById(R.id.username);
+            _first_name = itemView.findViewById(R.id.first_name);
+            _last_name = itemView.findViewById(R.id.last_name);
+
         }
     }
 }

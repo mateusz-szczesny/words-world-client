@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(LoginActivity.this);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Authenticating...");
+        progressDialog.setMessage("Uwierzytelnianie...");
         progressDialog.show();
 
         String username = _usernameText.getText().toString();
@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
-                onLoginFailed();
+                Log.d("INTERNAL ERROR", "CANNOT LOG IN");
             }
         });
     }
@@ -131,9 +131,13 @@ public class LoginActivity extends AppCompatActivity {
         ApiManager.getInstance().fetchUser(getTokenFormSP(getApplication()), new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                User resUser = response.body();
-                storeUserInSP(resUser, getApplication());
-                onLoginSuccess();
+                if (response.isSuccessful()) {
+                    User resUser = response.body();
+                    storeUserInSP(resUser, getApplication());
+                    onLoginSuccess();
+                } else {
+                    onLoginFailed();
+                }
             }
 
             @Override
@@ -157,14 +161,14 @@ public class LoginActivity extends AppCompatActivity {
 
 
         if (username.isEmpty() || username.length() < MINIMUM_USERNAME_LENGTH) {
-            _usernameText.setError("at least 4 characters");
+            _usernameText.setError("przynajmniej 4 znaki");
             valid = false;
         } else {
             _usernameText.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 6) {
-            _passwordText.setError("at least 6 characters");
+            _passwordText.setError("przynajmniej 6 znaków");
             valid = false;
         } else {
             _passwordText.setError(null);

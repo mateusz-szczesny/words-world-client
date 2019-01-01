@@ -19,13 +19,14 @@
             android:enabled="false"
             android:title="" />
         <item
-            android:id="@+id/title_games"
-            android:enabled="false"
-            android:icon="@drawable/ic_games_black_24dp"
-            android:title="@string/games" />
+            android:id="@+id/nav_dictionary"
+            android:checkable="false"
+            android:icon="@drawable/ic_compare_arrows_black_24dp"
+            android:title="@string/dictionary" />
         <item
             android:id="@+id/nav_taboo"
             android:checkable="false"
+            android:icon="@drawable/ic_games_black_24dp"
             android:title="@string/taboo" />
     </group>
 </menu>

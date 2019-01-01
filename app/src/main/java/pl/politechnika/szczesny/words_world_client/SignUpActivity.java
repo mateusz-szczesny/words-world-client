@@ -87,7 +87,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
-                onSignUpFailed();
+                Log.d("INTERNAL ERROR", "CANNOT SIGN UP");
             }
         });
     }
