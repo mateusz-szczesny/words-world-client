@@ -1,5 +1,7 @@
 package pl.politechnika.szczesny.words_world_client.model;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Achievement {
@@ -47,6 +49,7 @@ public class Achievement {
         this.badgeIcon = badgeIcon;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Achievement{" +

@@ -51,7 +51,7 @@ public class MainActivity extends AppBaseActivity {
         // load fragment for selected menu item by default
         loadFragment(new ChallengesFragment());
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }

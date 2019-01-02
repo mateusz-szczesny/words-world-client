@@ -3,6 +3,7 @@ package pl.politechnika.szczesny.words_world_client;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -75,7 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         ApiManager.getInstance().registerUser(username, email, password, new Callback<Token>() {
             @Override
-            public void onResponse(Call<Token> call, Response<Token> response) {
+            public void onResponse(@NonNull Call<Token> call, @NonNull Response<Token> response) {
                 if (response.isSuccessful()) {
                     Token resToken = response.body();
                     storeTokenInSP(resToken, getApplication());
@@ -86,7 +87,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Token> call, Throwable t) {
+            public void onFailure(@NonNull Call<Token> call, @NonNull Throwable t) {
                 Log.d("INTERNAL ERROR", "CANNOT SIGN UP");
             }
         });

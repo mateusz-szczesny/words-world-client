@@ -1,5 +1,7 @@
 package pl.politechnika.szczesny.words_world_client.model;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -101,6 +103,7 @@ public class User implements Serializable {
         isFriend = friend;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return this.username;

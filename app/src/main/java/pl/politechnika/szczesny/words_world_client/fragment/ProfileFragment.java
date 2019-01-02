@@ -2,6 +2,7 @@ package pl.politechnika.szczesny.words_world_client.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -35,8 +36,8 @@ public class ProfileFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_profile, null);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
         _username = view.findViewById(R.id.profile_name);
         _first_name = view.findViewById(R.id.first_name);
@@ -56,7 +57,7 @@ public class ProfileFragment extends Fragment {
 
         ApiManager.getInstance().fetchUser(SharedPrefHelper.getTokenFormSP(getActivity().getApplication()), new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 User user = response.body();
                 fillData(user);
 
@@ -64,7 +65,7 @@ public class ProfileFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Log.d("API ERROR", "CANNOT FETCH USER DATA");
             }
         });

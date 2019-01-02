@@ -2,7 +2,6 @@ package pl.politechnika.szczesny.words_world_client.adapter;
 
 import android.app.Application;
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +17,6 @@ import android.widget.Toast;
 import java.util.List;
 
 import pl.politechnika.szczesny.words_world_client.R;
-import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
 import pl.politechnika.szczesny.words_world_client.viewmodel.LanguageViewModel;
@@ -29,9 +27,9 @@ import retrofit2.Response;
 import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.getTokenFormSP;
 
 public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.LanguageViewHolder> {
-    List<Language> languages;
-    Application application;
-    LanguageViewModel lvm;
+    private List<Language> languages;
+    private Application application;
+    private LanguageViewModel lvm;
 
     public LanguagesAdapter(Application application, LanguageViewModel lvm) {
         this.application = application;
@@ -42,8 +40,7 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
     @Override
     public LanguagesAdapter.LanguageViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_lang_item, viewGroup, false);
-        LanguagesAdapter.LanguageViewHolder lvh = new LanguagesAdapter.LanguageViewHolder(v);
-        return lvh;
+        return new LanguageViewHolder(v);
     }
 
     @Override
@@ -63,26 +60,26 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
                 if (isSubscribed) {
                     ApiManager.getInstance().unsubscribeLanguage(getTokenFormSP(application), lang.getId(), new Callback<Void>() {
                         @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
+                        public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                             Toast.makeText(application.getBaseContext(), "Subscription removed", Toast.LENGTH_LONG).show();
                             lvm.refreshData(application);
                         }
 
                         @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
+                        public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                             Log.d("ERROR", "API ERROR / SUBSCRIPTION");
                         }
                     });
                 } else {
                     ApiManager.getInstance().subscribeLanguage(getTokenFormSP(application), lang.getId(), new Callback<Void>() {
                         @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
+                        public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                             Toast.makeText(application.getBaseContext(), "Subscription created", Toast.LENGTH_LONG).show();
                             lvm.refreshData(application);
                         }
 
                         @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
+                        public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                             Log.d("ERROR", "API ERROR / SUBSCRIPTION");
                         }
                     });
@@ -108,7 +105,7 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    public static class LanguageViewHolder extends RecyclerView.ViewHolder {
+    static class LanguageViewHolder extends RecyclerView.ViewHolder {
         CardView cv;
         TextView name;
         ImageButton changeSub;
@@ -116,10 +113,10 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
 
         LanguageViewHolder(View itemView) {
             super(itemView);
-            cv = (CardView)itemView.findViewById(R.id.cv);
-            name = (TextView)itemView.findViewById(R.id.name);
-            changeSub = (ImageButton)itemView.findViewById(R.id.change_sub);
-            flagIcon = (ImageView)itemView.findViewById(R.id.flag_image);
+            cv = itemView.findViewById(R.id.cv);
+            name = itemView.findViewById(R.id.name);
+            changeSub = itemView.findViewById(R.id.change_sub);
+            flagIcon = itemView.findViewById(R.id.flag_image);
         }
     }
 }

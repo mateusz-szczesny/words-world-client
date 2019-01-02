@@ -3,6 +3,7 @@ package pl.politechnika.szczesny.words_world_client;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -87,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
 
         ApiManager.getInstance().authenticate(username, password, new Callback<Token>() {
             @Override
-            public void onResponse(Call<Token> call, Response<Token> response) {
+            public void onResponse(@NonNull Call<Token> call, @NonNull Response<Token> response) {
                 if (response.isSuccessful()) {
                     Token resToken = response.body();
                     storeTokenInSP(resToken, getApplication());
@@ -98,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Token> call, Throwable t) {
+            public void onFailure(@NonNull Call<Token> call, @NonNull Throwable t) {
                 Log.d("INTERNAL ERROR", "CANNOT LOG IN");
             }
         });
@@ -130,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
     private void fetchUserAndLogIn() {
         ApiManager.getInstance().fetchUser(getTokenFormSP(getApplication()), new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful()) {
                     User resUser = response.body();
                     storeUserInSP(resUser, getApplication());
@@ -141,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Log.d("INTERNAL ERROR", "CANNOT FETCH USER DATA");
             }
         });

@@ -1,15 +1,9 @@
 package pl.politechnika.szczesny.words_world_client.model;
 
-import android.app.Application;
+
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 
 public class Language {
 

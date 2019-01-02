@@ -1,6 +1,7 @@
 package pl.politechnika.szczesny.words_world_client.helper;
 
 import android.app.Application;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import pl.politechnika.szczesny.words_world_client.model.Token;
@@ -27,13 +28,13 @@ public class SessionHelper {
     public static void updateUserData(final Application application) {
         ApiManager.getInstance().fetchUser(getTokenFormSP(application), new Callback<User>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 User resUser = response.body();
                 storeUserInSP(resUser, application);
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                 Log.d("INTERNAL ERROR", "CANNOT FETCH USER DATA");
             }
         });

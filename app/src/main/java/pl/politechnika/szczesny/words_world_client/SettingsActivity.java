@@ -2,6 +2,7 @@ package pl.politechnika.szczesny.words_world_client;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,8 +28,6 @@ public class SettingsActivity extends AppBaseActivity {
     @BindView(R.id.input_last_name) EditText _lastNameText;
     @BindView(R.id.submit) Button _submit;
 
-    private User user;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +46,7 @@ public class SettingsActivity extends AppBaseActivity {
                 if (token != null ) {
                     ApiManager.getInstance().updateUserData(token, credentials, new Callback<User>() {
                         @Override
-                        public void onResponse(Call<User> call, Response<User> response) {
+                        public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                             if (response.isSuccessful()) {
                                 User user = response.body();
                                 SharedPrefHelper.storeUserInSP(user, getApplication());
@@ -60,7 +59,7 @@ public class SettingsActivity extends AppBaseActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<User> call, Throwable t) {
+                        public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                             Log.d("INTERNAL ERROR", "CANNOT UPDATE USER DATA");
                         }
                     });
@@ -70,11 +69,11 @@ public class SettingsActivity extends AppBaseActivity {
     }
 
     private void fillInputsWithUserData() {
-        this.user = SharedPrefHelper.getUserFormSP(getApplication());
+        User user = SharedPrefHelper.getUserFormSP(getApplication());
 
-        _usernameText.setHint(!"".equals(this.user.getUsername()) ? this.user.getUsername() : "");
-        _emailText.setHint(!"".equals(this.user.getEmail()) ? this.user.getEmail() : "");
-        _firstNameText.setHint(!"".equals(this.user.getFirstName()) ? this.user.getFirstName() : "Ustaw imię");
-        _lastNameText.setHint(!"".equals(this.user.getLastName()) ? this.user.getLastName() : "Ustaw nazwisko");
+        _usernameText.setHint(!"".equals(user.getUsername()) ? user.getUsername() : "");
+        _emailText.setHint(!"".equals(user.getEmail()) ? user.getEmail() : "");
+        _firstNameText.setHint(!"".equals(user.getFirstName()) ? user.getFirstName() : "Ustaw imię");
+        _lastNameText.setHint(!"".equals(user.getLastName()) ? user.getLastName() : "Ustaw nazwisko");
     }
 }

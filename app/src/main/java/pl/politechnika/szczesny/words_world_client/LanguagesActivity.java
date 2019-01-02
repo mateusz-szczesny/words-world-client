@@ -8,15 +8,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import java.util.List;
 
 import pl.politechnika.szczesny.words_world_client.adapter.LanguagesAdapter;
 import pl.politechnika.szczesny.words_world_client.model.Language;
-import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.viewmodel.LanguageViewModel;
-import pl.politechnika.szczesny.words_world_client.viewmodel.UserViewModel;
 
 public class LanguagesActivity extends AppBaseActivity {
     RecyclerView _languagesList;
