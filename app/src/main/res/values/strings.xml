@@ -27,4 +27,6 @@
     <string name="first_name">Imię</string>
     <string name="last_name">Nazwisko</string>
     <string name="submit_changes">Zapisz</string>
+    <string name="accept">Zaakceptuj</string>
+    <string name="reject">Odrzuć</string>
 </resources>

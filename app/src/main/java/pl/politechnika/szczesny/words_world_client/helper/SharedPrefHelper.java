@@ -44,4 +44,24 @@ public class SharedPrefHelper {
     private static SharedPreferences getUserSharedPreferences(Application application) {
         return application.getSharedPreferences(ConstHelper.USER__SP, Context.MODE_PRIVATE);
     }
+
+    public static void flushTabooScore(Application application) {
+        SharedPreferences sharedPref = getUserSharedPreferences(application);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(ConstHelper.TABOO_SCORE__SP, 0);
+        editor.apply();
+    }
+
+    public static int getTabooScore(Application application) {
+        SharedPreferences sharedPref = getUserSharedPreferences(application);
+        return sharedPref.getInt(ConstHelper.TABOO_SCORE__SP, 0);
+    }
+
+    public static void incrementTabooScore(Application application, int points) {
+        SharedPreferences sharedPref = getUserSharedPreferences(application);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(ConstHelper.TABOO_SCORE__SP, getTabooScore(application) + points);
+        editor.apply();
+    }
 }
+

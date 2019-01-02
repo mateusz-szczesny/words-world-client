@@ -17,6 +17,8 @@ import android.widget.Toast;
 import java.util.List;
 
 import pl.politechnika.szczesny.words_world_client.R;
+import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
+import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
 import pl.politechnika.szczesny.words_world_client.viewmodel.LanguageViewModel;
@@ -61,8 +63,13 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
                     ApiManager.getInstance().unsubscribeLanguage(getTokenFormSP(application), lang.getId(), new Callback<Void>() {
                         @Override
                         public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                            Toast.makeText(application.getBaseContext(), "Subscription removed", Toast.LENGTH_LONG).show();
-                            lvm.refreshData(application);
+                            if (response.isSuccessful()) {
+                                Toast.makeText(application.getBaseContext(), "Odsubskrybowano", Toast.LENGTH_LONG).show();
+                                lvm.refreshData(application);
+                            } else {
+                                Toast.makeText(application.getBaseContext(), "Błąd", Toast.LENGTH_LONG).show();
+
+                            }
                         }
 
                         @Override
@@ -74,8 +81,13 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
                     ApiManager.getInstance().subscribeLanguage(getTokenFormSP(application), lang.getId(), new Callback<Void>() {
                         @Override
                         public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                            Toast.makeText(application.getBaseContext(), "Subscription created", Toast.LENGTH_LONG).show();
-                            lvm.refreshData(application);
+                            if (response.isSuccessful()) {
+                                Toast.makeText(application.getBaseContext(), "Zasubskrybowano", Toast.LENGTH_LONG).show();
+                                lvm.refreshData(application);
+                            } else {
+                                Toast.makeText(application.getBaseContext(), "Błąd", Toast.LENGTH_LONG).show();
+
+                            }
                         }
 
                         @Override

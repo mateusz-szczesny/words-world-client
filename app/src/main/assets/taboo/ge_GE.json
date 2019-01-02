@@ -5,22 +5,22 @@
     "difficulty": "EASY",
     "black_list": [
       "SANDWICH",
-      "SHOP",
-      "FOOD",
-      "INCH",
+      "GESCHÄFT",
+      "LEBENSMITTEL",
+      "ZOLL",
       "JARED"
     ]
   },
   {
     "id": 2,
-    "key_word": "BARBECUE",
+    "key_word": "GRILL",
     "difficulty": "EASY",
     "black_list": [
-      "GRILL",
-      "OUTDOOR",
-      "BACKYARD",
+      "DRAUSSEN",
+      "HINTERHOF",
       "WEBER",
-      "MEAT"
+      "FLEISCH",
+      "WURST"
     ]
   },
   {
@@ -28,35 +28,35 @@
     "key_word": "SCRABBLE",
     "difficulty": "MEDIUM",
     "black_list": [
-      "LETTERS",
+      "BRIEFE",
       "WORDS",
-      "DICTIONARY",
-      "TILE",
-      "BOARD GAME"
+      "WÖRTER",
+      "FLIESE",
+      "BRETTSPIEL"
     ]
   },
   {
     "id": 4,
-    "key_word": "STOP SIGN",
+    "key_word": "STOPPSCHILD",
     "difficulty": "EASY",
     "black_list": [
-      "RED",
-      "OCTAGON",
-      "DRIVE",
-      "CAR",
-      "INTERSECTION"
+      "ROT",
+      "ACHTECK",
+      "FAHRT",
+      "AUTO",
+      "ÜBERSCHNEIDUNG"
     ]
   },
   {
     "id": 5,
-    "key_word": "ON THE HOUR",
+    "key_word": "ZUR VOLLEN STUNDE",
     "difficulty": "HARD",
     "black_list": [
-      "DEPART",
-      "TIME",
-      "TRAVEL",
-      "CLOCK",
-      "WATCH"
+      "ABFLIEGEN",
+      "ZEIT",
+      "REISE",
+      "UHR",
+      "SEHEN"
     ]
   }
 ]

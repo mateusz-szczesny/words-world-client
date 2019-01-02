@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import java.util.List;
 
 import pl.politechnika.szczesny.words_world_client.adapter.LanguagesAdapter;
+import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
 import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.viewmodel.LanguageViewModel;
 
@@ -47,5 +48,11 @@ public class LanguagesActivity extends AppBaseActivity {
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SessionHelper.updateUserData(getApplication());
     }
 }

@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "key_word": "SUBWAY",
+    "difficulty": "EASY",
+    "black_list": [
+      "SANDWICH",
+      "TIENDA",
+      "COMIDA",
+      "PULGADA",
+      "TARRO"
+    ]
+  },
+  {
+    "id": 2,
+    "key_word": "PARILLA",
+    "difficulty": "EASY",
+    "black_list": [
+      "PARRILLA",
+      "AL AIRE LIBRE",
+      "PATIO INTERIOR",
+      "WEBER",
+      "CARNE"
+    ]
+  },
+  {
+    "id": 3,
+    "key_word": "SCRABBLE",
+    "difficulty": "MEDIUM",
+    "black_list": [
+      "LETRAS",
+      "PALABRAS",
+      "DICCIONARIO",
+      "AZULEJO",
+      "JUEGO DE MESA"
+    ]
+  },
+  {
+    "id": 4,
+    "key_word": "SEÑAL DE STOP",
+    "difficulty": "EASY",
+    "black_list": [
+      "ROJO",
+      "OCTÁGONO",
+      "CONDUCIR",
+      "COCHE",
+      "INTERSECCIÓN"
+    ]
+  },
+  {
+    "id": 5,
+    "key_word": "EN LA HORA",
+    "difficulty": "HARD",
+    "black_list": [
+      "SALIR",
+      "HORA",
+      "VIAJE",
+      "TIP",
+      "RELOJ"
+    ]
+  }
+]
