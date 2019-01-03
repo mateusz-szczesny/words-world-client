@@ -52,23 +52,12 @@ public class ConstHelper {
         put("Niemiecki", "de");
     }};
 
-    public static final String DEFAULT_LANGUAGE_VOICE_CODE = "en-US";
-
-    public static final Map<String, String> langName2langVoiceCode = new HashMap<String, String>() {{
-        put("Wybierz język...", "en-US");
-        put("Polski", null);
-        put("Angielski", "en-US");
-        put("Francuski", "fr-FR");
-        put("Hiszpański", "es-ES");
-        put("Niemiecki", "de-DE");
+    public static final Map<String, Locale> langName2Locale = new HashMap<String, Locale>() {{
+        put("Wybierz język...", null);
+        put("Polski", new Locale("pl"));
+        put("Angielski", new Locale("en"));
+        put("Francuski", new Locale("fr"));
+        put("Hiszpański", new Locale("es"));
+        put("Niemiecki", new Locale("de"));
     }};
-
-//    public static final Map<String, Locale> langName2Locale = new HashMap<String, Locale>() {{
-//        put("Wybierz język...", null);
-//        put("Polski", null);
-//        put("Angielski", Locale.ENGLISH);
-//        put("Francuski", Locale.FRANCE);
-//        put("Hiszpański", null);
-//        put("Niemiecki", Locale.GERMAN);
-//    }};
 }

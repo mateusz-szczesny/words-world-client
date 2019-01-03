@@ -2,16 +2,8 @@ package pl.politechnika.szczesny.words_world_client.model;
 
 
 import android.support.annotation.NonNull;
-
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
-import java.util.Locale;
-
-import pl.politechnika.szczesny.words_world_client.helper.ConstHelper;
-
-import static pl.politechnika.szczesny.words_world_client.helper.ConstHelper.DEFAULT_LANGUAGE_VOICE_CODE;
 
 public class Language {
 
@@ -54,6 +46,4 @@ public class Language {
     public String toString() {
         return this.name;
     }
-
-
 }
