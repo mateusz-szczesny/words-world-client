@@ -29,4 +29,21 @@
     <string name="submit_changes">Zapisz</string>
     <string name="accept">Zaakceptuj</string>
     <string name="reject">Odrzuć</string>
+    <string name="enter_phrase_here">Wpisz tekst do przetłumaczenia...</string>
+    <string name="translation">Tłumaczenie</string>
+    <string name="TRANSLATE">PRZETŁUMACZ</string>
+
+    <string-array name="langs">
+        <item name="">Angielski</item>
+        <item name="">Francuski</item>
+        <item name="">Hiszpański</item>
+        <item name="">Niemiecki</item>
+    </string-array>
+
+    <string-array name="langs_codes">
+        <item name="">Angielski</item>
+        <item name="">Francuski</item>
+        <item name="">Hiszpański</item>
+        <item name="">Niemiecki</item>
+    </string-array>
 </resources>

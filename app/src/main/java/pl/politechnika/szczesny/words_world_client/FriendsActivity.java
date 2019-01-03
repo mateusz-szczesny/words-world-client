@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +15,7 @@ import pl.politechnika.szczesny.words_world_client.adapter.FriendsListAdapter;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.viewmodel.FriendsViewModel;
 
-public class FriendsActivity extends AppBaseActivity {
+public class FriendsActivity extends AppCompatActivity {
     RecyclerView _friendsList;
 
     @Override

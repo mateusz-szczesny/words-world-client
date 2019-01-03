@@ -31,6 +31,7 @@
         <activity android:name=".LanguagesActivity" android:theme="@style/AppTheme" />
         <activity android:name=".FriendsActivity" android:theme="@style/AppTheme" />
         <activity android:name=".TabooActivity" android:theme="@style/AppTheme" />
+        <activity android:name=".TranslateActivity" android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
