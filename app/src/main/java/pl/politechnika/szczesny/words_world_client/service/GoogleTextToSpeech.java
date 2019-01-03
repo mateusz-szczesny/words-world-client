@@ -5,18 +5,21 @@ import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import pl.politechnika.szczesny.words_world_client.helper.ConstHelper;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import pl.politechnika.szczesny.words_world_client.model.Language;
+import pl.politechnika.szczesny.words_world_client.model.TextToSpeechRequest;
+import pl.politechnika.szczesny.words_world_client.model.TranslatedVoice;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-public class GoogleTranslate {
+public class GoogleTextToSpeech {
     private static TranslateService translateService;
-    private static GoogleTranslate apiManager;
+    private static GoogleTextToSpeech apiManager;
 
-    private GoogleTranslate() {
+    private GoogleTextToSpeech() {
 
-        final String END_POINT = "https://translation.googleapis.com/";
+        final String END_POINT = "https://texttospeech.googleapis.com/";
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
@@ -34,15 +37,18 @@ public class GoogleTranslate {
 
     }
 
-    public static GoogleTranslate getInstance() {
+    public static GoogleTextToSpeech getInstance() {
         if (apiManager == null) {
-            apiManager = new GoogleTranslate();
+            apiManager = new GoogleTextToSpeech();
         }
         return apiManager;
     }
 
-    public void translate(String srcText, String srcLang, String trgLang, Callback<ResponseBody> callback) {
-        Call<ResponseBody> translateCall = translateService.translate(srcText, trgLang, srcLang, ConstHelper.GOOGLE_API__KEY);
+    public void synthesize(String text, String language, Callback<TranslatedVoice> callback) {
+        Call<TranslatedVoice> translateCall = translateService.synthesize(
+                ConstHelper.GOOGLE_API__KEY,
+                new TextToSpeechRequest(text, language)
+        );
         translateCall.enqueue(callback);
     }
 }

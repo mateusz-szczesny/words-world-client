@@ -10,11 +10,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class GoogleManager {
+public class GoogleTranslate {
     private static TranslateService translateService;
-    private static GoogleManager apiManager;
+    private static GoogleTranslate apiManager;
 
-    private GoogleManager() {
+    private GoogleTranslate() {
 
         final String END_POINT = "https://translation.googleapis.com/";
 
@@ -34,9 +34,9 @@ public class GoogleManager {
 
     }
 
-    public static GoogleManager getInstance() {
+    public static GoogleTranslate getInstance() {
         if (apiManager == null) {
-            apiManager = new GoogleManager();
+            apiManager = new GoogleTranslate();
         }
         return apiManager;
     }
