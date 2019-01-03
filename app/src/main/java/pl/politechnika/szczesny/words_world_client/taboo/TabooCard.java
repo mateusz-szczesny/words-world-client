@@ -19,10 +19,10 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
 
 
 import pl.politechnika.szczesny.words_world_client.R;
-import pl.politechnika.szczesny.words_world_client.helper.ConstHelper;
+import pl.politechnika.szczesny.words_world_client.helper.Utils;
 import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 
-import static pl.politechnika.szczesny.words_world_client.helper.ConstHelper.TabooLevel2CardColor;
+import static pl.politechnika.szczesny.words_world_client.helper.Utils.TabooLevel2CardColor;
 
 @Layout(R.layout.taboo_card_view)
 public class TabooCard {
@@ -55,8 +55,7 @@ public class TabooCard {
         mSwipeView = swipeView;
     }
 
-    @Resolve
-    private void onResolved(){
+    private void fillCardDetails() {
         keyWord.setText(mCard.getKeyWord());
 
         BL1.setText(mCard.getBlackList()[0]);
@@ -69,16 +68,21 @@ public class TabooCard {
         cardView.setCardBackgroundColor(color != null ? color : Color.WHITE);
     }
 
+    @Resolve
+    private void onResolved(){
+        fillCardDetails();
+    }
+
     @SwipeOut
     private void onSwipedOut(){
         Log.d("EVENT", "onSwipedOut");
+        Integer points = Utils.TabooLevel2Reward.get(mCard.getDifficulty());
+        SharedPrefHelper.incrementTabooScore(
+                (Application)mContext.getApplicationContext(),
+                -1 * (points != null ? points : 0)
+        );
         if (mSwipeView.getAllResolvers().size() == 1) {
             addSummaryCard();
-        } else {
-            SharedPrefHelper.incrementTabooScore(
-                    (Application)mContext.getApplicationContext(),
-                    -1 * ConstHelper.TabooLevel2Reward.get(mCard.getDifficulty())
-            );
         }
     }
 
@@ -90,19 +94,20 @@ public class TabooCard {
     @SwipeIn
     private void onSwipeIn(){
         Log.d("EVENT", "onSwipedIn");
+        Integer points = Utils.TabooLevel2Reward.get(mCard.getDifficulty());
+        SharedPrefHelper.incrementTabooScore(
+                (Application)mContext.getApplicationContext(),
+                points != null ? points : 0
+        );
         if (mSwipeView.getAllResolvers().size() == 1) {
             addSummaryCard();
-        } else {
-            SharedPrefHelper.incrementTabooScore(
-                    (Application)mContext.getApplicationContext(),
-                    ConstHelper.TabooLevel2Reward.get(mCard.getDifficulty())
-            );
         }
     }
 
     private void addSummaryCard() {
         mCard.setBlackList(new String[]{"", "Wynik " + SharedPrefHelper.getTabooScore((Application)mContext.getApplicationContext()) + "!"});
         mCard.setKeyWord("Gratulacje!");
+        mCard.setDifficulty("");
         mSwipeView.addView(this);
     }
 

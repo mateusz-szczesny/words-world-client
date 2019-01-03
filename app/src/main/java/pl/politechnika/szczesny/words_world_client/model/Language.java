@@ -13,6 +13,8 @@ public class Language {
     private String name;
     @SerializedName("is_subscribed")
     private Boolean isSubscribed;
+    @SerializedName("language_code")
+    private String languageCode;
 
     public Language() {
     }
@@ -39,6 +41,14 @@ public class Language {
 
     public void setSubscribed(Boolean subscribed) {
         isSubscribed = subscribed;
+    }
+
+    public String getLanguageCode() {
+        return languageCode;
+    }
+
+    public void setLanguageCode(String languageCode) {
+        this.languageCode = languageCode;
     }
 
     @NonNull

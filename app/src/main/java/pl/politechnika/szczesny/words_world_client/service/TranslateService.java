@@ -2,10 +2,7 @@ package pl.politechnika.szczesny.words_world_client.service;
 
 
 import okhttp3.ResponseBody;
-import pl.politechnika.szczesny.words_world_client.model.TranslatedVoice;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 

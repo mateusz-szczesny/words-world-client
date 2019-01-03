@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import pl.politechnika.szczesny.words_world_client.helper.ConstHelper;
+import pl.politechnika.szczesny.words_world_client.helper.Utils;
 import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.model.User;
@@ -27,7 +27,7 @@ public class TabooManager {
         application = (Application)context.getApplicationContext();
     }
 
-    public static TabooManager getInstance(Context context) throws IOException {
+    public static TabooManager getInstance(Context context) {
         if (INSTANCE == null) {
             INSTANCE = new TabooManager(context);
         }
@@ -39,7 +39,10 @@ public class TabooManager {
         List<String> files = new ArrayList<>();
         User user = SharedPrefHelper.getUserFormSP(application);
         for (Language lang : user.getSelectedLanguages()) {
-            files.add(ConstHelper.lang2TabooFile.get(lang.getName()));
+            String filePath = Utils.lang2TabooFile.get(lang.getName());
+            if (filePath != null && !"".equals(filePath.trim())) {
+                files.add(Utils.lang2TabooFile.get(lang.getName()));
+            }
         }
         for(String fileName : files) {
             InputStream is = application.getApplicationContext().getAssets().open("taboo/" + fileName);

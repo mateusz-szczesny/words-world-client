@@ -23,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static pl.politechnika.szczesny.words_world_client.helper.ConstHelper.MINIMUM_USERNAME_LENGTH;
+import static pl.politechnika.szczesny.words_world_client.helper.Utils.MINIMUM_USERNAME_LENGTH;
 import static pl.politechnika.szczesny.words_world_client.helper.SessionHelper.isSessionActive;
 import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.getTokenFormSP;
 import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.storeTokenInSP;

@@ -48,7 +48,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:foregroundGravity="center_vertical"
-                android:src="@drawable/ic_fiber_manual_record_black_24dp" />
+                android:src="@drawable/ic_fiber_manual_record" />
 
         </RelativeLayout>
 

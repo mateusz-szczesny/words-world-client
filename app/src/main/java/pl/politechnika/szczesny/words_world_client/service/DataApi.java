@@ -21,6 +21,12 @@ public interface DataApi {
         @Query("search") String filter
     );
 
+    @GET("api/users/{id}")
+    Call<User> getUserById(
+            @Header("Authorization") String token,
+            @Path("id") long id
+    );
+
     @GET("api/users/me")
     Call<User> getUserData(
             @Header("Authorization") String token

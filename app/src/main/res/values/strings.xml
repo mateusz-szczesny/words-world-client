@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Word\'s World</string>
     <string name="title_home">Wyzwania</string>
-    <string name="title_dashboard">P</string>
     <string name="title_notifications">Powiadomienia</string>
     <string name="title_challenge">Wyzwania</string>
     <string name="title_profile">Profil</string>
@@ -9,7 +8,6 @@
     <string name="search">szukaj</string>
     <string name="friends">Znajdz</string>
     <string name="about">O nas</string>
-    <string name="games">GRY</string>
     <string name="taboo">Taboo</string>
     <string name="languages">Języki</string>
     <string name="achievements_title">Osiągnięcia</string>
@@ -29,21 +27,7 @@
     <string name="submit_changes">Zapisz</string>
     <string name="accept">Zaakceptuj</string>
     <string name="reject">Odrzuć</string>
-    <string name="enter_phrase_here">Wpisz tekst do przetłumaczenia...</string>
+    <string name="enter_phrase_here">Wpisz tekst do przetłumaczenia…</string>
     <string name="translation">Tłumaczenie</string>
     <string name="TRANSLATE">PRZETŁUMACZ</string>
-
-    <string-array name="langs">
-        <item name="">Angielski</item>
-        <item name="">Francuski</item>
-        <item name="">Hiszpański</item>
-        <item name="">Niemiecki</item>
-    </string-array>
-
-    <string-array name="langs_codes">
-        <item name="">Angielski</item>
-        <item name="">Francuski</item>
-        <item name="">Hiszpański</item>
-        <item name="">Niemiecki</item>
-    </string-array>
 </resources>

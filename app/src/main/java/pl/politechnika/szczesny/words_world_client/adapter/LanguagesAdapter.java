@@ -17,8 +17,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import pl.politechnika.szczesny.words_world_client.R;
-import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
-import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
+import pl.politechnika.szczesny.words_world_client.helper.Utils;
 import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
 import pl.politechnika.szczesny.words_world_client.viewmodel.LanguageViewModel;
@@ -50,9 +49,9 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
         final Language lang = languages.get(i);
         final Boolean isSubscribed = lang.getSubscribed();
         if (isSubscribed) {
-            languageViewHolder.changeSub.setImageResource(R.drawable.ic_delete_subscription_24dp);
+            languageViewHolder.changeSub.setImageResource(R.drawable.ic_delete_subscription);
         } else {
-            languageViewHolder.changeSub.setImageResource(R.drawable.ic_add_subscription_24dp);
+            languageViewHolder.changeSub.setImageResource(R.drawable.ic_add_subscription);
         }
         languageViewHolder.changeSub.setBackgroundColor(Color.WHITE);
 
@@ -98,9 +97,11 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
                 }
             }
         });
-        // TODO: choose correct lang's flag here...
-        languageViewHolder.name.setText(languages.get(i).getName());
+
+        languageViewHolder.name.setText(Utils.returnFlagEmojiForLanguage(lang) + "   " + lang.getName());
     }
+
+
 
     @Override
     public int getItemCount() {

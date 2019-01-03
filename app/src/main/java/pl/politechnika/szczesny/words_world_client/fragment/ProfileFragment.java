@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import pl.politechnika.szczesny.words_world_client.FriendsActivity;
-import pl.politechnika.szczesny.words_world_client.FriendsSearchActivity;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.SettingsActivity;
 import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;

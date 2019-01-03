@@ -4,7 +4,7 @@ package pl.politechnika.szczesny.words_world_client.service;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
-import pl.politechnika.szczesny.words_world_client.helper.ConstHelper;
+import pl.politechnika.szczesny.words_world_client.helper.Utils;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.Call;
@@ -42,7 +42,7 @@ public class GoogleTranslate {
     }
 
     public void translate(String srcText, String srcLang, String trgLang, Callback<ResponseBody> callback) {
-        Call<ResponseBody> translateCall = translateService.translate(srcText, trgLang, srcLang, ConstHelper.GOOGLE_API__KEY);
+        Call<ResponseBody> translateCall = translateService.translate(srcText, trgLang, srcLang, Utils.GOOGLE_API__KEY);
         translateCall.enqueue(callback);
     }
 }
