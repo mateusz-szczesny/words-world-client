@@ -66,6 +66,11 @@ public class ApiManager {
         call.enqueue(callback);
     }
 
+    public void getUserById(Token token, long id, Callback<User> callback) {
+        Call<User> call = dataService.getUserById(token.getToken(), id);
+        call.enqueue(callback);
+    }
+
     public void getLanguages(Token token, Callback<List<Language>> callback) {
         Call<List<Language>> call = dataService.getLanguages(token.getToken());
         call.enqueue(callback);
@@ -91,7 +96,7 @@ public class ApiManager {
         call.enqueue(callback);
     }
 
-    public void unFollowUser(Token token, long id, Callback<Void> callback) {
+    public void unfollowUser(Token token, long id, Callback<Void> callback) {
         Call<Void> call = dataService.unfollowUser(token.getToken(), id);
         call.enqueue(callback);
     }

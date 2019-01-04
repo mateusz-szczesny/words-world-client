@@ -9,6 +9,7 @@ import pl.politechnika.szczesny.words_world_client.model.Language;
 
 public class Utils {
     static final String TABOO_SCORE__SP = "TABOO_SCORE__SP";
+    public static final String USER__ID = "USER_ID";
     public static final String GOOGLE_API__KEY = "AIzaSyBmtY8VhmWWpfBOthj3Q728H7tt79-haFs";
     static final String USER__SP = "USER_SP";
     static final String TOKEN__SP = "TOKEN_SP";

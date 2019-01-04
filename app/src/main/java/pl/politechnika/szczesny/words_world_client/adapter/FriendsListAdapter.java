@@ -1,6 +1,7 @@
 package pl.politechnika.szczesny.words_world_client.adapter;
 
 import android.app.Application;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,8 +12,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import pl.politechnika.szczesny.words_world_client.OtherUserActivity;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.model.User;
+
+import static pl.politechnika.szczesny.words_world_client.helper.Utils.USER__ID;
 
 public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.FriendViewHolder>{
     private List<User> friends;
@@ -31,9 +35,19 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull FriendViewHolder friendViewHolder, int i) {
-        friendViewHolder._username.setText(friends.get(i).getUsername());
-        friendViewHolder._first_name.setText(!"".equals(friends.get(i).getFirstName()) ? friends.get(i).getFirstName() : "");
-        friendViewHolder._last_name.setText(!"".equals(friends.get(i).getLastName()) ? friends.get(i).getLastName() : "");
+        final User currentUser = friends.get(i);
+        friendViewHolder._username.setText(currentUser.getUsername());
+        friendViewHolder._first_name.setText(!"".equals(currentUser.getFirstName()) ? currentUser.getFirstName() : "");
+        friendViewHolder._last_name.setText(!"".equals(currentUser.getLastName()) ? currentUser.getLastName() : "");
+
+        friendViewHolder._cv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(application.getApplicationContext(), OtherUserActivity.class);
+                intent.putExtra(USER__ID, currentUser.getId());
+                application.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -54,21 +54,6 @@ public class ProfileFragment extends Fragment {
         SessionHelper.updateUserData(getActivity().getApplication());
         fillData(SharedPrefHelper.getUserFormSP(getActivity().getApplication()));
 
-        ApiManager.getInstance().fetchUser(SharedPrefHelper.getTokenFormSP(getActivity().getApplication()), new Callback<User>() {
-            @Override
-            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-                User user = response.body();
-                fillData(user);
-
-                // TODO: fill list of achievements | more: https://stackoverflow.com/questions/40587168/simple-android-grid-example-using-recyclerview-with-gridlayoutmanager-like-the
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                Log.d("API ERROR", "CANNOT FETCH USER DATA");
-            }
-        });
-
         _noOfFollowings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +69,29 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    private void refreshUser() {
+        ApiManager.getInstance().fetchUser(SharedPrefHelper.getTokenFormSP(getActivity().getApplication()), new Callback<User>() {
+            @Override
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                User user = response.body();
+                fillData(user);
+
+                // TODO: fill list of achievements | more: https://stackoverflow.com/questions/40587168/simple-android-grid-example-using-recyclerview-with-gridlayoutmanager-like-the
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                Log.d("API ERROR", "CANNOT FETCH USER DATA");
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshUser();
     }
 
     private void fillData(User user) {
