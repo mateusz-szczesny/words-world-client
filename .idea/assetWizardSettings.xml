@@ -196,7 +196,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/communication/ic_import_export_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/av/ic_library_books_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -206,8 +206,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="f58229" />
-                            <entry key="outputName" value="ic_import_export" />
+                            <entry key="outputName" value="ic_fishe" />
                             <entry key="sourceFile" value="C:\Users\szczesm3" />
                           </map>
                         </option>

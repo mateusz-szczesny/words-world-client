@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.politechnika.szczesny.words_world_client.adapter.AchievementsGridAdapter;
 import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
 import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.helper.Utils;
@@ -29,6 +32,7 @@ public class OtherUserActivity extends AppCompatActivity {
     @BindView(R.id.first_name) TextView _firstName;
     @BindView(R.id.last_name) TextView _lastName;
     @BindView(R.id.username) TextView _username;
+    @BindView(R.id.overall_score) TextView _overallScore;
     @BindView(R.id.follow_or_unfollow) Button _changeFollowing;
     @BindView(R.id.achievements_list) RecyclerView _achievementsList;
     @BindView(R.id.languages_list) RecyclerView _languagesList;
@@ -77,8 +81,11 @@ public class OtherUserActivity extends AppCompatActivity {
         _firstName.setText(!"".equals(_user.getFirstName()) ? _user.getFirstName() : "");
         _lastName.setText(!"".equals(_user.getLastName()) ? _user.getLastName() : "");
         _username.setText(!"".equals(_user.getUsername()) ? _user.getUsername() : "");
+        _overallScore.setText(!"".equals(String.valueOf(_user.getOverallScore().getScore())) ?
+                String.valueOf(_user.getOverallScore().getScore()) : "0");
 
         refreshButton();
+        assignAchievements();
     }
 
     private void refreshButton() {
@@ -91,6 +98,16 @@ public class OtherUserActivity extends AppCompatActivity {
             _changeFollowing.setText("Obserwuj");
             _changeFollowing.setOnClickListener(followUser);
         }
+    }
+
+    private void assignAchievements() {
+        GridLayoutManager glm = new GridLayoutManager(getApplicationContext(), 3);
+        final AchievementsGridAdapter adapter = new AchievementsGridAdapter(getApplication());
+
+        _achievementsList.setLayoutManager(glm);
+        _achievementsList.setAdapter(adapter);
+        _achievementsList.setItemAnimator(new DefaultItemAnimator());
+        adapter.setAchievements(_user.getAchievements());
     }
 
     android.view.View.OnClickListener followUser = new android.view.View.OnClickListener() {

@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
 import pl.politechnika.szczesny.words_world_client.fragment.ChallengesFragment;
-import pl.politechnika.szczesny.words_world_client.fragment.NotificationsFragment;
+import pl.politechnika.szczesny.words_world_client.fragment.FlashcardsFragment;
 import pl.politechnika.szczesny.words_world_client.fragment.ProfileFragment;
 
 public class MainActivity extends AppBaseActivity {
@@ -24,8 +24,8 @@ public class MainActivity extends AppBaseActivity {
                 case R.id.navigation_challenges:
                     fragment = new ChallengesFragment();
                     break;
-                case R.id.navigation_notifications:
-                    fragment = new NotificationsFragment();
+                case R.id.navigation_flashcards:
+                    fragment = new FlashcardsFragment();
                     break;
                 case R.id.navigation_profile:
                     fragment = new ProfileFragment();

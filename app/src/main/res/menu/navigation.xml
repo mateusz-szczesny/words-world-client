@@ -7,9 +7,9 @@
         android:title="@string/title_challenge" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications"
-        android:title="@string/title_notifications" />
+        android:id="@+id/navigation_flashcards"
+        android:icon="@drawable/ic_fiche"
+        android:title="@string/fiche_nav_title" />
 
     <item
         android:id="@+id/navigation_profile"

@@ -5,7 +5,9 @@ import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import pl.politechnika.szczesny.words_world_client.model.Credentials;
 import pl.politechnika.szczesny.words_world_client.model.Language;
+import pl.politechnika.szczesny.words_world_client.model.Statistics;
 import pl.politechnika.szczesny.words_world_client.model.Token;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import retrofit2.Call;
@@ -101,8 +103,13 @@ public class ApiManager {
         call.enqueue(callback);
     }
 
-    public  void updateUserData(Token token, User.Credentials credentials, Callback<User> callback) {
+    public void updateUserData(Token token, Credentials credentials, Callback<User> callback) {
         Call<User> call = dataService.updateUserData(token.getToken(), credentials);
+        call.enqueue(callback);
+    }
+
+    public void pushUserStatistics(Token token, Statistics statistics, Callback<Void> callback) {
+        Call<Void> call = dataService.pushUserStatistics(token.getToken(), statistics);
         call.enqueue(callback);
     }
 }

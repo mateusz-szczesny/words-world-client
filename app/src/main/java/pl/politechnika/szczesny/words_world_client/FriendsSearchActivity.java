@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +19,7 @@ import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.viewmodel.UserViewModel;
 
-public class FriendsSearchActivity extends AppBaseActivity {
+public class FriendsSearchActivity extends AppCompatActivity {
     RecyclerView _friendsList;
     ImageButton _search;
     EditText _searchText;
@@ -42,9 +43,6 @@ public class FriendsSearchActivity extends AppBaseActivity {
         userViewModel.getUsers().observe(this, new Observer<List<User>>() {
             @Override
             public void onChanged(@Nullable List<User> users) {
-                if (users != null) {
-                    users.remove(SharedPrefHelper.getUserFormSP(getApplication()));
-                }
                 adapter.setFriends(users);
             }
         });

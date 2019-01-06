@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 
 import pl.politechnika.szczesny.words_world_client.R;
 
-public class NotificationsFragment extends Fragment {
+public class FlashcardsFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_notifications, container, false);
+        return inflater.inflate(R.layout.fragment_flashcards, container, false);
     }
 }

@@ -9,10 +9,11 @@ public class Achievement {
     private long id;
     @SerializedName("name")
     private String name;
-    @SerializedName("condition")
-    private String condition;
+    @SerializedName("level")
+    private String level;
     @SerializedName("font_awesome_icon")
     private String badgeIcon;
+
 
     public Achievement() {
     }
@@ -33,12 +34,12 @@ public class Achievement {
         this.name = name;
     }
 
-    public String getCondition() {
-        return condition;
+    public String getLevel() {
+        return level;
     }
 
-    public void setCondition(String condition) {
-        this.condition = condition;
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     public String getBadgeIcon() {
@@ -47,17 +48,6 @@ public class Achievement {
 
     public void setBadgeIcon(String badgeIcon) {
         this.badgeIcon = badgeIcon;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "Achievement{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", condition='" + condition + '\'' +
-                ", badgeIcon='" + badgeIcon + '\'' +
-                '}';
     }
 }
 

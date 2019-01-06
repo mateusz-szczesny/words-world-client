@@ -35,6 +35,13 @@ public class Utils {
         put("HARD", 3);
     }};
 
+    public static final Map<String, Integer> achievementLevel2Color = new HashMap<String, Integer>() {{
+        put("1", Color.parseColor("#a77044"));
+        put("2", Color.parseColor("#a7a7ad"));
+        put("3", Color.parseColor("#fee101"));
+        put("4", Color.parseColor("#b9f2ff"));
+    }};
+
     public static String returnFlagEmojiForLanguage(Language language) {
         int flagOffset = 0x1F1E6;
         int asciiOffset = 0x41;

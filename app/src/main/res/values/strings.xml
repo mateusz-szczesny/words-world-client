@@ -30,4 +30,10 @@
     <string name="enter_phrase_here">Wpisz tekst do przetłumaczenia…</string>
     <string name="translation">Tłumaczenie</string>
     <string name="TRANSLATE">PRZETŁUMACZ</string>
+    <string name="overall_score">Wynik:</string>
+    <string name="your_overall_score">Twój wynik:</string>
+    <string name="log_out">Wyloguj się</string>
+    <string name="fiche_nav_title">Fiszki</string>
+    <string name="lang_challenges">Potyczki językowe...</string>
+    <string name="flashcards">Fiszki</string>
 </resources>

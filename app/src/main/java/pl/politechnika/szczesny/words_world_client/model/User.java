@@ -27,6 +27,8 @@ public class User implements Serializable {
     private List<Language> selectedLanguages;
     @SerializedName("is_friend")
     private Boolean isFriend;
+    @SerializedName("overall_score")
+    private OverallScore overallScore;
 
     public User() {
     }
@@ -103,6 +105,14 @@ public class User implements Serializable {
         isFriend = friend;
     }
 
+    public OverallScore getOverallScore() {
+        return overallScore;
+    }
+
+    public void setOverallScore(OverallScore overallScore) {
+        this.overallScore = overallScore;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -124,10 +134,17 @@ public class User implements Serializable {
         }
     }
 
-    public static class Credentials {
-        @SerializedName("first_name")
-        public String firstName;
-        @SerializedName("last_name")
-        public String lastName;
+
+    public class OverallScore {
+        @SerializedName("score__sum")
+        private Integer score;
+
+        public Integer getScore() {
+            return score;
+        }
+
+        public void setScore(Integer score) {
+            this.score = score;
+        }
     }
 }
