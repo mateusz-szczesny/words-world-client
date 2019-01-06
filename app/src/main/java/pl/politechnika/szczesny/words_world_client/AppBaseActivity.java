@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 import java.util.Objects;
 
 
-import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.flushSP;
+import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.flushUserSP;
 
 public class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener {
     private FrameLayout view_stub;
@@ -87,7 +87,7 @@ public class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMen
     }
 
     public void logout(View view) {
-        flushSP(getApplication());
+        flushUserSP(getApplication());
 
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);

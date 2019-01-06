@@ -1,28 +1,38 @@
 package pl.politechnika.szczesny.words_world_client;
 
 import android.app.ProgressDialog;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.politechnika.szczesny.words_world_client.adapter.AchievementsGridAdapter;
+import pl.politechnika.szczesny.words_world_client.adapter.LanguagesAdapter;
+import pl.politechnika.szczesny.words_world_client.adapter.LanguagesMiniAdapter;
 import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
 import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.helper.Utils;
+import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.model.Token;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
+import pl.politechnika.szczesny.words_world_client.viewmodel.LanguageViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -86,6 +96,7 @@ public class OtherUserActivity extends AppCompatActivity {
 
         refreshButton();
         assignAchievements();
+        assignLanguages();
     }
 
     private void refreshButton() {
@@ -108,6 +119,19 @@ public class OtherUserActivity extends AppCompatActivity {
         _achievementsList.setAdapter(adapter);
         _achievementsList.setItemAnimator(new DefaultItemAnimator());
         adapter.setAchievements(_user.getAchievements());
+    }
+
+    private void assignLanguages() {
+        _languagesList = findViewById(R.id.languages_list);
+
+        GridLayoutManager glm = new GridLayoutManager(getApplicationContext(), 3);
+        final LanguagesMiniAdapter adapter = new LanguagesMiniAdapter(getApplication());
+
+        _languagesList.setLayoutManager(glm);
+        _languagesList.setAdapter(adapter);
+        _languagesList.setItemAnimator(new DefaultItemAnimator());
+        adapter.setLanguages(_user.getSelectedLanguages());
+
     }
 
     android.view.View.OnClickListener followUser = new android.view.View.OnClickListener() {

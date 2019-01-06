@@ -34,6 +34,8 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
+import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
+import pl.politechnika.szczesny.words_world_client.helper.Utils;
 import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.model.Translation;
 import pl.politechnika.szczesny.words_world_client.service.GoogleTranslate;
@@ -200,9 +202,17 @@ public class TranslateActivity extends AppCompatActivity {
             output.append(t.getTranslatedText());
         }
 
-        setTranslatedText(output.toString());    }
+        SharedPrefHelper.incrementTranslatedWords(getApplication(), Utils.ONE);
+        setTranslatedText(output.toString());
+    }
 
     private void setTranslatedText(String text) {
         _translatedText.setText(text);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Utils.pushStatistics(getApplication());
+        this.finish();
     }
 }

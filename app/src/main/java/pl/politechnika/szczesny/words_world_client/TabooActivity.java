@@ -10,7 +10,9 @@ import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import java.io.IOException;
 
+import okhttp3.internal.Util;
 import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
+import pl.politechnika.szczesny.words_world_client.helper.Utils;
 import pl.politechnika.szczesny.words_world_client.taboo.Card;
 import pl.politechnika.szczesny.words_world_client.taboo.TabooCard;
 import pl.politechnika.szczesny.words_world_client.taboo.TabooManager;
@@ -62,6 +64,7 @@ public class TabooActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Utils.pushStatistics(getApplication());
         this.finish();
     }
 }

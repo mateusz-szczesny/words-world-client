@@ -99,6 +99,14 @@ public class TabooCard {
                 (Application)mContext.getApplicationContext(),
                 points != null ? points : 0
         );
+
+        if (!"".equals(mCard.getDifficulty().trim())) {
+            SharedPrefHelper.incrementTabooStats(
+                    (Application)mContext.getApplicationContext(),
+                    Utils.ONE
+            );
+        }
+
         if (mSwipeView.getAllResolvers().size() == 1) {
             addSummaryCard();
         }

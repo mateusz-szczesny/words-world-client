@@ -1,5 +1,6 @@
 package pl.politechnika.szczesny.words_world_client.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -17,6 +18,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pl.politechnika.szczesny.words_world_client.FriendsActivity;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.SettingsActivity;
@@ -25,6 +29,7 @@ import pl.politechnika.szczesny.words_world_client.adapter.FriendsListAdapter;
 import pl.politechnika.szczesny.words_world_client.helper.FontManager;
 import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
 import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
+import pl.politechnika.szczesny.words_world_client.model.Achievement;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
 import retrofit2.Call;
@@ -97,13 +102,18 @@ public class ProfileFragment extends Fragment {
 
     private void assignAchievements(User user) {
         GridLayoutManager glm = new GridLayoutManager(getContext(), 3);
-        final AchievementsGridAdapter adapter = new AchievementsGridAdapter(getActivity().getApplication());
+        Activity activity = getActivity();
+        if (activity != null) {
+            final AchievementsGridAdapter adapter = new AchievementsGridAdapter(getActivity().getApplication());
 
-        _achievementsList.setLayoutManager(glm);
-        _achievementsList.setAdapter(adapter);
-        _achievementsList.setItemAnimator(new DefaultItemAnimator());
-        adapter.setAchievements(user.getAchievements());
+            _achievementsList.setLayoutManager(glm);
+            _achievementsList.setAdapter(adapter);
+            _achievementsList.setItemAnimator(new DefaultItemAnimator());
+            adapter.setAchievements(user.getAchievements());
+        }
     }
+
+
 
     @Override
     public void onResume() {

@@ -1,18 +1,36 @@
 package pl.politechnika.szczesny.words_world_client.helper;
 
+import android.app.Application;
 import android.graphics.Color;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import pl.politechnika.szczesny.words_world_client.model.Language;
+import pl.politechnika.szczesny.words_world_client.model.Statistics;
+import pl.politechnika.szczesny.words_world_client.model.Token;
+import pl.politechnika.szczesny.words_world_client.service.ApiManager;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Utils {
+    static final String TABOO__SP = "TABOO__SP";
     static final String TABOO_SCORE__SP = "TABOO_SCORE__SP";
+    static final String TABOO_STAT__SP = "TABOO_STAT__SP";
+
+    static final String DICT__SP = "DICT__SP";
+    static final String DICT__STAT__SP = "DICT__STAT__SP";
+    public static final Integer ONE = 1;
+
+    static final String USER__SP = "USER__SP";
     public static final String USER__ID = "USER_ID";
+
     public static final String GOOGLE_API__KEY = "AIzaSyBmtY8VhmWWpfBOthj3Q728H7tt79-haFs";
-    static final String USER__SP = "USER_SP";
-    static final String TOKEN__SP = "TOKEN_SP";
+
+    static final String TOKEN__SP = "TOKEN__SP";
+
     public static final int MINIMUM_PASSWORD_LENGTH = 6;
     public static final int MINIMUM_USERNAME_LENGTH = 4;
 
@@ -55,5 +73,34 @@ public class Utils {
 
         return new String(Character.toChars(firstChar))
                 + new String(Character.toChars(secondChar));
+    }
+
+    public static void pushStatistics(final Application application) {
+        int translatedWords = SharedPrefHelper.getDictionaryStats(application);
+        int tabooSwipedCards = SharedPrefHelper.getTabooStats(application);
+
+        Statistics statistics = new Statistics();
+        statistics.translatedWords = translatedWords;
+        statistics.correctlySwipedTabooCards = tabooSwipedCards;
+
+        Token token = SharedPrefHelper.getTokenFormSP(application);
+        ApiManager.getInstance().pushUserStatistics(token, statistics, new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("STATISTICS", "SUCCESSFULLY PUSHED!");
+                    SharedPrefHelper.flushTabooStats(application);
+                    SharedPrefHelper.flushTranslatedWordsCount(application);
+                } else {
+
+                    Log.d("STATISTICS", "API ERROR!");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.d("RETROFIT", "STAT PUSH FAILED");
+            }
+        });
     }
 }

@@ -101,8 +101,6 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
         languageViewHolder.name.setText(Utils.returnFlagEmojiForLanguage(lang) + "   " + lang.getName());
     }
 
-
-
     @Override
     public int getItemCount() {
         return languages == null ? 0 : languages.size();
@@ -122,14 +120,12 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
         CardView cv;
         TextView name;
         ImageButton changeSub;
-        ImageView flagIcon;
 
         LanguageViewHolder(View itemView) {
             super(itemView);
             cv = itemView.findViewById(R.id.cv);
             name = itemView.findViewById(R.id.name);
             changeSub = itemView.findViewById(R.id.change_sub);
-            flagIcon = itemView.findViewById(R.id.flag_image);
         }
     }
 }

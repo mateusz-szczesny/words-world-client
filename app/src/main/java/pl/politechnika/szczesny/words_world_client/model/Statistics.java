@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Statistics {
     @SerializedName("translated_words")
-    public String translatedWords;
+    public Integer translatedWords;
     @SerializedName("correctly_swiped_taboo_cards")
-    public String correctlySwipedTabooCards;
+    public Integer correctlySwipedTabooCards;
 }
