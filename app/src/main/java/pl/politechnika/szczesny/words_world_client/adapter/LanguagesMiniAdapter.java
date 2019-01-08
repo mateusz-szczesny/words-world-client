@@ -1,31 +1,19 @@
 package pl.politechnika.szczesny.words_world_client.adapter;
 
 import android.app.Application;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.helper.Utils;
 import pl.politechnika.szczesny.words_world_client.model.Language;
-import pl.politechnika.szczesny.words_world_client.service.ApiManager;
-import pl.politechnika.szczesny.words_world_client.viewmodel.LanguageViewModel;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.getTokenFormSP;
 
 public class LanguagesMiniAdapter extends RecyclerView.Adapter<LanguagesMiniAdapter.LanguageViewHolder> {
     private List<Language> languages;

@@ -52,7 +52,7 @@ public class TranslateActivity extends AppCompatActivity {
     @BindView(R.id.translated_text) TextView _translatedText;
     @BindView(R.id.voice) ImageButton _speakText;
     @BindView(R.id.translate) Button _translate;
-    TextToSpeech tts;
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,7 @@ public class TranslateActivity extends AppCompatActivity {
                 noLanguage.setName("Wybierz język...");
                 noLanguage.setLanguageCode("");
                 list.add(noLanguage);
-                list.addAll(languages != null ? languages : null);
+                list.addAll(languages);
 
                 ArrayAdapter<Language> spinnerArrayAdapter = new ArrayAdapter<>(
                         getApplicationContext(), R.layout.spinner_item, list);

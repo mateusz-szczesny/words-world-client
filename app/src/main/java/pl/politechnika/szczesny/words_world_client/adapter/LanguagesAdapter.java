@@ -10,13 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
 import pl.politechnika.szczesny.words_world_client.R;
+import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
 import pl.politechnika.szczesny.words_world_client.helper.Utils;
 import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
@@ -24,8 +24,6 @@ import pl.politechnika.szczesny.words_world_client.viewmodel.LanguageViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.getTokenFormSP;
 
 public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.LanguageViewHolder> {
     private List<Language> languages;
@@ -58,8 +56,10 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
         languageViewHolder.changeSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String token = SessionHelper.getToken(application);
+
                 if (isSubscribed) {
-                    ApiManager.getInstance().unsubscribeLanguage(getTokenFormSP(application), lang.getId(), new Callback<Void>() {
+                    ApiManager.getInstance().unsubscribeLanguage(token, lang.getId(), new Callback<Void>() {
                         @Override
                         public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                             if (response.isSuccessful()) {
@@ -77,7 +77,7 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
                         }
                     });
                 } else {
-                    ApiManager.getInstance().subscribeLanguage(getTokenFormSP(application), lang.getId(), new Callback<Void>() {
+                    ApiManager.getInstance().subscribeLanguage(token, lang.getId(), new Callback<Void>() {
                         @Override
                         public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                             if (response.isSuccessful()) {

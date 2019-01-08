@@ -16,7 +16,7 @@ import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.viewmodel.FriendsViewModel;
 
 public class FriendsActivity extends AppCompatActivity {
-    RecyclerView _friendsList;
+    private RecyclerView _friendsList;
     FriendsListAdapter adapter;
     FriendsViewModel friendsViewModel;
 
@@ -46,8 +46,5 @@ public class FriendsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         friendsViewModel.refreshData(getApplication());
-        if (adapter.getItemCount() == 0) {
-            finish();
-        }
     }
 }

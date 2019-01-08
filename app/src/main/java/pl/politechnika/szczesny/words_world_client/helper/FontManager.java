@@ -3,9 +3,6 @@ package pl.politechnika.szczesny.words_world_client.helper;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import pl.politechnika.szczesny.words_world_client.model.Achievement;
 

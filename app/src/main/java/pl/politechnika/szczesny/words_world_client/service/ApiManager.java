@@ -53,8 +53,8 @@ public class ApiManager {
         tokenCall.enqueue(callback);
     }
 
-    public void fetchUser(Token token, Callback<User> callback) {
-        Call<User> userDataCall = dataService.getUserData(token.getToken());
+    public void fetchUser(String token, Callback<User> callback) {
+        Call<User> userDataCall = dataService.getUserData(token);
         userDataCall.enqueue(callback);
     }
 
@@ -63,53 +63,53 @@ public class ApiManager {
         tokenCall.enqueue(callback);
     }
 
-    public void getUsersByFilter(Token token, String filter, Callback<List<User>> callback) {
-        Call<List<User>> call = dataService.getUsersByFilter(token.getToken(), filter);
+    public void getUsersByFilter(String token, String filter, Callback<List<User>> callback) {
+        Call<List<User>> call = dataService.getUsersByFilter(token, filter);
         call.enqueue(callback);
     }
 
-    public void getUserById(Token token, long id, Callback<User> callback) {
-        Call<User> call = dataService.getUserById(token.getToken(), id);
+    public void getUserById(String token, long id, Callback<User> callback) {
+        Call<User> call = dataService.getUserById(token, id);
         call.enqueue(callback);
     }
 
-    public void getLanguages(Token token, Callback<List<Language>> callback) {
-        Call<List<Language>> call = dataService.getLanguages(token.getToken());
+    public void getLanguages(String token, Callback<List<Language>> callback) {
+        Call<List<Language>> call = dataService.getLanguages(token);
         call.enqueue(callback);
     }
 
-    public void subscribeLanguage(Token token, long id, Callback<Void> callback) {
-        Call<Void> call = dataService.subscribeLanguage(token.getToken(), id);
+    public void subscribeLanguage(String token, long id, Callback<Void> callback) {
+        Call<Void> call = dataService.subscribeLanguage(token, id);
         call.enqueue(callback);
     }
 
-    public void unsubscribeLanguage(Token token, long id, Callback<Void> callback) {
-        Call<Void> call = dataService.unsubscribeLanguage(token.getToken(), id);
+    public void unsubscribeLanguage(String token, long id, Callback<Void> callback) {
+        Call<Void> call = dataService.unsubscribeLanguage(token, id);
         call.enqueue(callback);
     }
 
-    public void getFriends(Token token, Callback<List<User>> callback) {
-        Call<List<User>> call = dataService.getFollowings(token.getToken());
+    public void getFriends(String token, Callback<List<User>> callback) {
+        Call<List<User>> call = dataService.getFollowings(token);
         call.enqueue(callback);
     }
 
-    public void followUser(Token token, long id, Callback<Void> callback) {
-        Call<Void> call = dataService.followUser(token.getToken(), id);
+    public void followUser(String token, long id, Callback<Void> callback) {
+        Call<Void> call = dataService.followUser(token, id);
         call.enqueue(callback);
     }
 
-    public void unfollowUser(Token token, long id, Callback<Void> callback) {
-        Call<Void> call = dataService.unfollowUser(token.getToken(), id);
+    public void unfollowUser(String token, long id, Callback<Void> callback) {
+        Call<Void> call = dataService.unfollowUser(token, id);
         call.enqueue(callback);
     }
 
-    public void updateUserData(Token token, Credentials credentials, Callback<User> callback) {
-        Call<User> call = dataService.updateUserData(token.getToken(), credentials);
+    public void updateUserData(String token, Credentials credentials, Callback<User> callback) {
+        Call<User> call = dataService.updateUserData(token, credentials);
         call.enqueue(callback);
     }
 
-    public void pushUserStatistics(Token token, Statistics statistics, Callback<Void> callback) {
-        Call<Void> call = dataService.pushUserStatistics(token.getToken(), statistics);
+    public void pushUserStatistics(String token, Statistics statistics, Callback<Void> callback) {
+        Call<Void> call = dataService.pushUserStatistics(token, statistics);
         call.enqueue(callback);
     }
 }

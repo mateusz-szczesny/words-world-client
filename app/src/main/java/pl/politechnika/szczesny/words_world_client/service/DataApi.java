@@ -15,7 +15,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface DataApi {
+interface DataApi {
 
     @GET("api/users")
     Call<List<User>> getUsersByFilter(

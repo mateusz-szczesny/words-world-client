@@ -21,7 +21,7 @@ import static pl.politechnika.szczesny.words_world_client.helper.Utils.USER__ID;
 public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.FriendViewHolder>{
     private List<User> friends;
     private Application application;
-    View view;
+    private View view;
 
     public FriendsListAdapter(Application application) {
         this.application = application;

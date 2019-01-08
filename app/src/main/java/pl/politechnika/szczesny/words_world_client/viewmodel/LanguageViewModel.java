@@ -9,14 +9,12 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
 import pl.politechnika.szczesny.words_world_client.model.Language;
-import pl.politechnika.szczesny.words_world_client.model.Token;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.getTokenFormSP;
 
 public class LanguageViewModel extends AndroidViewModel {
     private final MutableLiveData<List<Language>> allLanguages;
@@ -30,7 +28,7 @@ public class LanguageViewModel extends AndroidViewModel {
         refreshData(application);
     }
 
-    private void fetchData (Token token) {
+    private void fetchData (String token) {
         apiManager.getLanguages(token, new Callback<List<Language>>() {
             @Override
             public void onResponse(@NonNull Call<List<Language>> call, @NonNull Response<List<Language>> response) {
@@ -49,7 +47,7 @@ public class LanguageViewModel extends AndroidViewModel {
     }
 
     public void refreshData(Application application) {
-        Token token = getTokenFormSP(application);
+        String token = SessionHelper.getToken(getApplication());
 
         if (token != null) {
             fetchData(token);

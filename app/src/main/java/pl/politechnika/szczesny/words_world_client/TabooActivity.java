@@ -10,7 +10,6 @@ import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import java.io.IOException;
 
-import okhttp3.internal.Util;
 import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.helper.Utils;
 import pl.politechnika.szczesny.words_world_client.taboo.Card;

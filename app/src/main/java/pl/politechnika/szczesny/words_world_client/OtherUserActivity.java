@@ -1,38 +1,26 @@
 package pl.politechnika.szczesny.words_world_client;
 
 import android.app.ProgressDialog;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.politechnika.szczesny.words_world_client.adapter.AchievementsGridAdapter;
-import pl.politechnika.szczesny.words_world_client.adapter.LanguagesAdapter;
 import pl.politechnika.szczesny.words_world_client.adapter.LanguagesMiniAdapter;
 import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
-import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.helper.Utils;
-import pl.politechnika.szczesny.words_world_client.model.Language;
-import pl.politechnika.szczesny.words_world_client.model.Token;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
-import pl.politechnika.szczesny.words_world_client.viewmodel.LanguageViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -65,7 +53,7 @@ public class OtherUserActivity extends AppCompatActivity {
         _progressDialog.setMessage("Pobieram dane...");
         _progressDialog.show();
 
-        Token token = SharedPrefHelper.getTokenFormSP(getApplication());
+        String token = SessionHelper.getToken(getApplication());
         ApiManager.getInstance().getUserById(token, getIntent().getLongExtra(Utils.USER__ID, 0), new Callback<User>() {
             @Override
             public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
@@ -134,10 +122,10 @@ public class OtherUserActivity extends AppCompatActivity {
 
     }
 
-    android.view.View.OnClickListener followUser = new android.view.View.OnClickListener() {
+    private android.view.View.OnClickListener followUser = new android.view.View.OnClickListener() {
         @Override
         public void onClick(android.view.View view) {
-            Token token = SharedPrefHelper.getTokenFormSP(getApplication());
+            String token = SessionHelper.getToken(getApplication());
             ApiManager.getInstance().followUser(token, _user.getId(), new Callback<Void>() {
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
@@ -158,10 +146,10 @@ public class OtherUserActivity extends AppCompatActivity {
         }
     };
 
-    android.view.View.OnClickListener unfollowUser = new android.view.View.OnClickListener() {
+    private android.view.View.OnClickListener unfollowUser = new android.view.View.OnClickListener() {
         @Override
         public void onClick(android.view.View view) {
-            Token token = SharedPrefHelper.getTokenFormSP(getApplication());
+            String token = SessionHelper.getToken(getApplication());
             ApiManager.getInstance().unfollowUser(token, _user.getId(), new Callback<Void>() {
                 @Override
                 public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {

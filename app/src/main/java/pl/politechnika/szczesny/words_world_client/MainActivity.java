@@ -41,7 +41,6 @@ public class MainActivity extends AppBaseActivity {
 
     @Override
     public void onBackPressed() {
-        // disable going back to the MainActivity
         moveTaskToBack(true);
     }
 
@@ -55,7 +54,6 @@ public class MainActivity extends AppBaseActivity {
             startActivity(intent);
         }
 
-        // load fragment for selected menu item by default
         loadFragment(new ChallengesFragment());
 
         BottomNavigationView navigation = findViewById(R.id.navigation);

@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import butterknife.BindView;
+import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
 import pl.politechnika.szczesny.words_world_client.model.Token;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
@@ -24,8 +25,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static pl.politechnika.szczesny.words_world_client.helper.Utils.MINIMUM_USERNAME_LENGTH;
-import static pl.politechnika.szczesny.words_world_client.helper.SessionHelper.isSessionActive;
-import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.getTokenFormSP;
 import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.storeTokenInSP;
 import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.storeUserInSP;
 
@@ -33,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 1;
 
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     @BindView(R.id.input_username) EditText _usernameText;
     @BindView(R.id.input_password) EditText _passwordText;
@@ -64,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void login() {
+    private void login() {
         Log.d(TAG, "Login");
 
         if (!validate()) {
@@ -113,11 +112,10 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // disable going back to the MainActivity
         moveTaskToBack(true);
     }
 
-    public void onLoginSuccess() {
+    private void onLoginSuccess() {
         _loginButton.setEnabled(true);
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -125,7 +123,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void fetchUserAndLogIn() {
-        ApiManager.getInstance().fetchUser(getTokenFormSP(getApplication()), new Callback<User>() {
+        String token = SessionHelper.getToken(getApplication());
+
+        ApiManager.getInstance().fetchUser(token, new Callback<User>() {
             @Override
             public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful()) {
@@ -144,13 +144,13 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void onLoginFailed() {
+    private void onLoginFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
         _loginButton.setEnabled(true);
         progressDialog.cancel();
     }
 
-    public boolean validate() {
+    private boolean validate() {
         boolean valid = true;
 
         String username = _usernameText.getText().toString();

@@ -21,8 +21,8 @@ import pl.politechnika.szczesny.words_world_client.viewmodel.UserViewModel;
 
 public class FriendsSearchActivity extends AppCompatActivity {
     RecyclerView _friendsList;
-    ImageButton _search;
-    EditText _searchText;
+    private ImageButton _search;
+    private EditText _searchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

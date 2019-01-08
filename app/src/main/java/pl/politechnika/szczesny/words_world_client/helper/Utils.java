@@ -2,6 +2,7 @@ package pl.politechnika.szczesny.words_world_client.helper;
 
 import android.app.Application;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.HashMap;
@@ -9,7 +10,6 @@ import java.util.Map;
 
 import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.model.Statistics;
-import pl.politechnika.szczesny.words_world_client.model.Token;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -83,10 +83,10 @@ public class Utils {
         statistics.translatedWords = translatedWords;
         statistics.correctlySwipedTabooCards = tabooSwipedCards;
 
-        Token token = SharedPrefHelper.getTokenFormSP(application);
+        String token = SessionHelper.getToken(application);
         ApiManager.getInstance().pushUserStatistics(token, statistics, new Callback<Void>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 if (response.isSuccessful()) {
                     Log.d("STATISTICS", "SUCCESSFULLY PUSHED!");
                     SharedPrefHelper.flushTabooStats(application);
@@ -98,7 +98,7 @@ public class Utils {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                 Log.d("RETROFIT", "STAT PUSH FAILED");
             }
         });

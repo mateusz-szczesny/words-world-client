@@ -26,7 +26,8 @@ public class SessionHelper {
     }
 
     public static void updateUserData(final Application application) {
-        ApiManager.getInstance().fetchUser(getTokenFormSP(application), new Callback<User>() {
+        String token = SessionHelper.getToken(application);
+        ApiManager.getInstance().fetchUser(token, new Callback<User>() {
             @Override
             public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 User resUser = response.body();

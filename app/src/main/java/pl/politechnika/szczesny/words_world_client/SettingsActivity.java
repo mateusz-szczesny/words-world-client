@@ -12,9 +12,9 @@ import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
 import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.model.Credentials;
-import pl.politechnika.szczesny.words_world_client.model.Token;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
 import retrofit2.Call;
@@ -41,7 +41,7 @@ public class SettingsActivity extends AppCompatActivity {
         _submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Token token = SharedPrefHelper.getTokenFormSP(getApplication());
+                String token = SessionHelper.getToken(getApplication());
                 Credentials credentials = new Credentials();
                 credentials.firstName = _firstNameText.getText().toString();
                 credentials.lastName = _lastNameText.getText().toString();

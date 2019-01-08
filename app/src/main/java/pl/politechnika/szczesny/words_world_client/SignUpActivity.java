@@ -26,7 +26,7 @@ import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelpe
 
 public class SignUpActivity extends AppCompatActivity {
     private static final String TAG = "SignUpActivity";
-    ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     @BindView(R.id.input_username) EditText _usernameText;
     @BindView(R.id.input_email) EditText _emailText;
@@ -55,7 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
         });
     }
 
-    public void signUp() {
+    private void signUp() {
         Log.d(TAG, "SignUp");
 
         if (!validate()) {
@@ -94,13 +94,13 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-    public void onSignUpSuccess() {
+    private void onSignUpSuccess() {
         _signUpButton.setEnabled(true);
         setResult(RESULT_OK, null);
         finish();
     }
 
-    public void onSignUpFailed() {
+    private void onSignUpFailed() {
         Toast.makeText(getBaseContext(), "Sign up failed", Toast.LENGTH_LONG).show();
         if (progressDialog != null) {
             progressDialog.cancel();
@@ -108,7 +108,7 @@ public class SignUpActivity extends AppCompatActivity {
         _signUpButton.setEnabled(true);
     }
 
-    public boolean validate() {
+    private boolean validate() {
         boolean valid = true;
 
         String username = _usernameText.getText().toString();

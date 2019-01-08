@@ -4,53 +4,39 @@ import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import pl.politechnika.szczesny.words_world_client.FriendsActivity;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.SettingsActivity;
 import pl.politechnika.szczesny.words_world_client.adapter.AchievementsGridAdapter;
-import pl.politechnika.szczesny.words_world_client.adapter.FriendsListAdapter;
-import pl.politechnika.szczesny.words_world_client.helper.FontManager;
-import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
-import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
-import pl.politechnika.szczesny.words_world_client.model.Achievement;
-import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.model.User;
-import pl.politechnika.szczesny.words_world_client.service.ApiManager;
-import pl.politechnika.szczesny.words_world_client.viewmodel.LanguageViewModel;
 import pl.politechnika.szczesny.words_world_client.viewmodel.SessionUserViewModel;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ProfileFragment extends Fragment {
-    public TextView _username;
-    public TextView _first_name;
-    public TextView _last_name;
-    public TextView _overallScore;
-    public TextView _noOfFollowings;
-    public RecyclerView _achievementsList;
-    public Button _editProfile;
+    private TextView _username;
+    private TextView _first_name;
+    private TextView _last_name;
+    private TextView _overallScore;
+    private TextView _noOfFollowings;
+    private RecyclerView _achievementsList;
+    private Button _editProfile;
 
-    SessionUserViewModel sessionUserViewModel;
+    private SessionUserViewModel sessionUserViewModel;
 
     @Nullable
     @Override
@@ -65,7 +51,9 @@ public class ProfileFragment extends Fragment {
         _editProfile = view.findViewById(R.id.edit_profile);
         _overallScore = view.findViewById(R.id.overall_score);
 
+        // TODO: display load spinner
         init();
+
         return view;
     }
 
@@ -84,7 +72,7 @@ public class ProfileFragment extends Fragment {
         _noOfFollowings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Integer noOfFollowings = sessionUserViewModel.getUser().getValue().getFollowedUsers().size();
+                Integer noOfFollowings = Objects.requireNonNull(sessionUserViewModel.getUser().getValue()).getFollowedUsers().size();
                 if (noOfFollowings > 0) {
                     Intent intent = new Intent(getContext(), FriendsActivity.class);
                     startActivity(intent);

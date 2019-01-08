@@ -9,14 +9,11 @@ import android.util.Log;
 
 
 import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
-import pl.politechnika.szczesny.words_world_client.model.Token;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.getTokenFormSP;
 
 public class SessionUserViewModel extends AndroidViewModel {
     private final MutableLiveData<User> user;
@@ -24,13 +21,11 @@ public class SessionUserViewModel extends AndroidViewModel {
     public SessionUserViewModel(Application application) {
         super(application);
         user = new MutableLiveData<>();
-        Token token = getTokenFormSP(application);
 
-        if (token != null)
-            fetchData(token);
+        refreshData(getApplication());
     }
 
-    private void fetchData (Token token) {
+    private void fetchData (String token) {
         ApiManager.getInstance().fetchUser(token, new Callback<User>() {
             @Override
             public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
@@ -50,7 +45,7 @@ public class SessionUserViewModel extends AndroidViewModel {
     }
 
     public void refreshData(Application application) {
-        Token token = getTokenFormSP(application);
+        String token = SessionHelper.getToken(getApplication());
 
         if (token != null) {
             fetchData(token);

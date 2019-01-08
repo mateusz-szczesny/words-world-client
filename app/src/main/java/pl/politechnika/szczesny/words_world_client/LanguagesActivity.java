@@ -17,7 +17,7 @@ import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.viewmodel.LanguageViewModel;
 
 public class LanguagesActivity extends AppBaseActivity {
-    RecyclerView _languagesList;
+    private RecyclerView _languagesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
