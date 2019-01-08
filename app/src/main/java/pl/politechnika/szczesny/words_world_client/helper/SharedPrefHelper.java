@@ -33,7 +33,7 @@ public class SharedPrefHelper {
         editor.apply();
     }
 
-    public static User getUserFormSP(Application application) {
+    public static User getUserFromSP(Application application) {
         SharedPreferences sharedPref = getUserSharedPreferences(application);
         return new Gson().fromJson(sharedPref.getString(Utils.USER__SP, ""), User.class);
     }

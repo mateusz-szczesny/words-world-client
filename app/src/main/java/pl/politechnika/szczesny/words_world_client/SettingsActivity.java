@@ -71,7 +71,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void fillInputsWithUserData() {
-        User user = SharedPrefHelper.getUserFormSP(getApplication());
+        User user = SharedPrefHelper.getUserFromSP(getApplication());
 
         _usernameText.setHint(!"".equals(user.getUsername()) ? user.getUsername() : "");
         _emailText.setHint(!"".equals(user.getEmail()) ? user.getEmail() : "");

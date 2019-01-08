@@ -1,6 +1,8 @@
 package pl.politechnika.szczesny.words_world_client.fragment;
 
 import android.app.Activity;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -30,14 +32,16 @@ import pl.politechnika.szczesny.words_world_client.helper.FontManager;
 import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
 import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.model.Achievement;
+import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
+import pl.politechnika.szczesny.words_world_client.viewmodel.LanguageViewModel;
+import pl.politechnika.szczesny.words_world_client.viewmodel.SessionUserViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProfileFragment extends Fragment {
-    public User _loggedUser;
     public TextView _username;
     public TextView _first_name;
     public TextView _last_name;
@@ -45,6 +49,8 @@ public class ProfileFragment extends Fragment {
     public TextView _noOfFollowings;
     public RecyclerView _achievementsList;
     public Button _editProfile;
+
+    SessionUserViewModel sessionUserViewModel;
 
     @Nullable
     @Override
@@ -64,14 +70,25 @@ public class ProfileFragment extends Fragment {
     }
 
     private void init() {
-        SessionHelper.updateUserData(getActivity().getApplication());
-        fillData(SharedPrefHelper.getUserFormSP(getActivity().getApplication()));
+        sessionUserViewModel = ViewModelProviders.of(this).get(SessionUserViewModel.class);
+        sessionUserViewModel.getUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                if (user != null) {
+                    fillData(user);
+                    assignAchievements(user);
+                }
+            }
+        });
 
         _noOfFollowings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), FriendsActivity.class);
-                startActivity(intent);
+                Integer noOfFollowings = sessionUserViewModel.getUser().getValue().getFollowedUsers().size();
+                if (noOfFollowings > 0) {
+                    Intent intent = new Intent(getContext(), FriendsActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -84,20 +101,13 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private void refreshUser() {
-        ApiManager.getInstance().fetchUser(SharedPrefHelper.getTokenFormSP(getActivity().getApplication()), new Callback<User>() {
-            @Override
-            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-                User user = response.body();
-                fillData(user);
-                assignAchievements(user);
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                Log.d("API ERROR", "CANNOT FETCH USER DATA");
-            }
-        });
+    private void fillData(User user) {
+        _username.setText(!"".equals(user.getUsername()) ? user.getUsername() : "");
+        _first_name.setText(!"".equals(user.getFirstName()) ? user.getFirstName() : "");
+        _last_name.setText(!"".equals(user.getLastName()) ? user.getLastName() : "");
+        _noOfFollowings.setText(String.valueOf(user.getFollowedUsers().size()));
+        _overallScore.setText(user.getOverallScore().getScore() != null ?
+                String.valueOf(user.getOverallScore().getScore()) : "0");
     }
 
     private void assignAchievements(User user) {
@@ -113,20 +123,12 @@ public class ProfileFragment extends Fragment {
         }
     }
 
-
-
     @Override
     public void onResume() {
         super.onResume();
-        refreshUser();
-    }
-
-    private void fillData(User user) {
-        _username.setText(!"".equals(user.getUsername()) ? user.getUsername() : "");
-        _first_name.setText(!"".equals(user.getFirstName()) ? user.getFirstName() : "");
-        _last_name.setText(!"".equals(user.getLastName()) ? user.getLastName() : "");
-        _noOfFollowings.setText(String.valueOf(user.getFollowedUsers().size()));
-        _overallScore.setText(!"".equals(String.valueOf(user.getOverallScore().getScore())) ?
-                String.valueOf(user.getOverallScore().getScore()) : "0");
+        Activity activity = getActivity();
+        if (activity != null) {
+            sessionUserViewModel.refreshData(activity.getApplication());
+        }
     }
 }

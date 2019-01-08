@@ -36,8 +36,7 @@ public class AchievementsGridAdapter extends RecyclerView.Adapter<AchievementsGr
     public void onBindViewHolder(@NonNull AchievementViewHolder achievementViewHolder, int i) {
         Achievement achievement = achievements.get(i);
         achievementViewHolder._fa_icon.setTypeface(FontManager.getTypeface(application.getApplicationContext(), FontManager.FONTAWESOME));
-        String iconCode = application.getApplicationContext().getResources().getString(application.getApplicationContext().getResources()
-                .getIdentifier(achievement.getBadgeIcon(), "string", application.getPackageName()));
+        String iconCode = FontManager.getIconCodeForAchievement(application, achievement);
         achievementViewHolder._fa_icon.setText(iconCode);
         achievementViewHolder._fa_icon.setTextColor(Utils.achievementLevel2Color.get(achievement.getLevel()));
         achievementViewHolder._name.setText(achievement.getName());

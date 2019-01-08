@@ -5,9 +5,8 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
 import pl.politechnika.szczesny.words_world_client.model.Token;
@@ -19,43 +18,42 @@ import retrofit2.Response;
 
 import static pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper.getTokenFormSP;
 
-public class UserViewModel extends AndroidViewModel {
-    private final MutableLiveData<List<User>> allUsers;
-    private final ApiManager apiManager;
+public class SessionUserViewModel extends AndroidViewModel {
+    private final MutableLiveData<User> user;
 
-    public UserViewModel(Application application) {
+    public SessionUserViewModel(Application application) {
         super(application);
-        apiManager = ApiManager.getInstance();
-        allUsers = new MutableLiveData<>();
+        user = new MutableLiveData<>();
         Token token = getTokenFormSP(application);
 
         if (token != null)
-            fetchData(token, "");
+            fetchData(token);
     }
 
-    private void fetchData (Token token, String filter) {
-        apiManager.getUsersByFilter(token, filter, new Callback<List<User>>() {
+    private void fetchData (Token token) {
+        ApiManager.getInstance().fetchUser(token, new Callback<User>() {
             @Override
-            public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
-                allUsers.setValue(response.body());
+            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                user.setValue(response.body());
+                SessionHelper.updateUserData(getApplication());
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<User>> call, @NonNull Throwable t) {
-                allUsers.setValue(new ArrayList<User>());
+            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                Log.d("INTERNAL ERROR", "CANNOT FETCH USER DATA");
             }
         });
     }
 
-    public LiveData<List<User>> getUsers() {
-        return allUsers;
+    public LiveData<User> getUser() {
+        return user;
     }
 
-    public void refreshData(Application application, String filter) {
+    public void refreshData(Application application) {
         Token token = getTokenFormSP(application);
 
         if (token != null) {
-            fetchData(token, filter);
+            fetchData(token);
         }
     }
 }

@@ -81,8 +81,7 @@ public class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMen
                 intent = new Intent(getBaseContext(), TranslateActivity.class);
                 break;
         }
-
-        getBaseContext().startActivity(intent);
+        view_stub.getContext().startActivity(intent);
         return false;
     }
 

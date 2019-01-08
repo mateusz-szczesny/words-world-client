@@ -1,5 +1,6 @@
 package pl.politechnika.szczesny.words_world_client;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -9,6 +10,8 @@ import android.view.MenuItem;
 import pl.politechnika.szczesny.words_world_client.fragment.ChallengesFragment;
 import pl.politechnika.szczesny.words_world_client.fragment.FlashcardsFragment;
 import pl.politechnika.szczesny.words_world_client.fragment.ProfileFragment;
+
+import static pl.politechnika.szczesny.words_world_client.helper.SessionHelper.isSessionActive;
 
 public class MainActivity extends AppBaseActivity {
 
@@ -47,6 +50,10 @@ public class MainActivity extends AppBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (!isSessionActive(getApplication())) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+        }
 
         // load fragment for selected menu item by default
         loadFragment(new ChallengesFragment());

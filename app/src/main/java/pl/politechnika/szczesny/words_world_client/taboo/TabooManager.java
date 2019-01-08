@@ -37,7 +37,7 @@ public class TabooManager {
     public List getCards() throws IOException {
         List allCards = new ArrayList<>();
         List<String> files = new ArrayList<>();
-        User user = SharedPrefHelper.getUserFormSP(application);
+        User user = SharedPrefHelper.getUserFromSP(application);
         for (Language lang : user.getSelectedLanguages()) {
             String filePath = Utils.lang2TabooFile.get(lang.getName());
             if (filePath != null && !"".equals(filePath.trim())) {

@@ -5,7 +5,7 @@
     <string name="title_challenge">Wyzwania</string>
     <string name="title_profile">Profil</string>
     <string name="app_title_nav">Word\'s World</string>
-    <string name="search">szukaj</string>
+    <string name="search">Szukaj…</string>
     <string name="friends">Znajdz</string>
     <string name="about">O nas</string>
     <string name="taboo">Taboo</string>
@@ -34,6 +34,10 @@
     <string name="your_overall_score">Twój wynik:</string>
     <string name="log_out">Wyloguj się</string>
     <string name="fiche_nav_title">Fiszki</string>
-    <string name="lang_challenges">Potyczki językowe...</string>
+    <string name="lang_challenges">Potyczki językowe…</string>
     <string name="flashcards">Fiszki</string>
+    <string name="fa_icon_taboo_master">&#xf504;</string>
+    <string name="fa_icon_dictionary_master">&#xf02d;</string>
+    <string name="fa_icon_id_card">&#xf2bb;</string>
+    <string name="fa_icon_friends">&#xf500;</string>
 </resources>

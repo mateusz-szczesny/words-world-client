@@ -91,7 +91,7 @@ public class OtherUserActivity extends AppCompatActivity {
         _firstName.setText(!"".equals(_user.getFirstName()) ? _user.getFirstName() : "");
         _lastName.setText(!"".equals(_user.getLastName()) ? _user.getLastName() : "");
         _username.setText(!"".equals(_user.getUsername()) ? _user.getUsername() : "");
-        _overallScore.setText(!"".equals(String.valueOf(_user.getOverallScore().getScore())) ?
+        _overallScore.setText(_user.getOverallScore().getScore() != null ?
                 String.valueOf(_user.getOverallScore().getScore()) : "0");
 
         refreshButton();

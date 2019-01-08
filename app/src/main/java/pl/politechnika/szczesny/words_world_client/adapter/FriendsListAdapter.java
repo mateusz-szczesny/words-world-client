@@ -21,6 +21,7 @@ import static pl.politechnika.szczesny.words_world_client.helper.Utils.USER__ID;
 public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.FriendViewHolder>{
     private List<User> friends;
     private Application application;
+    View view;
 
     public FriendsListAdapter(Application application) {
         this.application = application;
@@ -29,8 +30,8 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
     @NonNull
     @Override
     public FriendViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_friend_item, viewGroup, false);
-        return new FriendViewHolder(v);
+        view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.fragment_friend_item, viewGroup, false);
+        return new FriendViewHolder(view);
     }
 
     @Override
@@ -45,7 +46,7 @@ public class FriendsListAdapter extends RecyclerView.Adapter<FriendsListAdapter.
             public void onClick(View view) {
                 Intent intent = new Intent(application.getApplicationContext(), OtherUserActivity.class);
                 intent.putExtra(USER__ID, currentUser.getId());
-                application.startActivity(intent);
+                view.getContext().startActivity(intent);
             }
         });
     }

@@ -43,6 +43,9 @@ public class FriendsSearchActivity extends AppCompatActivity {
         userViewModel.getUsers().observe(this, new Observer<List<User>>() {
             @Override
             public void onChanged(@Nullable List<User> users) {
+                if (users != null) {
+                    users.remove(SharedPrefHelper.getUserFromSP(getApplication()));
+                }
                 adapter.setFriends(users);
             }
         });

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="fa_icon_address_card">&#xf2bb;</string>
-    <string name="fa_icon_clipboard">&#xf504;</string>
-    <string name="fa_icon_book">&#xf02d;</string>
-    <string name="fa_icon_user_friends">&#xf500;</string>
-</resources>

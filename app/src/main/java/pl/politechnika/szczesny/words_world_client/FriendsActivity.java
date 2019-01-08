@@ -46,5 +46,8 @@ public class FriendsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         friendsViewModel.refreshData(getApplication());
+        if (adapter.getItemCount() == 0) {
+            finish();
+        }
     }
 }
