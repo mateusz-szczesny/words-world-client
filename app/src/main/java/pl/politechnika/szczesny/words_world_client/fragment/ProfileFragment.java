@@ -51,7 +51,6 @@ public class ProfileFragment extends Fragment {
         _editProfile = view.findViewById(R.id.edit_profile);
         _overallScore = view.findViewById(R.id.overall_score);
 
-        // TODO: display load spinner
         init();
 
         return view;

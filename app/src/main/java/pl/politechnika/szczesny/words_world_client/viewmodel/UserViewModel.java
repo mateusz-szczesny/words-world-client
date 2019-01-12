@@ -24,8 +24,6 @@ public class UserViewModel extends AndroidViewModel {
         super(application);
         apiManager = ApiManager.getInstance();
         allUsers = new MutableLiveData<>();
-
-        refreshData(getApplication(), "");
     }
 
     private void fetchData (String token, String filter) {
