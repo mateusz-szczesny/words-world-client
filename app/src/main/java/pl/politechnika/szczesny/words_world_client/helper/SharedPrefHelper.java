@@ -75,46 +75,5 @@ public class SharedPrefHelper {
         editor.putInt(Utils.TABOO_SCORE__SP, getTabooScore(application) + points);
         editor.apply();
     }
-
-    // TABOO STATS SP
-    public static void incrementTabooStats(Application application, int no) {
-        SharedPreferences sharedPref = getTabooSharedPreferences(application);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(Utils.TABOO_STAT__SP, getTabooStats(application) + no);
-        editor.apply();
-    }
-
-    static void flushTabooStats(Application application) {
-        SharedPreferences sharedPref = getTabooSharedPreferences(application);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(Utils.TABOO_STAT__SP, 0);
-        editor.apply();
-    }
-
-    static int getTabooStats(Application application) {
-        SharedPreferences sharedPref = getTabooSharedPreferences(application);
-        return sharedPref.getInt(Utils.TABOO_STAT__SP, 0);
-    }
-
-
-    // DICTIONARY SP
-    public static void incrementTranslatedWords(Application application, int no) {
-        SharedPreferences sharedPref = getDictionarySharedPreferences(application);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(Utils.DICT__STAT__SP, getDictionaryStats(application) + no);
-        editor.apply();
-    }
-
-    static void flushTranslatedWordsCount(Application application) {
-        SharedPreferences sharedPref = getDictionarySharedPreferences(application);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(Utils.DICT__STAT__SP, 0);
-        editor.apply();
-    }
-
-    static int getDictionaryStats(Application application) {
-        SharedPreferences sharedPref = getDictionarySharedPreferences(application);
-        return sharedPref.getInt(Utils.DICT__STAT__SP, 0);
-    }
 }
 

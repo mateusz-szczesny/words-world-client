@@ -29,6 +29,8 @@ public class User implements Serializable {
     private Boolean isFriend;
     @SerializedName("overall_score")
     private OverallScore overallScore;
+    @SerializedName("taboo_efficiency")
+    private long tabooEfficiency;
 
     public User() {
     }
@@ -113,6 +115,14 @@ public class User implements Serializable {
         this.overallScore = overallScore;
     }
 
+    public long getTabooEfficiency() {
+        return tabooEfficiency;
+    }
+
+    public void setTabooEfficiency(long tabooEfficiency) {
+        this.tabooEfficiency = tabooEfficiency;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -133,7 +143,6 @@ public class User implements Serializable {
             return false;
         }
     }
-
 
     public class OverallScore {
         @SerializedName("score__sum")

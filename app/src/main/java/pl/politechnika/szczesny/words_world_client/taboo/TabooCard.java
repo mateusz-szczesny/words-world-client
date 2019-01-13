@@ -21,6 +21,8 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.helper.Utils;
 import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
+import pl.politechnika.szczesny.words_world_client.model.Card;
+import pl.politechnika.szczesny.words_world_client.model.Statistics;
 
 import static pl.politechnika.szczesny.words_world_client.helper.Utils.TabooLevel2CardColor;
 
@@ -81,6 +83,11 @@ public class TabooCard {
                 (Application)mContext.getApplicationContext(),
                 -1 * (points != null ? points : 0)
         );
+
+        if (!"".equals(mCard.getDifficulty().trim())) {
+            Statistics.getInstance().addIncorrectlySwipedCard(mCard.getId());
+        }
+
         if (mSwipeView.getAllResolvers().size() == 1) {
             addSummaryCard();
         }
@@ -101,10 +108,7 @@ public class TabooCard {
         );
 
         if (!"".equals(mCard.getDifficulty().trim())) {
-            SharedPrefHelper.incrementTabooStats(
-                    (Application)mContext.getApplicationContext(),
-                    Utils.ONE
-            );
+            Statistics.getInstance().addCorrectlySwipedCard(mCard.getId());
         }
 
         if (mSwipeView.getAllResolvers().size() == 1) {

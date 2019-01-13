@@ -27,8 +27,6 @@ import retrofit2.Response;
 
 public class OtherUserActivity extends AppCompatActivity {
 
-    @BindView(R.id.first_name) TextView _firstName;
-    @BindView(R.id.last_name) TextView _lastName;
     @BindView(R.id.username) TextView _username;
     @BindView(R.id.overall_score) TextView _overallScore;
     @BindView(R.id.follow_or_unfollow) Button _changeFollowing;
@@ -76,8 +74,6 @@ public class OtherUserActivity extends AppCompatActivity {
     }
 
     private void onFetchSuccess() {
-        _firstName.setText(!"".equals(_user.getFirstName()) ? _user.getFirstName() : "");
-        _lastName.setText(!"".equals(_user.getLastName()) ? _user.getLastName() : "");
         _username.setText(!"".equals(_user.getUsername()) ? _user.getUsername() : "");
         _overallScore.setText(_user.getOverallScore().getScore() != null ?
                 String.valueOf(_user.getOverallScore().getScore()) : "0");
@@ -89,11 +85,11 @@ public class OtherUserActivity extends AppCompatActivity {
 
     private void refreshButton() {
         if (_user.getFriend()) {
-            _changeFollowing.setBackgroundColor(Color.rgb(255,189,189));
-            _changeFollowing.setText("Przestań obserwować");
+            _changeFollowing.setBackgroundColor(Color.rgb(211,47,47));
+            _changeFollowing.setText("Nie obserwuj");
             _changeFollowing.setOnClickListener(unfollowUser);
         } else {
-            _changeFollowing.setBackgroundColor(Color.rgb(225,247,213));
+            _changeFollowing.setBackgroundColor(Color.rgb(76,175,80));
             _changeFollowing.setText("Obserwuj");
             _changeFollowing.setOnClickListener(followUser);
         }

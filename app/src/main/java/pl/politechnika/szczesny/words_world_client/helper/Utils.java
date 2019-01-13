@@ -1,27 +1,17 @@
 package pl.politechnika.szczesny.words_world_client.helper;
 
-import android.app.Application;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import pl.politechnika.szczesny.words_world_client.model.Language;
-import pl.politechnika.szczesny.words_world_client.model.Statistics;
-import pl.politechnika.szczesny.words_world_client.service.ApiManager;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Utils {
     static final String TABOO__SP = "TABOO__SP";
     static final String TABOO_SCORE__SP = "TABOO_SCORE__SP";
-    static final String TABOO_STAT__SP = "TABOO_STAT__SP";
 
     static final String DICT__SP = "DICT__SP";
-    static final String DICT__STAT__SP = "DICT__STAT__SP";
     public static final Integer ONE = 1;
 
     static final String USER__SP = "USER__SP";
@@ -34,17 +24,12 @@ public class Utils {
     public static final int MINIMUM_PASSWORD_LENGTH = 6;
     public static final int MINIMUM_USERNAME_LENGTH = 4;
 
-    public static final Map<String, String> lang2TabooFile = new HashMap<String, String>() {{
-        put("Angielski", "en_EN.json");
-        put("Francuski", "fr_FR.json");
-        put("Hiszpański", "es_ES.json");
-        put("Niemiecki", "de_DE.json");
-    }};
-
     public static final Map<String, Integer> TabooLevel2CardColor = new HashMap<String, Integer>() {{
         put("EASY", Color.parseColor("#e1f7d5"));
         put("MEDIUM", Color.parseColor("#c9c9ff"));
         put("HARD", Color.parseColor("#ffbdbd"));
+        put("INSANE", Color.parseColor("#ffbdbd"));
+        put("NOT ENOUGH STATS", Color.WHITE);
     }};
 
     public static final Map<String, Integer> TabooLevel2Reward = new HashMap<String, Integer>() {{
@@ -73,34 +58,5 @@ public class Utils {
 
         return new String(Character.toChars(firstChar))
                 + new String(Character.toChars(secondChar));
-    }
-
-    public static void pushStatistics(final Application application) {
-        int translatedWords = SharedPrefHelper.getDictionaryStats(application);
-        int tabooSwipedCards = SharedPrefHelper.getTabooStats(application);
-
-        Statistics statistics = new Statistics();
-        statistics.translatedWords = translatedWords;
-        statistics.correctlySwipedTabooCards = tabooSwipedCards;
-
-        String token = SessionHelper.getToken(application);
-        ApiManager.getInstance().pushUserStatistics(token, statistics, new Callback<Void>() {
-            @Override
-            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                if (response.isSuccessful()) {
-                    Log.d("STATISTICS", "SUCCESSFULLY PUSHED!");
-                    SharedPrefHelper.flushTabooStats(application);
-                    SharedPrefHelper.flushTranslatedWordsCount(application);
-                } else {
-
-                    Log.d("STATISTICS", "API ERROR!");
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                Log.d("RETROFIT", "STAT PUSH FAILED");
-            }
-        });
     }
 }

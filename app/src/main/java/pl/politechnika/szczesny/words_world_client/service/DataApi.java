@@ -3,8 +3,8 @@ package pl.politechnika.szczesny.words_world_client.service;
 import java.util.List;
 
 import pl.politechnika.szczesny.words_world_client.model.Credentials;
-import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.model.Statistics;
+import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import retrofit2.Call;
 import retrofit2.http.Body;

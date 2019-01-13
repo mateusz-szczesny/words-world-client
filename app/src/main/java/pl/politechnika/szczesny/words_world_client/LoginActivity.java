@@ -139,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                Log.d("INTERNAL ERROR", "CANNOT FETCH USER DATA");
+                Log.d("LOGIN ERROR", "CANNOT FETCH USER DATA");
             }
         });
     }

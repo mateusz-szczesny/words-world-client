@@ -29,8 +29,6 @@ import pl.politechnika.szczesny.words_world_client.viewmodel.SessionUserViewMode
 
 public class ProfileFragment extends Fragment {
     private TextView _username;
-    private TextView _first_name;
-    private TextView _last_name;
     private TextView _overallScore;
     private TextView _noOfFollowings;
     private RecyclerView _achievementsList;
@@ -44,8 +42,6 @@ public class ProfileFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_profile, container, false);
 
         _username = view.findViewById(R.id.profile_name);
-        _first_name = view.findViewById(R.id.first_name);
-        _last_name = view.findViewById(R.id.last_name);
         _noOfFollowings = view.findViewById(R.id.followings_no);
         _achievementsList = view.findViewById(R.id.achievements_list);
         _editProfile = view.findViewById(R.id.edit_profile);
@@ -90,8 +86,6 @@ public class ProfileFragment extends Fragment {
 
     private void fillData(User user) {
         _username.setText(!"".equals(user.getUsername()) ? user.getUsername() : "");
-        _first_name.setText(!"".equals(user.getFirstName()) ? user.getFirstName() : "");
-        _last_name.setText(!"".equals(user.getLastName()) ? user.getLastName() : "");
         _noOfFollowings.setText(String.valueOf(user.getFollowedUsers().size()));
         _overallScore.setText(user.getOverallScore().getScore() != null ?
                 String.valueOf(user.getOverallScore().getScore()) : "0");
@@ -113,9 +107,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Activity activity = getActivity();
-        if (activity != null) {
-            sessionUserViewModel.refreshData(activity.getApplication());
-        }
+        sessionUserViewModel.refreshData();
     }
 }

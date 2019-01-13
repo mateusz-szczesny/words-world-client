@@ -7,69 +7,35 @@
     tools:context=".OtherUserActivity">
 
     <TextView
-        android:id="@+id/first_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintEnd_toStartOf="@+id/last_name"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/last_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/first_name"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/separator_top"
-        app:layout_constraintEnd_toStartOf="@+id/follow_or_unfollow"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/follow_or_unfollow"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/separator_top"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/username" />
-
-    <View
-        android:id="@+id/separator_top"
-        android:layout_width="0dp"
-        android:layout_height="2dip"
-        android:layout_marginTop="112dp"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/icons"
         android:layout_marginEnd="8dp"
-        android:background="#000000"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toEndOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline1"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/separator_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/username" />
+
     <View
         android:id="@+id/separator_bottom"
         android:layout_width="0dp"
         android:layout_height="2dip"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="125dp"
         android:layout_marginEnd="8dp"
         android:background="#000000"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -83,6 +49,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent=".1" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".55" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
@@ -173,28 +146,30 @@
         android:id="@+id/score_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="32dp"
         android:text="@string/overall_score"
         app:layout_constraintBottom_toTopOf="@+id/separator_bottom"
         app:layout_constraintEnd_toStartOf="@+id/overall_score"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/separator_top" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <TextView
         android:id="@+id/overall_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:width="50dp"
+        android:height="50dp"
+        android:background="@drawable/taboo_stats_border"
+        android:gravity="center_vertical|center_horizontal"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         android:textColor="@color/primary"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/separator_bottom"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toEndOf="@+id/score_label"
-        app:layout_constraintTop_toBottomOf="@+id/separator_top" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
 </android.support.constraint.ConstraintLayout>

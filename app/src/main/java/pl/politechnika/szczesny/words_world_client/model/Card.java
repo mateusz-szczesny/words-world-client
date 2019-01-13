@@ -1,6 +1,5 @@
-package pl.politechnika.szczesny.words_world_client.taboo;
+package pl.politechnika.szczesny.words_world_client.model;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -8,17 +7,26 @@ import java.io.Serializable;
 public class Card implements Serializable {
 
     @SerializedName("id")
-    @Expose
     private int id;
+
     @SerializedName("key_word")
-    @Expose
     private String keyWord;
+
+    @SerializedName("card_efficiency")
+    private long cardEfficiency;
+
     @SerializedName("difficulty")
-    @Expose
     private String difficulty;
+
     @SerializedName("black_list")
-    @Expose
     private String[] blackList;
+
+    public Card(String keyWord, long cardEfficiency, String difficulty, String[] blackList) {
+        this.keyWord = keyWord;
+        this.cardEfficiency = cardEfficiency;
+        this.difficulty = difficulty;
+        this.blackList = blackList;
+    }
 
     public int getId() {
         return id;
@@ -50,5 +58,13 @@ public class Card implements Serializable {
 
     public void setBlackList(String[] blackList) {
         this.blackList = blackList;
+    }
+
+    public long getCardEfficiency() {
+        return cardEfficiency;
+    }
+
+    public void setCardEfficiency(long cardEfficiency) {
+        this.cardEfficiency = cardEfficiency;
     }
 }

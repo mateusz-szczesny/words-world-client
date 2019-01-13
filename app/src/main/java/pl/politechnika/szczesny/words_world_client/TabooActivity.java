@@ -11,10 +11,9 @@ import com.mindorks.placeholderview.SwipePlaceHolderView;
 import java.io.IOException;
 
 import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
-import pl.politechnika.szczesny.words_world_client.helper.Utils;
-import pl.politechnika.szczesny.words_world_client.taboo.Card;
+import pl.politechnika.szczesny.words_world_client.model.Statistics;
+import pl.politechnika.szczesny.words_world_client.model.Card;
 import pl.politechnika.szczesny.words_world_client.taboo.TabooCard;
-import pl.politechnika.szczesny.words_world_client.taboo.TabooManager;
 
 public class TabooActivity extends AppCompatActivity {
 
@@ -38,13 +37,14 @@ public class TabooActivity extends AppCompatActivity {
                         .setSwipeInMsgLayoutId(R.layout.taboo_swipe_in_msg_view)
                         .setSwipeOutMsgLayoutId(R.layout.taboo_swipe_out_msg_view));
 
-        try {
-            for(Object card : TabooManager.getInstance(getApplicationContext()).getCards()){
-                mSwipeView.addView(new TabooCard(mContext, (Card)card, mSwipeView));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // TODO: call for cards for selected settings from previous screen
+//        try {
+//            for(Object card : TabooManager.getInstance(getApplicationContext()).getCards()){
+//                mSwipeView.addView(new TabooCard(mContext, (Card)card, mSwipeView));
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +63,7 @@ public class TabooActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Utils.pushStatistics(getApplication());
+        Statistics.getInstance().pushStatistics(getApplication());
         this.finish();
     }
 }

@@ -22,7 +22,7 @@ public class SessionUserViewModel extends AndroidViewModel {
         super(application);
         user = new MutableLiveData<>();
 
-        refreshData(getApplication());
+        refreshData();
     }
 
     private void fetchData (String token) {
@@ -35,7 +35,7 @@ public class SessionUserViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                Log.d("INTERNAL ERROR", "CANNOT FETCH USER DATA");
+                Log.d("SESSION ERROR", "CANNOT FETCH USER DATA");
             }
         });
     }
@@ -44,7 +44,7 @@ public class SessionUserViewModel extends AndroidViewModel {
         return user;
     }
 
-    public void refreshData(Application application) {
+    public void refreshData() {
         String token = SessionHelper.getToken(getApplication());
 
         if (token != null) {
