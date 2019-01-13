@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import pl.politechnika.szczesny.words_world_client.R;
 
-public class ChallengesFragment extends Fragment {
+public class MyCardsFragment extends Fragment {
 
     @Nullable
     @Override
