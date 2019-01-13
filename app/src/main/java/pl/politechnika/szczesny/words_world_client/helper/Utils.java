@@ -12,7 +12,6 @@ public class Utils {
     static final String TABOO_SCORE__SP = "TABOO_SCORE__SP";
 
     static final String DICT__SP = "DICT__SP";
-    public static final Integer ONE = 1;
 
     static final String USER__SP = "USER__SP";
     public static final String USER__ID = "USER_ID";

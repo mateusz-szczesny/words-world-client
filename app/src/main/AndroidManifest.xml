@@ -33,6 +33,7 @@
         <activity android:name=".TabooActivity" android:theme="@style/AppTheme" />
         <activity android:name=".TranslateActivity" android:theme="@style/AppTheme" />
         <activity android:name=".OtherUserActivity" android:theme="@style/AppTheme" />
+        <activity android:name=".PreTabooSettingsActivity" android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

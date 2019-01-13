@@ -55,25 +55,5 @@ public class SharedPrefHelper {
         SharedPreferences sharedPref = getUserSharedPreferences(application);
         sharedPref.edit().clear().apply();
     }
-
-    // TABOO GAME SP
-    public static void flushTabooScore(Application application) {
-        SharedPreferences sharedPref = getTabooSharedPreferences(application);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(Utils.TABOO_SCORE__SP, 0);
-        editor.apply();
-    }
-
-    public static int getTabooScore(Application application) {
-        SharedPreferences sharedPref = getTabooSharedPreferences(application);
-        return sharedPref.getInt(Utils.TABOO_SCORE__SP, 0);
-    }
-
-    public static void incrementTabooScore(Application application, int points) {
-        SharedPreferences sharedPref = getTabooSharedPreferences(application);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(Utils.TABOO_SCORE__SP, getTabooScore(application) + points);
-        editor.apply();
-    }
 }
 

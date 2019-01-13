@@ -62,7 +62,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                            Log.d("INTERNAL ERROR", "CANNOT UPDATE USER DATA");
+                            Log.d("INTERNAL ERROR", t.getMessage());
                         }
                     });
                 }

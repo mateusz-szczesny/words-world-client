@@ -78,12 +78,6 @@ public class TabooCard {
     @SwipeOut
     private void onSwipedOut(){
         Log.d("EVENT", "onSwipedOut");
-        Integer points = Utils.TabooLevel2Reward.get(mCard.getDifficulty());
-        SharedPrefHelper.incrementTabooScore(
-                (Application)mContext.getApplicationContext(),
-                -1 * (points != null ? points : 0)
-        );
-
         if (!"".equals(mCard.getDifficulty().trim())) {
             Statistics.getInstance().addIncorrectlySwipedCard(mCard.getId());
         }
@@ -101,12 +95,6 @@ public class TabooCard {
     @SwipeIn
     private void onSwipeIn(){
         Log.d("EVENT", "onSwipedIn");
-        Integer points = Utils.TabooLevel2Reward.get(mCard.getDifficulty());
-        SharedPrefHelper.incrementTabooScore(
-                (Application)mContext.getApplicationContext(),
-                points != null ? points : 0
-        );
-
         if (!"".equals(mCard.getDifficulty().trim())) {
             Statistics.getInstance().addCorrectlySwipedCard(mCard.getId());
         }
@@ -117,7 +105,7 @@ public class TabooCard {
     }
 
     private void addSummaryCard() {
-        mCard.setBlackList(new String[]{"", "Wynik " + SharedPrefHelper.getTabooScore((Application)mContext.getApplicationContext()) + "!"});
+        mCard.setBlackList(new String[]{"", "Wynik " + Statistics.getInstance().getCurrentGameScore() + "!"});
         mCard.setKeyWord("Gratulacje!");
         mCard.setDifficulty("");
         mSwipeView.addView(this);

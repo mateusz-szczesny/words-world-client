@@ -35,7 +35,7 @@ public class SessionUserViewModel extends AndroidViewModel {
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                Log.d("SESSION ERROR", "CANNOT FETCH USER DATA");
+                Log.d("SESSION ERROR", t.getMessage());
             }
         });
     }

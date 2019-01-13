@@ -52,7 +52,7 @@ public class OtherUserActivity extends AppCompatActivity {
         _progressDialog.show();
 
         String token = SessionHelper.getToken(getApplication());
-        ApiManager.getInstance().getUserById(token, getIntent().getLongExtra(Utils.USER__ID, 0), new Callback<User>() {
+        ApiManager.getInstance().getUserById(token, getIntent().getIntExtra(Utils.USER__ID, 0), new Callback<User>() {
             @Override
             public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 if (response.isSuccessful()){
@@ -65,7 +65,7 @@ public class OtherUserActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                Log.d("API ERROR", "CANNOT FETCH USER DATA");
+                Log.d("API ERROR", t.getMessage());
                 onFetchFailed();
             }
         });
@@ -136,7 +136,7 @@ public class OtherUserActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                    Log.d("API ERROR", "CANNOT FOLLOW USER");
+                    Log.d("API ERROR", t.getMessage());
                 }
             });
         }
@@ -160,7 +160,7 @@ public class OtherUserActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                    Log.d("API ERROR", "CANNOT FOLLOW USER");
+                    Log.d("API ERROR", t.getMessage());
                 }
             });
         }

@@ -73,7 +73,7 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
 
                         @Override
                         public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                            Log.d("ERROR", "API ERROR / SUBSCRIPTION");
+                            Log.d("ERROR", t.getMessage());
                         }
                     });
                 } else {
@@ -91,7 +91,7 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
 
                         @Override
                         public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                            Log.d("ERROR", "API ERROR / SUBSCRIPTION");
+                            Log.d("ERROR", t.getMessage());
                         }
                     });
                 }

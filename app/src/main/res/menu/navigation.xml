@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_challenges"
-        android:icon="@drawable/ic_challenges"
-        android:title="@string/title_challenge" />
+        android:id="@+id/navigation_cards"
+        android:icon="@drawable/ic_taboo_card_icon"
+        android:title="@string/my_cards" />
 
     <item
         android:id="@+id/navigation_flashcards"

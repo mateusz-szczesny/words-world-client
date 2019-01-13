@@ -8,16 +8,12 @@ public class Card implements Serializable {
 
     @SerializedName("id")
     private int id;
-
     @SerializedName("key_word")
     private String keyWord;
-
     @SerializedName("card_efficiency")
-    private long cardEfficiency;
-
+    private double cardEfficiency;
     @SerializedName("difficulty")
     private String difficulty;
-
     @SerializedName("black_list")
     private String[] blackList;
 
@@ -60,11 +56,11 @@ public class Card implements Serializable {
         this.blackList = blackList;
     }
 
-    public long getCardEfficiency() {
+    public double getCardEfficiency() {
         return cardEfficiency;
     }
 
-    public void setCardEfficiency(long cardEfficiency) {
+    public void setCardEfficiency(double cardEfficiency) {
         this.cardEfficiency = cardEfficiency;
     }
 }

@@ -75,7 +75,7 @@ public class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMen
                 intent = new Intent(getBaseContext(), LanguagesActivity.class);
                 break;
             case R.id.nav_taboo:
-                intent = new Intent(getBaseContext(), TabooActivity.class);
+                intent = new Intent(getBaseContext(), PreTabooSettingsActivity.class);
                 break;
             case R.id.nav_dictionary:
                 intent = new Intent(getBaseContext(), TranslateActivity.class);

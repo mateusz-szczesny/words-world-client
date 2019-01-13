@@ -36,7 +36,7 @@ public class SessionHelper {
 
             @Override
             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                Log.d("INTERNAL ERROR", "CANNOT FETCH USER DATA");
+                Log.d("INTERNAL ERROR", t.getMessage());
             }
         });
     }

@@ -2,10 +2,12 @@ package pl.politechnika.szczesny.words_world_client.service;
 
 import java.util.List;
 
+import pl.politechnika.szczesny.words_world_client.model.Card;
 import pl.politechnika.szczesny.words_world_client.model.Credentials;
 import pl.politechnika.szczesny.words_world_client.model.Statistics;
 import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.model.User;
+import pl.politechnika.szczesny.words_world_client.taboo.TabooCard;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -78,5 +80,17 @@ interface DataApi {
     Call<Void> pushUserStatistics(
             @Header("Authorization") String token,
             @Body Statistics statistics
+    );
+
+    @GET("api/taboo/cards/random")
+    Call<List<Card>> randTabooCards(
+            @Header("Authorization") String token,
+            @Query("language_id") long languageId,
+            @Query("card_count") Integer cardCount
+    );
+
+    @GET("/api/taboo/cards")
+    Call<List<Card>> getMyCards(
+            @Header("Authorization") String token
     );
 }

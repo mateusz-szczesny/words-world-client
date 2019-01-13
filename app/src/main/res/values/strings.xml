@@ -39,4 +39,11 @@
     <string name="fa_icon_dictionary_master">&#xf02d;</string>
     <string name="fa_icon_id_card">&#xf2bb;</string>
     <string name="fa_icon_friends">&#xf500;</string>
+    <string name="copy_right" translatable="false">Copyrights © %1$d</string>
+    <string name="start">START</string>
+    <string name="your_efficiency">Twoja efektywność:</string>
+    <string name="cards_count">Ilość kart</string>
+    <string name="lang">Język</string>
+    <string name="define_game_settings">Zdefiniuj ustawienia gry</string>
+    <string name="my_cards">Moje Karty</string>
 </resources>

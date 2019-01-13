@@ -5,11 +5,13 @@ import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import pl.politechnika.szczesny.words_world_client.model.Card;
 import pl.politechnika.szczesny.words_world_client.model.Credentials;
 import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.model.Statistics;
 import pl.politechnika.szczesny.words_world_client.model.Token;
 import pl.politechnika.szczesny.words_world_client.model.User;
+import pl.politechnika.szczesny.words_world_client.taboo.TabooCard;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -110,6 +112,16 @@ public class ApiManager {
 
     public void pushUserStatistics(String token, Statistics statistics, Callback<Void> callback) {
         Call<Void> call = dataService.pushUserStatistics(token, statistics);
+        call.enqueue(callback);
+    }
+
+    public void randomCards(String token, long languageId, Integer cardsCount, Callback<List<Card>> callback) {
+        Call<List<Card>> call = dataService.randTabooCards(token, languageId, cardsCount);
+        call.enqueue(callback);
+    }
+
+    public void getMyCards(String token, Callback<List<Card>> callback) {
+        Call<List<Card>> call = dataService.getMyCards(token);
         call.enqueue(callback);
     }
 }

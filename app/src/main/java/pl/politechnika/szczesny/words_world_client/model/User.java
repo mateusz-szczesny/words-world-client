@@ -10,7 +10,7 @@ import java.util.List;
 public class User implements Serializable {
 
     @SerializedName("id")
-    private long id;
+    private int id;
     @SerializedName("email")
     private String email;
     @SerializedName("username")
@@ -30,16 +30,16 @@ public class User implements Serializable {
     @SerializedName("overall_score")
     private OverallScore overallScore;
     @SerializedName("taboo_efficiency")
-    private long tabooEfficiency;
+    private double tabooEfficiency;
 
     public User() {
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -115,11 +115,11 @@ public class User implements Serializable {
         this.overallScore = overallScore;
     }
 
-    public long getTabooEfficiency() {
+    public double getTabooEfficiency() {
         return tabooEfficiency;
     }
 
-    public void setTabooEfficiency(long tabooEfficiency) {
+    public void setTabooEfficiency(double tabooEfficiency) {
         this.tabooEfficiency = tabooEfficiency;
     }
 

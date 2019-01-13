@@ -39,20 +39,20 @@ public class Statistics implements Serializable {
         }
     }
 
-    @SerializedName("correctly_swiped_cards ")
-    private ArrayList<Long> correctlySwipedCards;
+    @SerializedName("correctly_swiped_cards")
+    private ArrayList<Integer> correctlySwipedCards;
 
-    @SerializedName("incorrectly_swiped_cards ")
-    private ArrayList<Long> incorrectlySwipedCards;
+    @SerializedName("incorrectly_swiped_cards")
+    private ArrayList<Integer> incorrectlySwipedCards;
 
-    @SerializedName("translated_words ")
+    @SerializedName("translated_words")
     private Integer translatedWordsCount;
 
-    public void addCorrectlySwipedCard(long id) {
+    public void addCorrectlySwipedCard(Integer id) {
         correctlySwipedCards.add(id);
     }
 
-    public void addIncorrectlySwipedCard(long id) {
+    public void addIncorrectlySwipedCard(Integer id) {
         incorrectlySwipedCards.add(id);
     }
 
@@ -60,7 +60,7 @@ public class Statistics implements Serializable {
         translatedWordsCount++;
     }
 
-    public void pushStatistics(Application application) {
+    public void pushStatistics(final Application application) {
         String token = SessionHelper.getToken(application);
         ApiManager.getInstance().pushUserStatistics(token, this, new Callback<Void>() {
             @Override
@@ -68,6 +68,7 @@ public class Statistics implements Serializable {
                 if (response.isSuccessful()) {
                     Log.d("STATISTICS", "SUCCESSFULLY PUSHED!");
                     flushStatistics();
+                    SessionHelper.updateUserData(application);
                 } else {
                     Log.d("STATISTICS", "API ERROR!");
                 }
@@ -84,6 +85,10 @@ public class Statistics implements Serializable {
         this.correctlySwipedCards = new ArrayList<>();
         this.incorrectlySwipedCards = new ArrayList<>();
         this.translatedWordsCount = 0;
+    }
+
+    public Integer getCurrentGameScore(){
+        return this.correctlySwipedCards.size() - this.incorrectlySwipedCards.size();
     }
 
 }

@@ -3,12 +3,18 @@ package pl.politechnika.szczesny.words_world_client;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.model.Statistics;
@@ -17,14 +23,14 @@ import pl.politechnika.szczesny.words_world_client.taboo.TabooCard;
 
 public class TabooActivity extends AppCompatActivity {
 
+    public static final String CARDS = "CARDS";
     private SwipePlaceHolderView mSwipeView;
+    List<Card> cards = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taboo);
-
-        SharedPrefHelper.flushTabooScore(getApplication());
 
         mSwipeView = findViewById(R.id.swipeView);
         Context mContext = getApplicationContext();
@@ -37,14 +43,18 @@ public class TabooActivity extends AppCompatActivity {
                         .setSwipeInMsgLayoutId(R.layout.taboo_swipe_in_msg_view)
                         .setSwipeOutMsgLayoutId(R.layout.taboo_swipe_out_msg_view));
 
-        // TODO: call for cards for selected settings from previous screen
-//        try {
-//            for(Object card : TabooManager.getInstance(getApplicationContext()).getCards()){
-//                mSwipeView.addView(new TabooCard(mContext, (Card)card, mSwipeView));
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        String stringCards = getIntent().getStringExtra(CARDS);
+        if (stringCards != null) {
+            Type type = new TypeToken<List<Card>>() {
+            }.getType();
+            cards = new Gson().fromJson(stringCards, type);
+        } else {
+            Log.d("DATA","MISSING!");
+        }
+
+        for (Card card : cards){
+            mSwipeView.addView(new TabooCard(mContext, card, mSwipeView));
+        }
 
         findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener() {
             @Override

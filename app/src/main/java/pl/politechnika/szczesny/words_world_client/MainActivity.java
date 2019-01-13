@@ -7,7 +7,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
-import pl.politechnika.szczesny.words_world_client.fragment.ChallengesFragment;
+import pl.politechnika.szczesny.words_world_client.fragment.MyCardsFragment;
 import pl.politechnika.szczesny.words_world_client.fragment.FlashcardsFragment;
 import pl.politechnika.szczesny.words_world_client.fragment.ProfileFragment;
 
@@ -24,8 +24,8 @@ public class MainActivity extends AppBaseActivity {
             Fragment fragment = null;
 
             switch (item.getItemId()) {
-                case R.id.navigation_challenges:
-                    fragment = new ChallengesFragment();
+                case R.id.navigation_cards:
+                    fragment = new MyCardsFragment();
                     break;
                 case R.id.navigation_flashcards:
                     fragment = new FlashcardsFragment();
@@ -54,7 +54,7 @@ public class MainActivity extends AppBaseActivity {
             startActivity(intent);
         }
 
-        loadFragment(new ChallengesFragment());
+        loadFragment(new MyCardsFragment());
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
