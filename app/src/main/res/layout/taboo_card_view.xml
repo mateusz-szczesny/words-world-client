@@ -22,7 +22,7 @@
             android:layout_gravity="top"
             android:gravity="center|start"
             android:orientation="vertical"
-            android:paddingStart="20dp">
+            android:padding="20dp">
 
             <TextView
             android:id="@+id/KEY_WORD"
@@ -91,6 +91,13 @@
                 android:textColor="@color/primary"
                 android:textSize="28sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/owner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.05"
+                android:gravity="start|bottom" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>

@@ -14,14 +14,16 @@ public class Card implements Serializable {
     private double cardEfficiency;
     @SerializedName("difficulty")
     private String difficulty;
+    @SerializedName("owner")
+    private String owner;
     @SerializedName("black_list")
     private String[] blackList;
+    @SerializedName("times_shown")
+    private Integer timesPlayed;
+    @SerializedName("language")
+    private Language language;
 
-    public Card(String keyWord, long cardEfficiency, String difficulty, String[] blackList) {
-        this.keyWord = keyWord;
-        this.cardEfficiency = cardEfficiency;
-        this.difficulty = difficulty;
-        this.blackList = blackList;
+    public Card() {
     }
 
     public int getId() {
@@ -62,5 +64,29 @@ public class Card implements Serializable {
 
     public void setCardEfficiency(double cardEfficiency) {
         this.cardEfficiency = cardEfficiency;
+    }
+
+    public Integer getTimesPlayed() {
+        return timesPlayed;
+    }
+
+    public void setTimesPlayed(Integer timesPlayed) {
+        this.timesPlayed = timesPlayed;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

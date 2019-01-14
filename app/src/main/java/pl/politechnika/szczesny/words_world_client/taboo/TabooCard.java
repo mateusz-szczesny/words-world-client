@@ -1,6 +1,5 @@
 package pl.politechnika.szczesny.words_world_client.taboo;
 
-import android.app.Application;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
@@ -45,7 +44,8 @@ public class TabooCard {
     private TextView BL4;
     @View(R.id.BL5)
     private TextView BL5;
-
+    @View(R.id.owner)
+    private TextView owner;
 
     private Card mCard;
     private Context mContext;
@@ -65,6 +65,8 @@ public class TabooCard {
         BL3.setText(mCard.getBlackList()[2]);
         BL4.setText(mCard.getBlackList()[3]);
         BL5.setText(mCard.getBlackList()[4]);
+
+        owner.setText("Autor: " + mCard.getOwner());
 
         Integer color = TabooLevel2CardColor.get(mCard.getDifficulty());
         cardView.setCardBackgroundColor(color != null ? color : Color.WHITE);

@@ -54,15 +54,15 @@ public class MainActivity extends AppBaseActivity {
             startActivity(intent);
         }
 
-        loadFragment(new MyCardsFragment());
+        loadFragment(new ProfileFragment());
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setSelectedItemId(R.id.navigation_profile);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
     }
 
     private boolean loadFragment(Fragment fragment) {
-        //switching fragment
         if (fragment != null) {
             getSupportFragmentManager()
                     .beginTransaction()
