@@ -48,7 +48,6 @@ public class TabooCard {
     private TextView owner;
 
     private Card mCard;
-    private Context mContext;
     private SwipePlaceHolderView mSwipeView;
 
     public TabooCard(Context context, Card card, SwipePlaceHolderView swipeView) {
@@ -58,13 +57,13 @@ public class TabooCard {
     }
 
     private void fillCardDetails() {
-        keyWord.setText(mCard.getKeyWord());
+        keyWord.setText(mCard.getKeyWord().toUpperCase());
 
-        BL1.setText(mCard.getBlackList()[0]);
-        BL2.setText(mCard.getBlackList()[1]);
-        BL3.setText(mCard.getBlackList()[2]);
-        BL4.setText(mCard.getBlackList()[3]);
-        BL5.setText(mCard.getBlackList()[4]);
+        BL1.setText(mCard.getBlackList()[0].toUpperCase());
+        BL2.setText(mCard.getBlackList()[1].toUpperCase());
+        BL3.setText(mCard.getBlackList()[2].toUpperCase());
+        BL4.setText(mCard.getBlackList()[3].toUpperCase());
+        BL5.setText(mCard.getBlackList()[4].toUpperCase());
 
         owner.setText("Autor: " + mCard.getOwner());
 
