@@ -24,20 +24,4 @@ public class SessionHelper {
         Token token = getTokenFormSP(application);
         return token.getToken();
     }
-
-    public static void updateUserData(final Application application) {
-        String token = SessionHelper.getToken(application);
-        ApiManager.getInstance().fetchUser(token, new Callback<User>() {
-            @Override
-            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-                User resUser = response.body();
-                storeUserInSP(resUser, application);
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                Log.d("INTERNAL ERROR", t.getMessage());
-            }
-        });
-    }
 }

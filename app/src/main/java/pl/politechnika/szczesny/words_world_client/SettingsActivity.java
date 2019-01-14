@@ -1,8 +1,11 @@
 package pl.politechnika.szczesny.words_world_client;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +20,7 @@ import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.model.Credentials;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
+import pl.politechnika.szczesny.words_world_client.viewmodel.SessionUserViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,11 +54,8 @@ public class SettingsActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                             if (response.isSuccessful()) {
-                                User user = response.body();
-                                SharedPrefHelper.storeUserInSP(user, getApplication());
                                 Toast.makeText(getBaseContext(), "Dane zaktualizowane!", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(getBaseContext(), MainActivity.class);
-                                startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(getBaseContext(), "Błąd połączenia!", Toast.LENGTH_LONG).show();
                             }
@@ -71,11 +72,17 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void fillInputsWithUserData() {
-        User user = SharedPrefHelper.getUserFromSP(getApplication());
-
-        _usernameText.setHint(!"".equals(user.getUsername()) ? user.getUsername() : "");
-        _emailText.setHint(!"".equals(user.getEmail()) ? user.getEmail() : "");
-        _firstNameText.setHint(!"".equals(user.getFirstName()) ? user.getFirstName() : "Ustaw imię");
-        _lastNameText.setHint(!"".equals(user.getLastName()) ? user.getLastName() : "Ustaw nazwisko");
+        SessionUserViewModel sessionUserViewModel = ViewModelProviders.of(this).get(SessionUserViewModel.class);
+        sessionUserViewModel.getUser().observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                if (user != null) {
+                    _usernameText.setHint(!"".equals(user.getUsername()) ? user.getUsername() : "");
+                    _emailText.setHint(!"".equals(user.getEmail()) ? user.getEmail() : "");
+                    _firstNameText.setHint(!"".equals(user.getFirstName()) ? user.getFirstName() : "Ustaw imię");
+                    _lastNameText.setHint(!"".equals(user.getLastName()) ? user.getLastName() : "Ustaw nazwisko");
+                }
+            }
+        });
     }
 }

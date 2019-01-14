@@ -68,7 +68,6 @@ public class Statistics implements Serializable {
                 if (response.isSuccessful()) {
                     Log.d("STATISTICS", "SUCCESSFULLY PUSHED!");
                     flushStatistics();
-                    SessionHelper.updateUserData(application);
                 } else {
                     Log.d("STATISTICS", "API ERROR!");
                 }

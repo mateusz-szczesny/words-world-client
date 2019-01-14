@@ -1,6 +1,5 @@
 package pl.politechnika.szczesny.words_world_client;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,12 +10,10 @@ import com.google.gson.reflect.TypeToken;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.model.Statistics;
 import pl.politechnika.szczesny.words_world_client.model.Card;
 import pl.politechnika.szczesny.words_world_client.taboo.TabooCard;
@@ -33,7 +30,6 @@ public class TabooActivity extends AppCompatActivity {
         setContentView(R.layout.activity_taboo);
 
         mSwipeView = findViewById(R.id.swipeView);
-        Context mContext = getApplicationContext();
 
         mSwipeView.getBuilder()
                 .setDisplayViewCount(3)
@@ -53,7 +49,7 @@ public class TabooActivity extends AppCompatActivity {
         }
 
         for (Card card : cards){
-            mSwipeView.addView(new TabooCard(mContext, card, mSwipeView));
+            mSwipeView.addView(new TabooCard(card, mSwipeView));
         }
 
         findViewById(R.id.rejectBtn).setOnClickListener(new View.OnClickListener() {

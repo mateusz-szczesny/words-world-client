@@ -124,4 +124,9 @@ public class ApiManager {
         Call<List<Card>> call = dataService.getMyCards(token);
         call.enqueue(callback);
     }
+
+    public void createNewCard(String token, String keyWord, String blackList, int languageId, Callback<Void> callback) {
+        Call<Void> call = dataService.createNewCard(token, keyWord, blackList, languageId);
+        call.enqueue(callback);
+    }
 }

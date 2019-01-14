@@ -3,9 +3,11 @@ package pl.politechnika.szczesny.words_world_client.fragment;
 import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -19,6 +21,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pl.politechnika.szczesny.words_world_client.AddTabooCardActivity;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.adapter.MyCardsAdapter;
 import pl.politechnika.szczesny.words_world_client.model.Card;
@@ -29,6 +32,7 @@ public class MyCardsFragment extends Fragment {
     MyCardsViewModel myCardsViewModel;
     RecyclerView _myCards;
     SwipeRefreshLayout _swipeRefreshLayout;
+    FloatingActionButton _fab;
 
     @Nullable
     @Override
@@ -37,6 +41,7 @@ public class MyCardsFragment extends Fragment {
 
         _myCards = view.findViewById(R.id.mycards_list);
         _swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        _fab = view.findViewById(R.id.new_card);
 
         return view;
     }
@@ -64,6 +69,14 @@ public class MyCardsFragment extends Fragment {
             public void onRefresh() {
                 myCardsViewModel.refreshData();
                 _swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        _fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), AddTabooCardActivity.class);
+                startActivity(intent);
             }
         });
     }

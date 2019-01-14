@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Word\'s World</string>
-    <string name="title_home">Wyzwania</string>
-    <string name="title_challenge">Wyzwania</string>
     <string name="title_profile">Profil</string>
     <string name="app_title_nav">Word\'s World</string>
     <string name="search">Szukaj…</string>
@@ -46,4 +44,7 @@
     <string name="lang">Język</string>
     <string name="define_game_settings">Zdefiniuj ustawienia gry</string>
     <string name="my_cards">Moje Karty</string>
+    <string name="add">DODAJ</string>
+    <string name="key_word">Słowo kluczowe...</string>
+    <string name="black_word">Słowo zablokowane...</string>
 </resources>

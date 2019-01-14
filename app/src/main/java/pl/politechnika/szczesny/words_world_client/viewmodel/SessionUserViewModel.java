@@ -30,7 +30,6 @@ public class SessionUserViewModel extends AndroidViewModel {
             @Override
             public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                 user.setValue(response.body());
-                SessionHelper.updateUserData(getApplication());
             }
 
             @Override

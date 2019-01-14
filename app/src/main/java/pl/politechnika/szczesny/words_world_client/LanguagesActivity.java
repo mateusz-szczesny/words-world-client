@@ -49,10 +49,4 @@ public class LanguagesActivity extends AppBaseActivity {
             }
         });
     }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        SessionHelper.updateUserData(getApplication());
-    }
 }

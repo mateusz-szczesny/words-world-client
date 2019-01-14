@@ -50,8 +50,7 @@ public class TabooCard {
     private Card mCard;
     private SwipePlaceHolderView mSwipeView;
 
-    public TabooCard(Context context, Card card, SwipePlaceHolderView swipeView) {
-        mContext = context;
+    public TabooCard(Card card, SwipePlaceHolderView swipeView) {
         mCard = card;
         mSwipeView = swipeView;
     }

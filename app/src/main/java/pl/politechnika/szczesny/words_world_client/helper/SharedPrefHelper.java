@@ -17,14 +17,6 @@ public class SharedPrefHelper {
         return application.getSharedPreferences(Utils.USER__SP, Context.MODE_PRIVATE);
     }
 
-    private static SharedPreferences getTabooSharedPreferences(Application application) {
-        return application.getSharedPreferences(Utils.TABOO__SP, Context.MODE_PRIVATE);
-    }
-
-    private static SharedPreferences getDictionarySharedPreferences(Application application) {
-        return application.getSharedPreferences(Utils.DICT__SP, Context.MODE_PRIVATE);
-    }
-
     // USER STORAGE SP
     public static void storeUserInSP(User user, Application application) {
         SharedPreferences sharedPref = getUserSharedPreferences(application);
@@ -46,7 +38,7 @@ public class SharedPrefHelper {
         editor.apply();
     }
 
-    public static Token getTokenFormSP(Application application) {
+    static Token getTokenFormSP(Application application) {
         SharedPreferences sharedPref = getUserSharedPreferences(application);
         return new Gson().fromJson(sharedPref.getString(Utils.TOKEN__SP, ""), Token.class);
     }

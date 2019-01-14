@@ -10,6 +10,8 @@ import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.taboo.TabooCard;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -92,5 +94,14 @@ interface DataApi {
     @GET("/api/taboo/cards")
     Call<List<Card>> getMyCards(
             @Header("Authorization") String token
+    );
+
+    @POST("/api/taboo/cards/")
+    @FormUrlEncoded
+    Call<Void> createNewCard(
+            @Header("Authorization") String token,
+            @Field("key_word") String keyWord,
+            @Field("black_list") String blackList,
+            @Field("language") int language
     );
 }

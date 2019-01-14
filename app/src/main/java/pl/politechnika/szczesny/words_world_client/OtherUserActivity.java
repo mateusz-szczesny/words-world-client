@@ -128,7 +128,6 @@ public class OtherUserActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         _user.setFriend(true);
                         refreshButton();
-                        SessionHelper.updateUserData(getApplication());
                     } else {
                         Toast.makeText(getApplicationContext(), "Nie można obserwować! Błąd!", Toast.LENGTH_LONG).show();
                     }
@@ -152,7 +151,6 @@ public class OtherUserActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         _user.setFriend(false);
                         refreshButton();
-                        SessionHelper.updateUserData(getApplication());
                     } else {
                         Toast.makeText(getApplicationContext(), "Nie można obserwować! Błąd!", Toast.LENGTH_LONG).show();
                     }
