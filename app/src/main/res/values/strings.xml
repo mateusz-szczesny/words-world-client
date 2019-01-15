@@ -47,4 +47,6 @@
     <string name="add">DODAJ</string>
     <string name="key_word">Słowo kluczowe...</string>
     <string name="black_word">Słowo zablokowane...</string>
+    <string name="used_cards">Ilość użytych kart:</string>
+    <string name="correct_cards">Odgadniętych kart:</string>
 </resources>

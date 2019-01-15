@@ -8,10 +8,6 @@ import java.util.Map;
 import pl.politechnika.szczesny.words_world_client.model.Language;
 
 public class Utils {
-    static final String TABOO__SP = "TABOO__SP";
-    static final String TABOO_SCORE__SP = "TABOO_SCORE__SP";
-
-    static final String DICT__SP = "DICT__SP";
 
     static final String USER__SP = "USER__SP";
     public static final String USER__ID = "USER_ID";
@@ -22,6 +18,10 @@ public class Utils {
 
     public static final int MINIMUM_PASSWORD_LENGTH = 6;
     public static final int MINIMUM_USERNAME_LENGTH = 4;
+
+    public static final Integer MINIMAL_CARD_COUNT = 5;
+    public static final Integer DEFAULT_CARD_COUNT = 5;
+    public static final Integer MAXIMAL_CARD_COUNT = 15;
 
     public static final Map<String, Integer> TabooLevel2CardColor = new HashMap<String, Integer>() {{
         put("EASY", Color.parseColor("#e1f7d5"));

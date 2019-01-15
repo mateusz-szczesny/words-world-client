@@ -9,10 +9,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,22 +20,16 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import mehdi.sakout.aboutpage.AboutPage;
-import mehdi.sakout.aboutpage.Element;
-import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
-import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
 import pl.politechnika.szczesny.words_world_client.helper.Utils;
 import pl.politechnika.szczesny.words_world_client.model.Card;
 import pl.politechnika.szczesny.words_world_client.model.Language;
 import pl.politechnika.szczesny.words_world_client.model.User;
 import pl.politechnika.szczesny.words_world_client.service.ApiManager;
-import pl.politechnika.szczesny.words_world_client.taboo.TabooCard;
 import pl.politechnika.szczesny.words_world_client.viewmodel.SessionUserViewModel;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,6 +41,8 @@ public class PreTabooSettingsActivity extends AppCompatActivity {
     @BindView(R.id.cc_picker) NumberPicker _ccPicker;
     @BindView(R.id.go_ahead) Button _play;
     @BindView(R.id.kda) TextView _kda;
+    @BindView(R.id.totalSwipes) TextView _totalSwipes;
+    @BindView(R.id.correctSwipes) TextView _correctSwipes;
 
     private Integer ccSetting;
     private long langIdSetting;
@@ -56,9 +50,6 @@ public class PreTabooSettingsActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
 
-    private final Integer MINIMAL_CARD_COUNT = 5;
-    private final Integer DEFAULT_CARD_COUNT = 5;
-    private final Integer MAXIMAL_CARD_COUNT = 15;
 
     private SessionUserViewModel sessionUserViewModel;
 
@@ -120,7 +111,10 @@ public class PreTabooSettingsActivity extends AppCompatActivity {
     }
 
     private void updateKDR(User user) {
-        _kda.setText((int)(user.getTabooEfficiency() * 100.0) + "%");
+        String percentageStat = String.valueOf(user.getTabooEfficiency() * 100.0) + "%";
+        _kda.setText(percentageStat);
+        _totalSwipes.setText(String.valueOf(user.getTotalSwipesTbo()));
+        _correctSwipes.setText(String.valueOf(user.getCorrectSwipesTbo()));
     }
 
     private void fillPickers() {
@@ -142,9 +136,9 @@ public class PreTabooSettingsActivity extends AppCompatActivity {
             }
         });
 
-        ccSetting = DEFAULT_CARD_COUNT;
-        _ccPicker.setMinValue(MINIMAL_CARD_COUNT);
-        _ccPicker.setMaxValue(MAXIMAL_CARD_COUNT);
+        ccSetting = Utils.DEFAULT_CARD_COUNT;
+        _ccPicker.setMinValue(Utils.MINIMAL_CARD_COUNT);
+        _ccPicker.setMaxValue(Utils.MAXIMAL_CARD_COUNT);
         _ccPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal){

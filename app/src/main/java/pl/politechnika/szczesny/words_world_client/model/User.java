@@ -31,6 +31,10 @@ public class User implements Serializable {
     private OverallScore overallScore;
     @SerializedName("taboo_efficiency")
     private double tabooEfficiency;
+    @SerializedName("swiped_taboo_cards")
+    private Integer totalSwipesTbo;
+    @SerializedName("correctly_swiped_taboo_cards")
+    private Integer correctSwipesTbo;
 
     public User() {
     }
@@ -75,19 +79,19 @@ public class User implements Serializable {
         this.lastName = lastName;
     }
 
-    public List getFollowedUsers() {
+    public List<User> getFollowedUsers() {
         return followedUsers;
     }
 
-    public void setFollowedUsers(List followedUsers) {
+    public void setFollowedUsers(List<User> followedUsers) {
         this.followedUsers = followedUsers;
     }
 
-    public List getAchievements() {
+    public List<Achievement> getAchievements() {
         return achievements;
     }
 
-    public void setAchievements(List achievements) {
+    public void setAchievements(List<Achievement> achievements) {
         this.achievements = achievements;
     }
 
@@ -95,7 +99,7 @@ public class User implements Serializable {
         return selectedLanguages;
     }
 
-    public void setSelectedLanguages(List selectedLanguages) {
+    public void setSelectedLanguages(List<Language> selectedLanguages) {
         this.selectedLanguages = selectedLanguages;
     }
 
@@ -121,6 +125,22 @@ public class User implements Serializable {
 
     public void setTabooEfficiency(double tabooEfficiency) {
         this.tabooEfficiency = tabooEfficiency;
+    }
+
+    public Integer getTotalSwipesTbo() {
+        return totalSwipesTbo;
+    }
+
+    public void setTotalSwipesTbo(Integer totalSwipesTbo) {
+        this.totalSwipesTbo = totalSwipesTbo;
+    }
+
+    public Integer getCorrectSwipesTbo() {
+        return correctSwipesTbo;
+    }
+
+    public void setCorrectSwipesTbo(Integer correctSwipesTbo) {
+        this.correctSwipesTbo = correctSwipesTbo;
     }
 
     @NonNull
