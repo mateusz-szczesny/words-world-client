@@ -1,6 +1,5 @@
 package pl.politechnika.szczesny.words_world_client.taboo;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.util.Log;
@@ -18,12 +17,10 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
 
 
 import pl.politechnika.szczesny.words_world_client.R;
-import pl.politechnika.szczesny.words_world_client.helper.Utils;
-import pl.politechnika.szczesny.words_world_client.helper.SharedPrefHelper;
-import pl.politechnika.szczesny.words_world_client.model.Card;
-import pl.politechnika.szczesny.words_world_client.model.Statistics;
+import pl.politechnika.szczesny.words_world_client.models.Card;
+import pl.politechnika.szczesny.words_world_client.models.Statistics;
 
-import static pl.politechnika.szczesny.words_world_client.helper.Utils.TabooLevel2CardColor;
+import static pl.politechnika.szczesny.words_world_client.utils.Utils.TabooLevel2CardColor;
 
 @Layout(R.layout.taboo_card_view)
 public class TabooCard {

@@ -10,40 +10,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.politechnika.szczesny.words_world_client.utils.SessionUtils;
-import pl.politechnika.szczesny.words_world_client.models.Language;
+import pl.politechnika.szczesny.words_world_client.models.User;
 import pl.politechnika.szczesny.words_world_client.network.ApiManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LanguageViewModel extends AndroidViewModel {
-    private final MutableLiveData<List<Language>> allLanguages;
+public class FriendViewModel extends AndroidViewModel {
+    private final MutableLiveData<List<User>> allFriends;
     private final ApiManager apiManager;
 
-    public LanguageViewModel(Application application) {
+    public FriendViewModel(Application application) {
         super(application);
         apiManager = ApiManager.getInstance();
-        allLanguages = new MutableLiveData<>();
+        allFriends = new MutableLiveData<>();
 
-        refreshData(application);
+        refreshData(getApplication());
     }
 
-    private void fetchData (String token) {
-        apiManager.getLanguages(token, new Callback<List<Language>>() {
+    private void fetchData(String token) {
+        apiManager.getFriends(token, new Callback<List<User>>() {
             @Override
-            public void onResponse(@NonNull Call<List<Language>> call, @NonNull Response<List<Language>> response) {
-                allLanguages.setValue(response.body());
+            public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
+                allFriends.setValue(response.body());
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<Language>> call, @NonNull Throwable t) {
-                allLanguages.setValue(new ArrayList<Language>());
+            public void onFailure(@NonNull Call<List<User>> call, @NonNull Throwable t) {
+                allFriends.setValue(new ArrayList<User>());
             }
         });
     }
 
-    public LiveData<List<Language>> getLanguages() {
-        return allLanguages;
+    public LiveData<List<User>> getFriends() {
+        return allFriends;
     }
 
     public void refreshData(Application application) {

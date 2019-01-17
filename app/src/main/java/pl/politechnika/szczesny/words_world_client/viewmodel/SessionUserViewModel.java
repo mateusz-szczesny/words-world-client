@@ -8,9 +8,9 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 
-import pl.politechnika.szczesny.words_world_client.helper.SessionHelper;
-import pl.politechnika.szczesny.words_world_client.model.User;
-import pl.politechnika.szczesny.words_world_client.service.ApiManager;
+import pl.politechnika.szczesny.words_world_client.utils.SessionUtils;
+import pl.politechnika.szczesny.words_world_client.models.User;
+import pl.politechnika.szczesny.words_world_client.network.ApiManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,7 +44,7 @@ public class SessionUserViewModel extends AndroidViewModel {
     }
 
     public void refreshData() {
-        String token = SessionHelper.getToken(getApplication());
+        String token = SessionUtils.getToken(getApplication());
 
         if (token != null) {
             fetchData(token);
