@@ -1,13 +1,13 @@
 package pl.politechnika.szczesny.words_world_client.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.Calendar;
 
+import androidx.appcompat.app.AppCompatActivity;
 import mehdi.sakout.aboutpage.AboutPage;
 import mehdi.sakout.aboutpage.Element;
 import pl.politechnika.szczesny.words_world_client.R;
@@ -31,7 +31,7 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(aboutPage);
     }
 
-    Element getCopyRightsElement() {
+    private Element getCopyRightsElement() {
         Element copyRightsElement = new Element();
         final String copyrights = String.format(getString(R.string.copy_right), Calendar.getInstance().get(Calendar.YEAR));
         copyRightsElement.setTitle(copyrights);

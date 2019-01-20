@@ -3,8 +3,7 @@ package pl.politechnika.szczesny.words_world_client.activities;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import android.content.Intent;
@@ -14,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
 import butterknife.BindView;
 import pl.politechnika.szczesny.words_world_client.R;
@@ -45,26 +45,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
-        _loginButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
-
-        _signUpLink.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
-            }
-        });
     }
 
-    private void login() {
+    public void signUp(View view) {
+        Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
+        startActivityForResult(intent, REQUEST_SIGNUP);
+    }
+
+    public void login(View view) {
         Log.d(TAG, "Login");
 
         if (!validate()) {
@@ -100,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

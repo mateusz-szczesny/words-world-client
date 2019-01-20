@@ -1,6 +1,6 @@
 package pl.politechnika.szczesny.words_world_client.models;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -151,7 +151,7 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        return (int) (this.id * 31);
+        return (this.id * 31);
     }
 
     @Override

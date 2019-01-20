@@ -1,13 +1,7 @@
 package pl.politechnika.szczesny.words_world_client.activities;
 
-
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -31,6 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.ResponseBody;
@@ -53,6 +51,8 @@ public class TranslateActivity extends AppCompatActivity {
     @BindView(R.id.voice) ImageButton _speakText;
     @BindView(R.id.translate) Button _translate;
     private TextToSpeech tts;
+    private ArrayAdapter<Language> spinnerArrayAdapter;
+    private final List<Language> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,39 +60,34 @@ public class TranslateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_translate);
         ButterKnife.bind(this);
 
-        final List<Language> list = new ArrayList<>();
-
         LanguageViewModel languageViewModel = ViewModelProviders.of(this).get(LanguageViewModel.class);
         languageViewModel.getLanguages().observe(this, new Observer<List<Language>>() {
             @Override
-            public void onChanged(@Nullable List<Language> languages) {
-                Language noLanguage = new Language();
-                noLanguage.setName("Wybierz język...");
-                noLanguage.setLanguageCode("");
-                list.add(noLanguage);
-                list.addAll(languages);
-
-                ArrayAdapter<Language> spinnerArrayAdapter = new ArrayAdapter<>(
-                        getApplicationContext(), R.layout.spinner_item, list);
-                spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
-
-                _srcLanguage.setAdapter(spinnerArrayAdapter);
-                _targetLanguage.setAdapter(spinnerArrayAdapter);
+            public void onChanged(List<Language> languages) {
+                initSpinners(languages);
             }
         });
+    }
 
-        _translate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                translate();
-            }
-        });
+    private void initSpinners(List<Language> languages){
+        Language noLanguage = new Language();
+        noLanguage.setName("Wybierz język...");
+        noLanguage.setLanguageCode("");
+        list.add(noLanguage);
+        list.addAll(languages != null ? languages : new ArrayList<Language>());
+
+        spinnerArrayAdapter = new ArrayAdapter<>(
+                getApplicationContext(), R.layout.spinner_item, list);
+        spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
+
+        _srcLanguage.setAdapter(spinnerArrayAdapter);
+        _targetLanguage.setAdapter(spinnerArrayAdapter);
 
         _targetLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                setUpNewLocaleForTTF(adapterView, i);
-                translate();
+                setUpNewLocaleForTTF((Language)adapterView.getAdapter().getItem(i));
+                translate(view);
             }
 
             @Override
@@ -100,16 +95,9 @@ public class TranslateActivity extends AppCompatActivity {
 
             }
         });
-
-        _speakText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                speakTranslated();
-            }
-        });
     }
 
-    private void speakTranslated() {
+    public void speak(View view) {
         final String text = _translatedText.getText().toString();
 
         if (!"".equals(text.trim())) {
@@ -118,20 +106,19 @@ public class TranslateActivity extends AppCompatActivity {
         }
     }
 
-    private void setUpNewLocaleForTTF(AdapterView<?> adapterView, int position) {
-        final Language lang = (Language) adapterView.getItemAtPosition(position);
+    private void setUpNewLocaleForTTF(final Language language) {
 
         tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if(status != TextToSpeech.ERROR) {
-                    tts.setLanguage(new Locale(lang.getLanguageCode()));
+                    tts.setLanguage(new Locale(language.getLanguageCode()));
                 }
             }
         });
     }
 
-    private void translate() {
+    public void translate(View view) {
         final String toTranslate = _textToTranslate.getText().toString();
         final String srcLang = ((Language)_srcLanguage.getSelectedItem()).getLanguageCode();
         final String trgLang = ((Language)_targetLanguage.getSelectedItem()).getLanguageCode();

@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_gravity="bottom"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
         <ImageButton
             android:id="@+id/rejectBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/ic_cancel"/>
+            android:background="@drawable/ic_cancel"
+            android:onClick="reject" />
+
         <ImageButton
             android:id="@+id/acceptBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
-            android:background="@drawable/ic_done"/>
+            android:background="@drawable/ic_done"
+            android:onClick="accept" />
     </LinearLayout>
+
     <com.mindorks.placeholderview.SwipePlaceHolderView
         android:id="@+id/swipeView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</FrameLayout>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

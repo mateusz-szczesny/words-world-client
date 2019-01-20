@@ -1,13 +1,10 @@
 package pl.politechnika.szczesny.words_world_client.activities;
 
 import android.app.ProgressDialog;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +19,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.politechnika.szczesny.words_world_client.R;
@@ -44,14 +44,10 @@ public class PreTabooSettingsActivity extends AppCompatActivity {
     @BindView(R.id.kda) TextView _kda;
     @BindView(R.id.totalSwipes) TextView _totalSwipes;
     @BindView(R.id.correctSwipes) TextView _correctSwipes;
-
     private Integer ccSetting;
     private long langIdSetting;
     private List<Language> languages;
-
     private ProgressDialog progressDialog;
-
-
     private SessionUserViewModel sessionUserViewModel;
 
     @Override
@@ -71,42 +67,38 @@ public class PreTabooSettingsActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
-        _play.setOnClickListener(new View.OnClickListener() {
+    public void play(View view) {
+        progressDialog = new ProgressDialog(PreTabooSettingsActivity.this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Uruchamianie...");
+        progressDialog.show();
+
+        String token = SessionUtils.getToken(getApplication());
+        ApiManager.getInstance().randomCards(token, langIdSetting, ccSetting, new Callback<List<Card>>() {
             @Override
-            public void onClick(View view) {
+            public void onResponse(@NonNull Call<List<Card>> call, @NonNull Response<List<Card>> response) {
+                if (response.isSuccessful()) {
+                    List<Card> cards = response.body();
 
-                progressDialog = new ProgressDialog(PreTabooSettingsActivity.this);
-                progressDialog.setIndeterminate(true);
-                progressDialog.setMessage("Uruchamianie...");
-                progressDialog.show();
+                    Type type = new TypeToken<List<Card>>() {}.getType();
+                    String json = new Gson().toJson(cards, type);
 
-                String token = SessionUtils.getToken(getApplication());
-                ApiManager.getInstance().randomCards(token, langIdSetting, ccSetting, new Callback<List<Card>>() {
-                    @Override
-                    public void onResponse(@NonNull Call<List<Card>> call, @NonNull Response<List<Card>> response) {
-                        if (response.isSuccessful()) {
-                            List<Card> cards = response.body();
+                    Intent intent = new Intent(getBaseContext(), TabooActivity.class);
+                    intent.putExtra(TabooActivity.CARDS, json);
+                    progressDialog.cancel();
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getBaseContext(), "Błąd połączenia!", Toast.LENGTH_LONG).show();
+                    progressDialog.cancel();
+                }
+            }
 
-                            Type type = new TypeToken<List<Card>>() {}.getType();
-                            String json = new Gson().toJson(cards, type);
-
-                            Intent intent = new Intent(getBaseContext(), TabooActivity.class);
-                            intent.putExtra(TabooActivity.CARDS, json);
-                            progressDialog.cancel();
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(getBaseContext(), "Błąd połączenia!", Toast.LENGTH_LONG).show();
-                            progressDialog.cancel();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<List<Card>> call, @NonNull Throwable t) {
-                        Log.d("API ERROR", t.getMessage());
-                        progressDialog.cancel();
-                    }
-                });
+            @Override
+            public void onFailure(@NonNull Call<List<Card>> call, @NonNull Throwable t) {
+                Log.d("API ERROR", t.getMessage());
+                progressDialog.cancel();
             }
         });
     }

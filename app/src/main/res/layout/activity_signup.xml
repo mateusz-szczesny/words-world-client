@@ -5,7 +5,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.SignUpActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -25,7 +25,7 @@
             android:text="@string/app_name"
             android:textColor="@color/primary"/>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -35,9 +35,9 @@
                 android:layout_height="wrap_content"
                 android:inputType="text|textEmailAddress"
                 android:hint="@string/username_inpt" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -47,9 +47,9 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:hint="@string/email_inpt" />
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -59,21 +59,23 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:hint="@string/password_input"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.v7.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
+            android:onClick="signUp"
             android:text="@string/create_btn"/>
 
         <TextView android:id="@+id/link_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
+            android:onClick="backToLogin"
             android:text="@string/login_in_Case"
             android:gravity="center"
             android:textSize="16sp"/>

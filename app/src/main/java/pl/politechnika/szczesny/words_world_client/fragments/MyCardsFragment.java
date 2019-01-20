@@ -1,24 +1,27 @@
 package pl.politechnika.szczesny.words_world_client.fragments;
 
 import android.app.Activity;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import pl.politechnika.szczesny.words_world_client.activities.AddTabooCardActivity;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.adapters.MyCardsAdapter;
@@ -27,19 +30,21 @@ import pl.politechnika.szczesny.words_world_client.viewmodel.MyCardViewModel;
 
 public class MyCardsFragment extends Fragment {
 
-    MyCardViewModel myCardViewModel;
-    RecyclerView _myCards;
-    SwipeRefreshLayout _swipeRefreshLayout;
-    FloatingActionButton _fab;
+    private MyCardViewModel myCardViewModel;
+    @BindView(R.id.mycards_list) RecyclerView _myCards;
+    @BindView(R.id.swipeRefreshLayout) SwipeRefreshLayout _swipeRefreshLayout;
+    @BindView(R.id.new_card) FloatingActionButton _addCard;
+
+    private MyCardsAdapter adapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mycards, container, false);
+        ButterKnife.bind(this, view);
 
-        _myCards = view.findViewById(R.id.mycards_list);
-        _swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-        _fab = view.findViewById(R.id.new_card);
+        _addCard.setOnClickListener(addCard);
+        _swipeRefreshLayout.setOnRefreshListener(refresh);
 
         return view;
     }
@@ -48,49 +53,39 @@ public class MyCardsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        init();
-    }
+        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+        Activity activity = getActivity();
+        if (activity != null) {
+            adapter = new MyCardsAdapter(getActivity().getApplication());
+            _myCards.setLayoutManager(llm);
+            _myCards.setAdapter(adapter);
+            _myCards.setItemAnimator(new DefaultItemAnimator());
+        }
 
-    private void init() {
         myCardViewModel = ViewModelProviders.of(this).get(MyCardViewModel.class);
         myCardViewModel.getCards().observe(this, new Observer<List<Card>>() {
             @Override
             public void onChanged(@Nullable List<Card> cards) {
-                if (cards != null) {
-                    assignCards(cards);
-                }
-            }
-        });
-
-        _swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                myCardViewModel.refreshData();
-                _swipeRefreshLayout.setRefreshing(false);
-            }
-        });
-
-        _fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), AddTabooCardActivity.class);
-                startActivity(intent);
+                adapter.setCards(cards);
             }
         });
     }
 
-    private void assignCards(List<Card> cards) {
-        LinearLayoutManager llm = new LinearLayoutManager(getContext());
-        Activity activity = getActivity();
-        if (activity != null) {
-            final MyCardsAdapter adapter = new MyCardsAdapter(getActivity().getApplication());
-
-            _myCards.setLayoutManager(llm);
-            _myCards.setAdapter(adapter);
-            _myCards.setItemAnimator(new DefaultItemAnimator());
-            adapter.setCards(cards);
+    private SwipeRefreshLayout.OnRefreshListener refresh = new SwipeRefreshLayout.OnRefreshListener() {
+        @Override
+        public void onRefresh() {
+            myCardViewModel.refreshData();
+            _swipeRefreshLayout.setRefreshing(false);
         }
-    }
+    };
+
+    private android.view.View.OnClickListener addCard = new android.view.View.OnClickListener() {
+        @Override
+        public void onClick(android.view.View view) {
+            Intent intent = new Intent(getContext(), AddTabooCardActivity.class);
+            startActivity(intent);
+        }
+    };
 
     @Override
     public void onResume() {

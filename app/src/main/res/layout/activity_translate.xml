@@ -68,6 +68,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_width="75dp"
+        android:onClick="speak"
         android:layout_height="75dp"
         android:src="@drawable/ic_voice" />
 
@@ -78,6 +79,7 @@
         android:layout_height="wrap_content"
         android:background="@color/primary_dark"
         android:textColor="@color/icons"
-        android:text="@string/TRANSLATE" />
+        android:text="@string/TRANSLATE"
+        android:onClick="translate" />
 </LinearLayout>
 

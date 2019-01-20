@@ -1,9 +1,6 @@
 package pl.politechnika.szczesny.words_world_client.adapters;
 
 import android.app.Application;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +9,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.utils.Utils;
 import pl.politechnika.szczesny.words_world_client.models.Card;
@@ -37,10 +37,12 @@ public class MyCardsAdapter extends RecyclerView.Adapter<MyCardsAdapter.MyCardsV
         Card card = cards.get(i);
 
         achievementViewHolder._keyWord.setText(card.getKeyWord());
-        achievementViewHolder._blackList.setText("[ " + TextUtils.join(",", card.getBlackList()) + " ]");
+        String blackList = "[ " + TextUtils.join(",", card.getBlackList()) + " ]";
+        achievementViewHolder._blackList.setText(blackList);
         achievementViewHolder._timesPlayed.setText(String.valueOf(card.getTimesPlayed()));
         achievementViewHolder._language.setText(Utils.returnFlagEmojiForLanguage(card.getLanguage()));
-        achievementViewHolder._efficiency.setText((int)(card.getCardEfficiency() * 100.0) + "%");
+        String effPercent = (int)(card.getCardEfficiency() * 100.0) + "%";
+        achievementViewHolder._efficiency.setText(effPercent);
     }
 
     public void setCards(List<Card> cards) {

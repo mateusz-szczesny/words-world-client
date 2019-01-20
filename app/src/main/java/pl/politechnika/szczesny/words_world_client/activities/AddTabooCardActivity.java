@@ -1,15 +1,12 @@
 package pl.politechnika.szczesny.words_world_client.activities;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +14,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.utils.SessionUtils;
 import pl.politechnika.szczesny.words_world_client.utils.Utils;
@@ -31,74 +33,58 @@ import retrofit2.Response;
 
 public class AddTabooCardActivity extends AppCompatActivity {
 
-    private TextView _keyWord;
-    private TextView _BL1;
-    private TextView _BL2;
-    private TextView _BL3;
-    private TextView _BL4;
-    private TextView _BL5;
+    @BindView(R.id.key_word) TextView _keyWord;
+    @BindView(R.id.BL1) TextView _BL1;
+    @BindView(R.id.BL2) TextView _BL2;
+    @BindView(R.id.BL3) TextView _BL3;
+    @BindView(R.id.BL4) TextView _BL4;
+    @BindView(R.id.BL5) TextView _BL5;
 
-    private TextView _owner;
-    private Spinner _language;
-    private Button _submit;
+    @BindView(R.id.owner) TextView _owner;
+    @BindView(R.id.language) Spinner _language;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_card);
+        ButterKnife.bind(this);
 
-        connectViews();
         assignAuthor();
         fillSpinnerWithSupportedLanguages();
-
-        _submit.setOnClickListener(new android.view.View.OnClickListener() {
-            @Override
-            public void onClick(android.view.View view) {
-                String keyWord = _keyWord.getText().toString().toUpperCase();
-                List<String> forbiddenWordsInput = new ArrayList<>();
-                forbiddenWordsInput.add(_BL1.getText().toString().toUpperCase());
-                forbiddenWordsInput.add(_BL2.getText().toString().toUpperCase());
-                forbiddenWordsInput.add(_BL3.getText().toString().toUpperCase());
-                forbiddenWordsInput.add(_BL4.getText().toString().toUpperCase());
-                forbiddenWordsInput.add(_BL5.getText().toString().toUpperCase());
-                String blackList = TextUtils.join("; ", forbiddenWordsInput);
-                int languageId = ((LanguageWrapper)_language.getSelectedItem()).getLanguageId();
-
-                if ("".equals(keyWord.trim()) || "".equals(blackList.trim())) {
-                    onCreteFailed();
-                } else {
-                    String token = SessionUtils.getToken(getApplication());
-                    ApiManager.getInstance().createNewCard(token, keyWord, blackList, languageId, new Callback<Void>() {
-                        @Override
-                        public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                            if (response.isSuccessful()) {
-                                onCreateSuccess();
-                            } else {
-                                onCreteFailed();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
-                            Log.d("API ERROR", t.getMessage());
-                            onCreteFailed();
-                        }
-                    });
-                }
-            }
-        });
     }
 
-    private void connectViews() {
-        _keyWord = findViewById(R.id.key_word);
-        _BL1 = findViewById(R.id.BL1);
-        _BL2 = findViewById(R.id.BL2);
-        _BL3 = findViewById(R.id.BL3);
-        _BL4 = findViewById(R.id.BL4);
-        _BL5 = findViewById(R.id.BL5);
-        _owner = findViewById(R.id.owner);
-        _language = findViewById(R.id.language);
-        _submit = findViewById(R.id.submit);
+    public void submit(View view) {
+        String keyWord = _keyWord.getText().toString().toUpperCase();
+        List<String> forbiddenWordsInput = new ArrayList<>();
+        forbiddenWordsInput.add(_BL1.getText().toString().toUpperCase());
+        forbiddenWordsInput.add(_BL2.getText().toString().toUpperCase());
+        forbiddenWordsInput.add(_BL3.getText().toString().toUpperCase());
+        forbiddenWordsInput.add(_BL4.getText().toString().toUpperCase());
+        forbiddenWordsInput.add(_BL5.getText().toString().toUpperCase());
+        String blackList = TextUtils.join("; ", forbiddenWordsInput);
+        int languageId = ((LanguageWrapper)_language.getSelectedItem()).getLanguageId();
+
+        if ("".equals(keyWord.trim()) || "".equals(blackList.trim())) {
+            onCreteFailed();
+        } else {
+            String token = SessionUtils.getToken(getApplication());
+            ApiManager.getInstance().createNewCard(token, keyWord, blackList, languageId, new Callback<Void>() {
+                @Override
+                public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        onCreateSuccess();
+                    } else {
+                        onCreteFailed();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                    Log.d("API ERROR", t.getMessage());
+                    onCreteFailed();
+                }
+            });
+        }
     }
 
     private void assignAuthor() {
@@ -107,7 +93,8 @@ public class AddTabooCardActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable User user) {
                 if (user != null) {
-                    _owner.setText("Autor: " + user.getUsername());
+                    String author = "Autor: " + user.getUsername();
+                    _owner.setText(author);
                 }
             }
         });
@@ -148,14 +135,15 @@ public class AddTabooCardActivity extends AppCompatActivity {
     class LanguageWrapper {
         Language language;
 
-        public LanguageWrapper(Language language) {
+        LanguageWrapper(Language language) {
             this.language = language;
         }
 
-        public int getLanguageId(){
+        int getLanguageId(){
             return this.language.getId();
         }
 
+        @NonNull
         @Override
         public String toString() {
             return Utils.returnFlagEmojiForLanguage(this.language);

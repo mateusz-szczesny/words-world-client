@@ -1,9 +1,6 @@
 package pl.politechnika.szczesny.words_world_client.adapters;
 
 import android.app.Application;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +8,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.utils.Utils;
 import pl.politechnika.szczesny.words_world_client.models.Language;
@@ -44,11 +44,6 @@ public class LanguagesMiniAdapter extends RecyclerView.Adapter<LanguagesMiniAdap
     public void setLanguages(List<Language> languages) {
         this.languages = languages;
         notifyDataSetChanged();
-    }
-
-    @Override
-    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
     }
 
     static class LanguageViewHolder extends RecyclerView.ViewHolder {

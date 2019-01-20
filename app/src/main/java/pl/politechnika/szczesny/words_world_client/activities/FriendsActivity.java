@@ -1,31 +1,33 @@
 package pl.politechnika.szczesny.words_world_client.activities;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
 
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.adapters.FriendsListAdapter;
 import pl.politechnika.szczesny.words_world_client.models.User;
 import pl.politechnika.szczesny.words_world_client.viewmodel.FriendViewModel;
 
 public class FriendsActivity extends AppCompatActivity {
-    private RecyclerView _friendsList;
-    FriendsListAdapter adapter;
-    FriendViewModel friendViewModel;
+    @BindView(R.id.friends_list) RecyclerView _friendsList;
+    private FriendsListAdapter adapter;
+    private FriendViewModel friendViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
-        _friendsList = findViewById(R.id.friends_list);
+        ButterKnife.bind(this);
 
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         adapter = new FriendsListAdapter(getApplication());

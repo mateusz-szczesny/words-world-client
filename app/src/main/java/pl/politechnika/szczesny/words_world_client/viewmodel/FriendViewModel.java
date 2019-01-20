@@ -1,14 +1,14 @@
 package pl.politechnika.szczesny.words_world_client.viewmodel;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import pl.politechnika.szczesny.words_world_client.utils.SessionUtils;
 import pl.politechnika.szczesny.words_world_client.models.User;
 import pl.politechnika.szczesny.words_world_client.network.ApiManager;

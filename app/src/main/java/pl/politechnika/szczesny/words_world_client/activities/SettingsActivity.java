@@ -1,17 +1,16 @@
 package pl.politechnika.szczesny.words_world_client.activities;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.politechnika.szczesny.words_world_client.R;
@@ -25,13 +24,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SettingsActivity extends AppCompatActivity {
-    private static final String TAG = "SettingsActivity";
-
     @BindView(R.id.input_username) EditText _usernameText;
     @BindView(R.id.input_email) EditText _emailText;
     @BindView(R.id.input_first_name) EditText _firstNameText;
     @BindView(R.id.input_last_name) EditText _lastNameText;
-    @BindView(R.id.submit) Button _submit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,34 +36,31 @@ public class SettingsActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         fillInputsWithUserData();
+    }
 
-        _submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String token = SessionUtils.getToken(getApplication());
-                Credentials credentials = new Credentials();
-                credentials.firstName = _firstNameText.getText().toString();
-                credentials.lastName = _lastNameText.getText().toString();
-                if (token != null ) {
-                    ApiManager.getInstance().updateUserData(token, credentials, new Callback<User>() {
-                        @Override
-                        public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-                            if (response.isSuccessful()) {
-                                Toast.makeText(getBaseContext(), "Dane zaktualizowane!", Toast.LENGTH_LONG).show();
-                                finish();
-                            } else {
-                                Toast.makeText(getBaseContext(), "Błąd połączenia!", Toast.LENGTH_LONG).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                            Log.d("INTERNAL ERROR", t.getMessage());
-                        }
-                    });
+    public void submit(View view) {
+        String token = SessionUtils.getToken(getApplication());
+        Credentials credentials = new Credentials();
+        credentials.firstName = _firstNameText.getText().toString();
+        credentials.lastName = _lastNameText.getText().toString();
+        if (token != null ) {
+            ApiManager.getInstance().updateUserData(token, credentials, new Callback<User>() {
+                @Override
+                public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(getBaseContext(), "Dane zaktualizowane!", Toast.LENGTH_LONG).show();
+                        finish();
+                    } else {
+                        Toast.makeText(getBaseContext(), "Błąd połączenia!", Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
-        });
+
+                @Override
+                public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                    Log.d("INTERNAL ERROR", t.getMessage());
+                }
+            });
+        }
     }
 
     private void fillInputsWithUserData() {

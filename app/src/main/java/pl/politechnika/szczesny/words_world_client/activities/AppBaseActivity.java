@@ -2,8 +2,6 @@ package pl.politechnika.szczesny.words_world_client.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,22 +9,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.google.android.material.navigation.NavigationView;
+
 import java.util.Objects;
 
 
+import androidx.appcompat.app.AppCompatActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import pl.politechnika.szczesny.words_world_client.R;
 
 import static pl.politechnika.szczesny.words_world_client.utils.SharedPreferencesUtils.flushUserSP;
 
 public class AppBaseActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener {
-    private FrameLayout view_stub;
+    @BindView(R.id.view_stub) FrameLayout view_stub;
+    @BindView(R.id.navigation_view) NavigationView navigation_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_app_base);
-        view_stub = findViewById(R.id.view_stub);
-        NavigationView navigation_view = findViewById(R.id.navigation_view);
+        ButterKnife.bind(this);
 
         Menu drawerMenu = navigation_view.getMenu();
         for(int i = 0; i < drawerMenu.size(); i++) {

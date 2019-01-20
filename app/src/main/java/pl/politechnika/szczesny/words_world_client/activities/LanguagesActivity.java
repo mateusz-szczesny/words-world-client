@@ -1,29 +1,31 @@
 package pl.politechnika.szczesny.words_world_client.activities;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
 
 import java.util.List;
 
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.adapters.LanguagesAdapter;
 import pl.politechnika.szczesny.words_world_client.models.Language;
 import pl.politechnika.szczesny.words_world_client.viewmodel.LanguageViewModel;
 
 public class LanguagesActivity extends AppBaseActivity {
-    private RecyclerView _languagesList;
+    @BindView(R.id.languages_list) RecyclerView _languagesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_languages);
-        _languagesList = findViewById(R.id.languages_list);
+        ButterKnife.bind(this);
 
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         final LanguageViewModel languageViewModel = ViewModelProviders.of(this).get(LanguageViewModel.class);

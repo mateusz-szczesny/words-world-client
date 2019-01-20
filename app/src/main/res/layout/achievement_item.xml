@@ -5,13 +5,13 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="105dp"
         android:layout_height="115dp"
         android:layout_margin="8dp"
         android:id="@+id/cv" >
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp">
@@ -48,7 +48,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fa_icon" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </LinearLayout>

@@ -31,7 +31,6 @@
     <string name="your_overall_score">Twój wynik:</string>
     <string name="log_out">Wyloguj się</string>
     <string name="fiche_nav_title">Fiszki</string>
-    <string name="lang_challenges">Potyczki językowe…</string>
     <string name="flashcards">Fiszki</string>
     <string name="fa_icon_taboo_master">&#xf504;</string>
     <string name="fa_icon_dictionary_master">&#xf02d;</string>
@@ -45,8 +44,8 @@
     <string name="define_game_settings">Zdefiniuj ustawienia gry</string>
     <string name="my_cards">Moje Karty</string>
     <string name="add">DODAJ</string>
-    <string name="key_word">Słowo kluczowe...</string>
-    <string name="black_word">Słowo zablokowane...</string>
+    <string name="key_word">Słowo kluczowe…</string>
+    <string name="black_word">Słowo zablokowane…</string>
     <string name="used_cards">Ilość użytych kart:</string>
     <string name="correct_cards">Odgadniętych kart:</string>
 </resources>

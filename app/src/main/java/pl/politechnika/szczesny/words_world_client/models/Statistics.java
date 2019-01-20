@@ -1,7 +1,7 @@
 package pl.politechnika.szczesny.words_world_client.models;
 
 import android.app.Application;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.google.gson.annotations.SerializedName;

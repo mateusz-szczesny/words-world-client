@@ -3,16 +3,16 @@ package pl.politechnika.szczesny.words_world_client.activities;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pl.politechnika.szczesny.words_world_client.R;
@@ -34,7 +34,6 @@ public class OtherUserActivity extends AppCompatActivity {
     @BindView(R.id.achievements_list) RecyclerView _achievementsList;
     @BindView(R.id.languages_list) RecyclerView _languagesList;
 
-    private ProgressDialog _progressDialog;
     private User _user;
 
     @Override
@@ -47,7 +46,7 @@ public class OtherUserActivity extends AppCompatActivity {
     }
 
     private void fetchUserDetails() {
-        _progressDialog = new ProgressDialog(OtherUserActivity.this);
+        ProgressDialog _progressDialog = new ProgressDialog(OtherUserActivity.this);
         _progressDialog.setIndeterminate(true);
         _progressDialog.setMessage("Pobieram dane...");
         _progressDialog.show();

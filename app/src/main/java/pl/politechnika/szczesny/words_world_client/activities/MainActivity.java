@@ -2,11 +2,12 @@ package pl.politechnika.szczesny.words_world_client.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
+import androidx.annotation.NonNull;
 import android.view.MenuItem;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.fragment.app.Fragment;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.fragments.MyCardsFragment;
 import pl.politechnika.szczesny.words_world_client.fragments.FlashcardsFragment;
@@ -15,7 +16,6 @@ import pl.politechnika.szczesny.words_world_client.fragments.ProfileFragment;
 import static pl.politechnika.szczesny.words_world_client.utils.SessionUtils.isSessionActive;
 
 public class MainActivity extends AppBaseActivity {
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
