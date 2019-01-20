@@ -23,7 +23,7 @@ public class Utils {
     public static final Integer DEFAULT_CARD_COUNT = 5;
     public static final Integer MAXIMAL_CARD_COUNT = 15;
 
-    public static final Map<String, Integer> TabooLevel2CardColor = new HashMap<String, Integer>() {{
+    public static final Map<String, Integer> tabooLevel2CardColor = new HashMap<String, Integer>() {{
         put("EASY", Color.parseColor("#e1f7d5"));
         put("MEDIUM", Color.parseColor("#c9c9ff"));
         put("HARD", Color.parseColor("#ffbdbd"));
@@ -31,10 +31,11 @@ public class Utils {
         put("NOT ENOUGH STATS", Color.WHITE);
     }};
 
-    public static final Map<String, Integer> TabooLevel2Reward = new HashMap<String, Integer>() {{
-        put("EASY", 1);
-        put("MEDIUM", 2);
-        put("HARD", 3);
+    public static final Map<String, String> flashCardLabel2DifficultyLevel = new HashMap<String, String>() {{
+        put("Poziom I", "EASY");
+        put("Poziom II", "MEDIUM");
+        put("Poziom III", "HARD");
+        put("Poziom IV", "INSANE");
     }};
 
     public static final Map<String, Integer> achievementLevel2Color = new HashMap<String, Integer>() {{

@@ -35,6 +35,13 @@
         <activity android:name=".activities.OtherUserActivity" android:theme="@style/AppTheme" />
         <activity android:name=".activities.PreTabooSettingsActivity" android:theme="@style/AppTheme" />
         <activity android:name=".activities.AddTabooCardActivity" android:theme="@style/AppTheme" />
-    </application>
+        <activity android:name=".activities.FlashCardActivity" android:theme="@style/AppTheme" />
 
+        <receiver
+            android:name=".receiver.AlarmReceiver"
+            android:process=":remote" />
+        <service
+            android:name=".receiver.WODTService"
+            android:exported="false" />
+    </application>
 </manifest>

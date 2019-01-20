@@ -44,7 +44,7 @@ public class UsersViewModel extends AndroidViewModel {
         return allUsers;
     }
 
-    public void refreshData(Application application, String filter) {
+    public void refreshData(String filter) {
         String token = SessionUtils.getToken(getApplication());
 
         if (token != null) {

@@ -101,10 +101,6 @@ public class ProfileFragment extends Fragment {
                 String.valueOf(_userData.getOverallScore().getScore()) : "0");
     }
 
-    private void assignAchievements() {
-
-    }
-
     @Override
     public void onResume() {
         super.onResume();

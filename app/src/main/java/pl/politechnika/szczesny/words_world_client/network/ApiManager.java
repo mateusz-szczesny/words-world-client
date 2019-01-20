@@ -9,7 +9,9 @@ import pl.politechnika.szczesny.words_world_client.interfaces.AuthApi;
 import pl.politechnika.szczesny.words_world_client.interfaces.DataApi;
 import pl.politechnika.szczesny.words_world_client.models.Card;
 import pl.politechnika.szczesny.words_world_client.models.Credentials;
+import pl.politechnika.szczesny.words_world_client.models.FlashCard;
 import pl.politechnika.szczesny.words_world_client.models.Language;
+import pl.politechnika.szczesny.words_world_client.models.RandomWord;
 import pl.politechnika.szczesny.words_world_client.models.Statistics;
 import pl.politechnika.szczesny.words_world_client.models.Token;
 import pl.politechnika.szczesny.words_world_client.models.User;
@@ -128,6 +130,16 @@ public class ApiManager {
 
     public void createNewCard(String token, String keyWord, String blackList, int languageId, Callback<Void> callback) {
         Call<Void> call = dataService.createNewCard(token, keyWord, blackList, languageId);
+        call.enqueue(callback);
+    }
+
+    public void getRandomWord(String token, Callback<RandomWord> callback) {
+        Call<RandomWord> call = dataService.getRandomWord(token);
+        call.enqueue(callback);
+    }
+
+    public void getFlashCards(String token, Language language, String difficulty, int count, Callback<List<FlashCard>> callback) {
+        Call<List<FlashCard>> call = dataService.getFlashCards(token,language.getLanguageCode(), difficulty, count);
         call.enqueue(callback);
     }
 }

@@ -20,7 +20,7 @@ import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.models.Card;
 import pl.politechnika.szczesny.words_world_client.models.Statistics;
 
-import static pl.politechnika.szczesny.words_world_client.utils.Utils.TabooLevel2CardColor;
+import static pl.politechnika.szczesny.words_world_client.utils.Utils.tabooLevel2CardColor;
 
 @Layout(R.layout.taboo_card_view)
 public class TabooCard {
@@ -64,7 +64,7 @@ public class TabooCard {
         String autorSign = "Autor: " + mCard.getOwner();
         owner.setText(autorSign);
 
-        Integer color = TabooLevel2CardColor.get(mCard.getDifficulty());
+        Integer color = tabooLevel2CardColor.get(mCard.getDifficulty());
         cardView.setCardBackgroundColor(color != null ? color : Color.WHITE);
     }
 

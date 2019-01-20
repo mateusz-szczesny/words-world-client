@@ -64,7 +64,7 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
                         public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                             if (response.isSuccessful()) {
                                 Toast.makeText(application.getBaseContext(), "Odsubskrybowano", Toast.LENGTH_LONG).show();
-                                lvm.refreshData(application);
+                                lvm.refreshData();
                             } else {
                                 Toast.makeText(application.getBaseContext(), "Błąd", Toast.LENGTH_LONG).show();
 
@@ -82,7 +82,7 @@ public class LanguagesAdapter extends RecyclerView.Adapter<LanguagesAdapter.Lang
                         public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                             if (response.isSuccessful()) {
                                 Toast.makeText(application.getBaseContext(), "Zasubskrybowano", Toast.LENGTH_LONG).show();
-                                lvm.refreshData(application);
+                                lvm.refreshData();
                             } else {
                                 Toast.makeText(application.getBaseContext(), "Błąd", Toast.LENGTH_LONG).show();
 

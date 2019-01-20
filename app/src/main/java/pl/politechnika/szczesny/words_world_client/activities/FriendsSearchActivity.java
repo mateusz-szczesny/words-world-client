@@ -55,6 +55,6 @@ public class FriendsSearchActivity extends AppCompatActivity {
 
     public void search(View view) {
         String searchText = _searchText.getText().toString();
-        userViewModel.refreshData(getApplication(), searchText);
+        userViewModel.refreshData(searchText);
     }
 }

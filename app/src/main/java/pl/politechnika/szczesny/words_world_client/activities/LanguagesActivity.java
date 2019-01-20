@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -18,8 +19,8 @@ import pl.politechnika.szczesny.words_world_client.adapters.LanguagesAdapter;
 import pl.politechnika.szczesny.words_world_client.models.Language;
 import pl.politechnika.szczesny.words_world_client.viewmodel.LanguageViewModel;
 
-public class LanguagesActivity extends AppBaseActivity {
-    @BindView(R.id.languages_list) RecyclerView _languagesList;
+public class LanguagesActivity extends AppCompatActivity {
+    @BindView(R.id.available_languages) RecyclerView _languagesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +47,7 @@ public class LanguagesActivity extends AppBaseActivity {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                languageViewModel.refreshData(getApplication());
+                languageViewModel.refreshData();
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });

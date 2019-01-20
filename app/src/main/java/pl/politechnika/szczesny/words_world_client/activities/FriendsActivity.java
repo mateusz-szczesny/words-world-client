@@ -48,6 +48,6 @@ public class FriendsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        friendViewModel.refreshData(getApplication());
+        friendViewModel.refreshData();
     }
 }

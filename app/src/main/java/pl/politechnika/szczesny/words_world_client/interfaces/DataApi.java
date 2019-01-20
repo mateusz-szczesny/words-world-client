@@ -4,6 +4,8 @@ import java.util.List;
 
 import pl.politechnika.szczesny.words_world_client.models.Card;
 import pl.politechnika.szczesny.words_world_client.models.Credentials;
+import pl.politechnika.szczesny.words_world_client.models.FlashCard;
+import pl.politechnika.szczesny.words_world_client.models.RandomWord;
 import pl.politechnika.szczesny.words_world_client.models.Statistics;
 import pl.politechnika.szczesny.words_world_client.models.Language;
 import pl.politechnika.szczesny.words_world_client.models.User;
@@ -102,5 +104,18 @@ public interface DataApi {
             @Field("key_word") String keyWord,
             @Field("black_list") String blackList,
             @Field("language") int language
+    );
+
+    @GET("/api/words/random")
+    Call<RandomWord> getRandomWord(
+            @Header("Authorization") String token
+    );
+
+    @GET("/api/flashcards")
+    Call<List<FlashCard>> getFlashCards(
+            @Header("Authorization") String token,
+            @Query("language_code") String language,
+            @Query("difficulty") String difficulty,
+            @Query("count") int count
     );
 }

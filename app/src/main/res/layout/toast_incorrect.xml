@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/incorrect_toast_background"
+    android:padding="15dp">
+
+    <ImageView
+        android:id="@+id/customToastImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_clear_white" />
+
+    <TextView
+        android:id="@+id/correct_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/incorrect_msg"
+        android:textColor="@color/icons"
+        android:textSize="20sp"/>
+
+</LinearLayout>

@@ -17,10 +17,8 @@ import pl.politechnika.szczesny.words_world_client.models.Language;
 
 public class LanguagesMiniAdapter extends RecyclerView.Adapter<LanguagesMiniAdapter.LanguageViewHolder> {
     private List<Language> languages;
-    private Application application;
 
-    public LanguagesMiniAdapter(Application application) {
-        this.application = application;
+    public LanguagesMiniAdapter() {
     }
 
     @NonNull

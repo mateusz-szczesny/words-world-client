@@ -25,7 +25,7 @@ public class FriendViewModel extends AndroidViewModel {
         apiManager = ApiManager.getInstance();
         allFriends = new MutableLiveData<>();
 
-        refreshData(getApplication());
+        refreshData();
     }
 
     private void fetchData(String token) {
@@ -46,7 +46,7 @@ public class FriendViewModel extends AndroidViewModel {
         return allFriends;
     }
 
-    public void refreshData(Application application) {
+    public void refreshData() {
         String token = SessionUtils.getToken(getApplication());
 
         if (token != null) {

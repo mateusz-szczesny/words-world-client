@@ -48,4 +48,8 @@
     <string name="black_word">Słowo zablokowane…</string>
     <string name="used_cards">Ilość użytych kart:</string>
     <string name="correct_cards">Odgadniętych kart:</string>
+    <string name="type_translation">Podaj tłumaczenie słowa...</string>
+    <string name="incorrect_msg">Błąd :( próbuj dalej!</string>
+    <string name="correct_msg">Dobrze!</string>
+    <string name="check">Sprawdź!</string>
 </resources>

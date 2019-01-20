@@ -26,10 +26,11 @@ public class Statistics implements Serializable {
                     INSTANCE.translatedWordsCount = 0;
                     INSTANCE.correctlySwipedCards = new ArrayList<>();
                     INSTANCE.incorrectlySwipedCards = new ArrayList<>();
+                    INSTANCE.correctlyAnsFlashCards = new ArrayList<>();
+                    INSTANCE.incorrectlyAnsFlashCards = new ArrayList<>();
                 }
             }
         }
-
         return INSTANCE;
     }
 
@@ -41,10 +42,12 @@ public class Statistics implements Serializable {
 
     @SerializedName("correctly_swiped_cards")
     private ArrayList<Integer> correctlySwipedCards;
-
     @SerializedName("incorrectly_swiped_cards")
     private ArrayList<Integer> incorrectlySwipedCards;
-
+    @SerializedName("correctly_ans_flashcards")
+    private ArrayList<Integer> correctlyAnsFlashCards;
+    @SerializedName("incorrectly_ans_flashcards")
+    private ArrayList<Integer> incorrectlyAnsFlashCards;
     @SerializedName("translated_words")
     private Integer translatedWordsCount;
 
@@ -54,6 +57,14 @@ public class Statistics implements Serializable {
 
     public void addIncorrectlySwipedCard(Integer id) {
         incorrectlySwipedCards.add(id);
+    }
+
+    public void addCorrectlyAnsFlashCards(Integer id) {
+        correctlyAnsFlashCards.add(id);
+    }
+
+    public void addIncorrectlyAnsFlashCards(Integer id) {
+        incorrectlyAnsFlashCards.add(id);
     }
 
     public void incrementTranslatedWordsCounter() {
@@ -83,6 +94,8 @@ public class Statistics implements Serializable {
     private void flushStatistics() {
         this.correctlySwipedCards = new ArrayList<>();
         this.incorrectlySwipedCards = new ArrayList<>();
+        correctlyAnsFlashCards = new ArrayList<>();
+        incorrectlyAnsFlashCards = new ArrayList<>();
         this.translatedWordsCount = 0;
     }
 

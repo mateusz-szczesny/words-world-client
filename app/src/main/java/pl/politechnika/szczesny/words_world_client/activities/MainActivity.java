@@ -1,5 +1,8 @@
 package pl.politechnika.szczesny.words_world_client.activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -7,11 +10,15 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Calendar;
+import java.util.TimeZone;
+
 import androidx.fragment.app.Fragment;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.fragments.MyCardsFragment;
 import pl.politechnika.szczesny.words_world_client.fragments.FlashcardsFragment;
 import pl.politechnika.szczesny.words_world_client.fragments.ProfileFragment;
+import pl.politechnika.szczesny.words_world_client.receiver.AlarmReceiver;
 
 import static pl.politechnika.szczesny.words_world_client.utils.SessionUtils.isSessionActive;
 
@@ -61,6 +68,7 @@ public class MainActivity extends AppBaseActivity {
         navigation.setSelectedItemId(R.id.navigation_profile);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        scheduleNotification(getApplicationContext());
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -72,5 +80,25 @@ public class MainActivity extends AppBaseActivity {
             return true;
         }
         return false;
+    }
+
+    private void scheduleNotification(Context context) {
+
+        Calendar updateTime = Calendar.getInstance();
+        updateTime.setTimeZone(TimeZone.getTimeZone("GMT"));
+        updateTime.set(Calendar.HOUR_OF_DAY, 16);
+        updateTime.set(Calendar.MINUTE, 45);
+
+        Intent notification = new Intent(context, AlarmReceiver.class);
+
+        PendingIntent recurringNotification = PendingIntent.getBroadcast(context,
+                0, notification, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        AlarmManager alarms = (AlarmManager) getSystemService(
+                Context.ALARM_SERVICE);
+
+        alarms.setInexactRepeating(AlarmManager.RTC_WAKEUP,
+                updateTime.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, recurringNotification);
     }
 }

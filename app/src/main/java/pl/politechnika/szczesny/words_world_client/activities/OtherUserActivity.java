@@ -109,7 +109,7 @@ public class OtherUserActivity extends AppCompatActivity {
         _languagesList = findViewById(R.id.languages_list);
 
         GridLayoutManager glm = new GridLayoutManager(getApplicationContext(), 3);
-        final LanguagesMiniAdapter adapter = new LanguagesMiniAdapter(getApplication());
+        final LanguagesMiniAdapter adapter = new LanguagesMiniAdapter();
 
         _languagesList.setLayoutManager(glm);
         _languagesList.setAdapter(adapter);

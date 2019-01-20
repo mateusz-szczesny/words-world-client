@@ -1,5 +1,7 @@
 package pl.politechnika.szczesny.words_world_client.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -51,7 +53,6 @@ public class TranslateActivity extends AppCompatActivity {
     @BindView(R.id.voice) ImageButton _speakText;
     @BindView(R.id.translate) Button _translate;
     private TextToSpeech tts;
-    private ArrayAdapter<Language> spinnerArrayAdapter;
     private final List<Language> list = new ArrayList<>();
 
     @Override
@@ -76,7 +77,7 @@ public class TranslateActivity extends AppCompatActivity {
         list.add(noLanguage);
         list.addAll(languages != null ? languages : new ArrayList<Language>());
 
-        spinnerArrayAdapter = new ArrayAdapter<>(
+        ArrayAdapter<Language> spinnerArrayAdapter = new ArrayAdapter<>(
                 getApplicationContext(), R.layout.spinner_item, list);
         spinnerArrayAdapter.setDropDownViewResource(R.layout.spinner_item);
 
@@ -103,6 +104,18 @@ public class TranslateActivity extends AppCompatActivity {
         if (!"".equals(text.trim())) {
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
 
+        }
+    }
+
+    public void meaning(View view) {
+        final String text = _translatedText.getText().toString();
+
+        if (!"".equals(text.trim())) {
+            Intent intent = new Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://www.google.com/search?q=" + text.toLowerCase() + "+znaczenie"));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
         }
     }
 

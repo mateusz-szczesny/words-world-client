@@ -1,6 +1,5 @@
 package pl.politechnika.szczesny.words_world_client.adapters;
 
-import android.app.Application;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +18,8 @@ import pl.politechnika.szczesny.words_world_client.models.Card;
 public class MyCardsAdapter extends RecyclerView.Adapter<MyCardsAdapter.MyCardsViewHolder> {
 
     private List<Card> cards;
-    private final Application application;
 
-    public MyCardsAdapter(Application application) {
-        this.application = application;
+    public MyCardsAdapter() {
     }
 
     @NonNull
@@ -38,7 +35,7 @@ public class MyCardsAdapter extends RecyclerView.Adapter<MyCardsAdapter.MyCardsV
 
         achievementViewHolder._keyWord.setText(card.getKeyWord());
         String blackList = "[ " + TextUtils.join(",", card.getBlackList()) + " ]";
-        achievementViewHolder._blackList.setText(blackList);
+        achievementViewHolder._blackList.setText(blackList.toUpperCase());
         achievementViewHolder._timesPlayed.setText(String.valueOf(card.getTimesPlayed()));
         achievementViewHolder._language.setText(Utils.returnFlagEmojiForLanguage(card.getLanguage()));
         String effPercent = (int)(card.getCardEfficiency() * 100.0) + "%";

@@ -25,7 +25,7 @@ public class LanguageViewModel extends AndroidViewModel {
         apiManager = ApiManager.getInstance();
         allLanguages = new MutableLiveData<>();
 
-        refreshData(application);
+        refreshData();
     }
 
     private void fetchData (String token) {
@@ -46,7 +46,7 @@ public class LanguageViewModel extends AndroidViewModel {
         return allLanguages;
     }
 
-    public void refreshData(Application application) {
+    public void refreshData() {
         String token = SessionUtils.getToken(getApplication());
 
         if (token != null) {

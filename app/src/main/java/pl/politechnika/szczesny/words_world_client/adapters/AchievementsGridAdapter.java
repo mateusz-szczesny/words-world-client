@@ -9,7 +9,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import pl.politechnika.szczesny.words_world_client.R;
 import pl.politechnika.szczesny.words_world_client.utils.FontManager;
@@ -53,13 +52,11 @@ public class AchievementsGridAdapter extends RecyclerView.Adapter<AchievementsGr
     }
 
     static class AchievementViewHolder extends RecyclerView.ViewHolder {
-        CardView _cv;
         TextView _fa_icon;
         TextView _name;
 
         AchievementViewHolder(View itemView) {
             super(itemView);
-            _cv = itemView.findViewById(R.id.cv);
             _fa_icon = itemView.findViewById(R.id.fa_icon);
             _name = itemView.findViewById(R.id.name);
 
