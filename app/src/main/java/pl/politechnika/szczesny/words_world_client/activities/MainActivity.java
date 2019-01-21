@@ -86,8 +86,8 @@ public class MainActivity extends AppBaseActivity {
 
         Calendar updateTime = Calendar.getInstance();
         updateTime.setTimeZone(TimeZone.getTimeZone("GMT"));
-        updateTime.set(Calendar.HOUR_OF_DAY, 16);
-        updateTime.set(Calendar.MINUTE, 45);
+        updateTime.set(Calendar.HOUR_OF_DAY, 9);
+        updateTime.set(Calendar.MINUTE, 55);
 
         Intent notification = new Intent(context, AlarmReceiver.class);
 

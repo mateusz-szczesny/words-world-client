@@ -56,7 +56,7 @@ public class MyCardsFragment extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         Activity activity = getActivity();
         if (activity != null) {
-            adapter = new MyCardsAdapter(getActivity().getApplication());
+            adapter = new MyCardsAdapter();
             _myCards.setLayoutManager(llm);
             _myCards.setAdapter(adapter);
             _myCards.setItemAnimator(new DefaultItemAnimator());

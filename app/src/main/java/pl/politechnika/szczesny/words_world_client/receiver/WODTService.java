@@ -21,6 +21,16 @@ public class WODTService extends IntentService {
     }
 
     @Override
+    public void onStart(@Nullable Intent intent, int startId) {
+        super.onStart(intent, startId);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         final NotificationHelper notificationHelper = new NotificationHelper(getApplicationContext());
         String token = SessionUtils.getToken(getApplication());
